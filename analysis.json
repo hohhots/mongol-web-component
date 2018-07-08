@@ -1,0 +1,1599 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "",
+      "summary": "",
+      "path": "demos/index.html",
+      "properties": [
+        {
+          "name": "renderComplete",
+          "type": "?",
+          "description": "Returns a promise which resolves after the element next renders.\nThe promise resolves to `true` if the element rendered and `false` if the\nelement did not render.\nThis is useful when users (e.g. tests) need to react to the rendered state\nof the element after a change is made.\nThis can also be useful in event handlers if it is desireable to wait\nto send an event until after rendering. If possible implement the\n`_didRender` method to directly respond to rendering within the\nrendering lifecycle.\n     ",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 224,
+              "column": 4
+            },
+            "end": {
+              "line": 237,
+              "column": 5
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true
+            }
+          },
+          "inheritedFrom": "LitElement"
+        }
+      ],
+      "methods": [
+        {
+          "name": "ready",
+          "description": "Override which sets up element rendering by calling* `_createRoot`\nand `_firstRendered`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 67,
+              "column": 4
+            },
+            "end": {
+              "line": 71,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 72,
+              "column": 4
+            },
+            "end": {
+              "line": 77,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_firstRendered",
+          "description": "Called after the element DOM is rendered for the first time.\nImplement to perform tasks after first rendering like capturing a\nreference to a static node which must be directly manipulated.\nThis should not be commonly needed. For tasks which should be performed\nbefore first render, use the element constructor.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 85,
+              "column": 4
+            },
+            "end": {
+              "line": 85,
+              "column": 24
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_createRoot",
+          "description": "Implement to customize where the element's template is rendered by\nreturning an element into which to render. By default this creates\na shadowRoot for the element. To render into the element's childNodes,\nreturn `this`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 93,
+              "column": 4
+            },
+            "end": {
+              "line": 95,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "(Element | DocumentFragment)",
+            "desc": "Returns a node into which to render."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldPropertiesChange",
+          "description": "Override which returns the value of `_shouldRender` which users\nshould implement to control rendering. If this method returns false,\n_propertiesChanged will not be called and no rendering will occur even\nif property values change or `requestRender` is called.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 106,
+              "column": 4
+            },
+            "end": {
+              "line": 112,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "boolean",
+            "desc": "Default implementation always returns true."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldRender",
+          "description": "Implement to control if rendering should occur when property values\nchange or `requestRender` is called. By default, this method always\nreturns true, but this can be customized as an optimization to avoid\nrendering work when changes occur which should not be rendered.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 123,
+              "column": 4
+            },
+            "end": {
+              "line": 125,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "boolean",
+            "desc": "Default implementation always returns true."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_propertiesChanged",
+          "description": "Override which performs element rendering by calling\n`_render`, `_applyRender`, and finally `_didRender`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 133,
+              "column": 4
+            },
+            "end": {
+              "line": 143,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_flushProperties",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 144,
+              "column": 4
+            },
+            "end": {
+              "line": 149,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldPropertyChange",
+          "description": "tslint:disable-next-line no-any",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 158,
+              "column": 4
+            },
+            "end": {
+              "line": 166,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "property"
+            },
+            {
+              "name": "value"
+            },
+            {
+              "name": "old"
+            }
+          ],
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_render",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 32,
+              "column": 6
+            },
+            "end": {
+              "line": 216,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_applyRender",
+          "description": "Renders the given lit-html template `result` into the given `node`.\nImplement to customize the way rendering is applied. This is should not\ntypically be needed and is provided for advanced use cases.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 187,
+              "column": 4
+            },
+            "end": {
+              "line": 189,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "result",
+              "description": "{TemplateResult} `lit-html` template result to render"
+            },
+            {
+              "name": "node",
+              "description": "{Element|DocumentFragment} node into which to render"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_didRender",
+          "description": "Called after element DOM has been rendered. Implement to\ndirectly control rendered DOM. Typically this is not needed as `lit-html`\ncan be used in the `_render` method to set properties, attributes, and\nevent listeners. However, it is sometimes useful for calling methods on\nrendered elements, like calling `focus()` on an element to focus it.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 200,
+              "column": 4
+            },
+            "end": {
+              "line": 200,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "requestRender",
+          "description": "Call to request the element to asynchronously re-render regardless\nof whether or not any property changes are pending.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 205,
+              "column": 4
+            },
+            "end": {
+              "line": 205,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_invalidateProperties",
+          "description": "Override which provides tracking of invalidated state.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 209,
+              "column": 4
+            },
+            "end": {
+              "line": 212,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 31,
+          "column": 4
+        },
+        "end": {
+          "line": 217,
+          "column": 5
+        }
+      },
+      "privacy": "public",
+      "superclass": "LitElement",
+      "name": "DemoView",
+      "attributes": [],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "demo-view"
+    },
+    {
+      "description": "",
+      "summary": "",
+      "path": "demos/button.html",
+      "properties": [
+        {
+          "name": "renderComplete",
+          "type": "?",
+          "description": "Returns a promise which resolves after the element next renders.\nThe promise resolves to `true` if the element rendered and `false` if the\nelement did not render.\nThis is useful when users (e.g. tests) need to react to the rendered state\nof the element after a change is made.\nThis can also be useful in event handlers if it is desireable to wait\nto send an event until after rendering. If possible implement the\n`_didRender` method to directly respond to rendering within the\nrendering lifecycle.\n     ",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 224,
+              "column": 4
+            },
+            "end": {
+              "line": 237,
+              "column": 5
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true
+            }
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "raised",
+          "type": "boolean | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 25,
+              "column": 6
+            },
+            "end": {
+              "line": 25,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "unelevated",
+          "type": "boolean | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 26,
+              "column": 6
+            },
+            "end": {
+              "line": 26,
+              "column": 25
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "outlined",
+          "type": "boolean | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 27,
+              "column": 6
+            },
+            "end": {
+              "line": 27,
+              "column": 23
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "dense",
+          "type": "boolean | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 28,
+              "column": 6
+            },
+            "end": {
+              "line": 28,
+              "column": 20
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 29,
+              "column": 6
+            },
+            "end": {
+              "line": 29,
+              "column": 23
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "icon",
+          "type": "string | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 30,
+              "column": 6
+            },
+            "end": {
+              "line": 30,
+              "column": 18
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "label",
+          "type": "string | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 31,
+              "column": 6
+            },
+            "end": {
+              "line": 31,
+              "column": 19
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "inheritedFrom": "Button"
+        }
+      ],
+      "methods": [
+        {
+          "name": "ready",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 50,
+              "column": 2
+            },
+            "end": {
+              "line": 54,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 72,
+              "column": 4
+            },
+            "end": {
+              "line": 77,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_firstRendered",
+          "description": "Called after the element DOM is rendered for the first time.\nImplement to perform tasks after first rendering like capturing a\nreference to a static node which must be directly manipulated.\nThis should not be commonly needed. For tasks which should be performed\nbefore first render, use the element constructor.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 85,
+              "column": 4
+            },
+            "end": {
+              "line": 85,
+              "column": 24
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_createRoot",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 46,
+              "column": 2
+            },
+            "end": {
+              "line": 48,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "_shouldPropertiesChange",
+          "description": "Override which returns the value of `_shouldRender` which users\nshould implement to control rendering. If this method returns false,\n_propertiesChanged will not be called and no rendering will occur even\nif property values change or `requestRender` is called.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 106,
+              "column": 4
+            },
+            "end": {
+              "line": 112,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "boolean",
+            "desc": "Default implementation always returns true."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldRender",
+          "description": "Implement to control if rendering should occur when property values\nchange or `requestRender` is called. By default, this method always\nreturns true, but this can be customized as an optimization to avoid\nrendering work when changes occur which should not be rendered.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 123,
+              "column": 4
+            },
+            "end": {
+              "line": 125,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "boolean",
+            "desc": "Default implementation always returns true."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_propertiesChanged",
+          "description": "Override which performs element rendering by calling\n`_render`, `_applyRender`, and finally `_didRender`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 133,
+              "column": 4
+            },
+            "end": {
+              "line": 143,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_flushProperties",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 144,
+              "column": 4
+            },
+            "end": {
+              "line": 149,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldPropertyChange",
+          "description": "tslint:disable-next-line no-any",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 158,
+              "column": 4
+            },
+            "end": {
+              "line": 166,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "property"
+            },
+            {
+              "name": "value"
+            },
+            {
+              "name": "old"
+            }
+          ],
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_render",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 60,
+              "column": 2
+            },
+            "end": {
+              "line": 74,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "{\n  raised,\n  unelevated,\n  outlined,\n  dense,\n  disabled,\n  icon,\n  label\n}"
+            }
+          ],
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "_applyRender",
+          "description": "Renders the given lit-html template `result` into the given `node`.\nImplement to customize the way rendering is applied. This is should not\ntypically be needed and is provided for advanced use cases.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 187,
+              "column": 4
+            },
+            "end": {
+              "line": 189,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "result",
+              "description": "{TemplateResult} `lit-html` template result to render"
+            },
+            {
+              "name": "node",
+              "description": "{Element|DocumentFragment} node into which to render"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_didRender",
+          "description": "Called after element DOM has been rendered. Implement to\ndirectly control rendered DOM. Typically this is not needed as `lit-html`\ncan be used in the `_render` method to set properties, attributes, and\nevent listeners. However, it is sometimes useful for calling methods on\nrendered elements, like calling `focus()` on an element to focus it.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 200,
+              "column": 4
+            },
+            "end": {
+              "line": 200,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "requestRender",
+          "description": "Call to request the element to asynchronously re-render regardless\nof whether or not any property changes are pending.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 205,
+              "column": 4
+            },
+            "end": {
+              "line": 205,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_invalidateProperties",
+          "description": "Override which provides tracking of invalidated state.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 209,
+              "column": 4
+            },
+            "end": {
+              "line": 212,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_renderStyle",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 81,
+              "column": 8
+            },
+            "end": {
+              "line": 83,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "params": []
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 80,
+          "column": 6
+        },
+        "end": {
+          "line": 84,
+          "column": 7
+        }
+      },
+      "privacy": "public",
+      "superclass": "Button",
+      "name": "CustomButton",
+      "attributes": [
+        {
+          "name": "raised",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 25,
+              "column": 6
+            },
+            "end": {
+              "line": 25,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "unelevated",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 26,
+              "column": 6
+            },
+            "end": {
+              "line": 26,
+              "column": 25
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "outlined",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 27,
+              "column": 6
+            },
+            "end": {
+              "line": 27,
+              "column": 23
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "dense",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 28,
+              "column": 6
+            },
+            "end": {
+              "line": 28,
+              "column": 20
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "disabled",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 29,
+              "column": 6
+            },
+            "end": {
+              "line": 29,
+              "column": 23
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "icon",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 30,
+              "column": 6
+            },
+            "end": {
+              "line": 30,
+              "column": 18
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined",
+          "inheritedFrom": "Button"
+        },
+        {
+          "name": "label",
+          "description": "",
+          "sourceRange": {
+            "file": "../../@material/mwc-button/mwc-button.js",
+            "start": {
+              "line": 31,
+              "column": 6
+            },
+            "end": {
+              "line": 31,
+              "column": 19
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined",
+          "inheritedFrom": "Button"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "custom-button"
+    },
+    {
+      "description": "",
+      "summary": "",
+      "path": "demos/card.html",
+      "properties": [
+        {
+          "name": "renderComplete",
+          "type": "?",
+          "description": "Returns a promise which resolves after the element next renders.\nThe promise resolves to `true` if the element rendered and `false` if the\nelement did not render.\nThis is useful when users (e.g. tests) need to react to the rendered state\nof the element after a change is made.\nThis can also be useful in event handlers if it is desireable to wait\nto send an event until after rendering. If possible implement the\n`_didRender` method to directly respond to rendering within the\nrendering lifecycle.\n     ",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 224,
+              "column": 4
+            },
+            "end": {
+              "line": 237,
+              "column": 5
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true
+            }
+          },
+          "inheritedFrom": "LitElement"
+        }
+      ],
+      "methods": [
+        {
+          "name": "ready",
+          "description": "Override which sets up element rendering by calling* `_createRoot`\nand `_firstRendered`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 67,
+              "column": 4
+            },
+            "end": {
+              "line": 71,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 72,
+              "column": 4
+            },
+            "end": {
+              "line": 77,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_firstRendered",
+          "description": "Called after the element DOM is rendered for the first time.\nImplement to perform tasks after first rendering like capturing a\nreference to a static node which must be directly manipulated.\nThis should not be commonly needed. For tasks which should be performed\nbefore first render, use the element constructor.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 85,
+              "column": 4
+            },
+            "end": {
+              "line": 85,
+              "column": 24
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_createRoot",
+          "description": "Implement to customize where the element's template is rendered by\nreturning an element into which to render. By default this creates\na shadowRoot for the element. To render into the element's childNodes,\nreturn `this`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 93,
+              "column": 4
+            },
+            "end": {
+              "line": 95,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "(Element | DocumentFragment)",
+            "desc": "Returns a node into which to render."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldPropertiesChange",
+          "description": "Override which returns the value of `_shouldRender` which users\nshould implement to control rendering. If this method returns false,\n_propertiesChanged will not be called and no rendering will occur even\nif property values change or `requestRender` is called.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 106,
+              "column": 4
+            },
+            "end": {
+              "line": 112,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "boolean",
+            "desc": "Default implementation always returns true."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldRender",
+          "description": "Implement to control if rendering should occur when property values\nchange or `requestRender` is called. By default, this method always\nreturns true, but this can be customized as an optimization to avoid\nrendering work when changes occur which should not be rendered.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 123,
+              "column": 4
+            },
+            "end": {
+              "line": 125,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "boolean",
+            "desc": "Default implementation always returns true."
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_propertiesChanged",
+          "description": "Override which performs element rendering by calling\n`_render`, `_applyRender`, and finally `_didRender`.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 133,
+              "column": 4
+            },
+            "end": {
+              "line": 143,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_flushProperties",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 144,
+              "column": 4
+            },
+            "end": {
+              "line": 149,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_shouldPropertyChange",
+          "description": "tslint:disable-next-line no-any",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 158,
+              "column": 4
+            },
+            "end": {
+              "line": 166,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "property"
+            },
+            {
+              "name": "value"
+            },
+            {
+              "name": "old"
+            }
+          ],
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_render",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 57,
+              "column": 6
+            },
+            "end": {
+              "line": 104,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_applyRender",
+          "description": "Renders the given lit-html template `result` into the given `node`.\nImplement to customize the way rendering is applied. This is should not\ntypically be needed and is provided for advanced use cases.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 187,
+              "column": 4
+            },
+            "end": {
+              "line": 189,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "result",
+              "description": "{TemplateResult} `lit-html` template result to render"
+            },
+            {
+              "name": "node",
+              "description": "{Element|DocumentFragment} node into which to render"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_didRender",
+          "description": "Called after element DOM has been rendered. Implement to\ndirectly control rendered DOM. Typically this is not needed as `lit-html`\ncan be used in the `_render` method to set properties, attributes, and\nevent listeners. However, it is sometimes useful for calling methods on\nrendered elements, like calling `focus()` on an element to focus it.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 200,
+              "column": 4
+            },
+            "end": {
+              "line": 200,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_props",
+              "description": "Current element properties"
+            },
+            {
+              "name": "_changedProps",
+              "description": "Changing element properties"
+            },
+            {
+              "name": "_prevProps",
+              "description": "Previous element properties"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "requestRender",
+          "description": "Call to request the element to asynchronously re-render regardless\nof whether or not any property changes are pending.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 205,
+              "column": 4
+            },
+            "end": {
+              "line": 205,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        },
+        {
+          "name": "_invalidateProperties",
+          "description": "Override which provides tracking of invalidated state.",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../../@polymer/lit-element/lit-element.js",
+            "start": {
+              "line": 209,
+              "column": 4
+            },
+            "end": {
+              "line": 212,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "LitElement"
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 56,
+          "column": 4
+        },
+        "end": {
+          "line": 105,
+          "column": 5
+        }
+      },
+      "privacy": "public",
+      "superclass": "LitElement",
+      "name": "DemoCard",
+      "attributes": [],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "demo-card"
+    }
+  ]
+}

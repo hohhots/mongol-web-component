@@ -1,0 +1,22 @@
+{
+  "name": "@material/mwc-card",
+  "version": "0.1.2",
+  "description": "",
+  "main": "mwc-card.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@polymer/lit-element": "^0.5.2"
+  },
+  "devDependencies": {
+    "@material/card": "^0.35.0",
+    "@material/mwc-sass-render": "^0.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": true
+}
