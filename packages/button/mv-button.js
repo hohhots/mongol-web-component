@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import {LitElement, html, classString as c$} from '@polymer/lit-element/lit-element.js';
-import {style} from './mwc-button-css.js';
+import {style} from './mv-button-css.js';
 import {MDCWCRipple} from '@material/mwc-ripple/mwc-ripple.js';
 import {afterNextRender} from '@material/mwc-base/utils.js';
 import '@material/mwc-icon/mwc-icon-font.js';
@@ -28,8 +28,6 @@ export class Button extends LitElement {
       outlined: Boolean,
       dense: Boolean,
       disabled: Boolean,
-      icon: String,
-      label: String,
     };
   }
 
@@ -40,8 +38,6 @@ export class Button extends LitElement {
     this.outlined = false;
     this.dense = false;
     this.disabled = false;
-    this.icon = '';
-    this.label = '';
   }
 
   _createRoot() {
@@ -51,28 +47,28 @@ export class Button extends LitElement {
   async ready() {
     super.ready();
     await afterNextRender();
-    this._ripple = new MDCWCRipple(this._root.querySelector('.mdc-button'));
+    this._ripple = new MDCWCRipple(this._root.querySelector('.mdc-vbutton'));
   }
 
   _renderStyle() {
     return style;
   }
 
-  _render({raised, unelevated, outlined, dense, disabled, icon, label}) {
+  _render({raised, unelevated, outlined, dense, disabled}) {
     const hostClasses = c$({
-      'mdc-button--raised': raised,
-      'mdc-button--unelevated': unelevated,
-      'mdc-button--outlined': outlined,
-      'mdc-button--dense': dense,
+      'mdc-vbutton--raised': raised,
+      'mdc-vbutton--unelevated': unelevated,
+      'mdc-vbutton--outlined': outlined,
+      'mdc-vbutton--dense': dense,
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-button ${hostClasses}" disabled?="${disabled}">
-        ${icon ? html`<span class="material-icons mdc-button__icon">${icon}</span>` : ''}
+      <button class$="mdc-vbutton ${hostClasses}" disabled?="${disabled}">
+        ${icon ? html`<span class="material-icons mdc-vbutton__icon">${icon}</span>` : ''}
         ${label || ''}
         <slot></slot>
       </button>`;
   }
 }
 
-customElements.define('mwc-button', Button);
+customElements.define('mv-button', Button);

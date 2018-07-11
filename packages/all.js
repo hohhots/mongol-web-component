@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export {Button} from '@material/mwc-button/mwc-button.js';
+export {Button} from '@material/mv-button/mv-button.js';
 export {Fab} from '@material/mwc-fab/mwc-fab.js';
 export {Checkbox} from '@material/mwc-checkbox/mwc-checkbox.js';
 export {Chip} from '@material/mwc-chips/mwc-chip.js';

@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+@license
+Copyright 2018 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+<head>
+  <title>button demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../node_modules/@material/mv-div/mv-div.js"></script>
+  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <link rel="stylesheet" href="demo-component.css">
+  <style>
+    .light {
+      --mdc-theme-on-primary: black;
+      --mdc-theme-primary: white;
+      --mdc-theme-on-secondary: black;
+      --mdc-theme-secondary: white;
+    }
+
+    .pink {
+      --mdc-theme-on-primary: white;
+      --mdc-theme-primary: #e9437a;
+      --mdc-theme-on-secondary: white;
+      --mdc-theme-secondary: #e9437a;
+    }
+
+    .wide {
+      width: 250px;
+    }
+  </style>
+</head>
+<body class="unresolved">
+  <header>
+    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <span>mv divs</span></a>
+    <style>
+      div {
+        border:1px solid black;
+      }
+      div.sizefixed {
+        margin-left: 20px;
+        display: block;
+        width: 300px;
+        height: 400px;
+        left: 20px;
+        background-color: gray;
+        overflow: scroll;
+      }
+    </style>
+  </header>
+  &nbsp;<p></p>&nbsp;<p></p>
+
+  <h4>mv-div in default div</h4>
+  <div>
+    <mv-div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.</mv-div>
+  </div>
+
+  <h4>mv-div in size fixed div</h4>
+  <div class="sizefixed">
+    <mv-div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat beatae sequi iure perferendis a. Labore debitis a sunt atque amet nam, excepturi illum quam maiores deserunt rem ad, quia voluptatem.
+    </mv-div>
+  </div>
+  <main>
+    <script type="module">
+      import {html} from '@polymer/lit-element/lit-element.js';
+      import {Div} from '@material/mv-div/mv-div.js';
+      class CustomMvdiv extends Div {
+        _renderStyle(){
+          return html`${super._renderStyle()}<style>.mv-div{border: 1px solid dark;border-radius: 8px}</style>`;
+        }
+      }
+      customElements.define('custom-mvdiv', CustomMvdiv);
+    </script>
+
+    <h4>custom button</h4>
+
+    <custom-mvdiv></custom-mvdiv>
+
+    <script>
+      addEventListener('load', () => document.body.classList.remove('unresolved'));
+    </script>
+
+  </main>
+</body>
+</html>

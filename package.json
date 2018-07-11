@@ -1,10 +1,10 @@
 {
-  "name": "material-components-web-components",
+  "name": "mongol-material-components-web-components",
   "private": true,
-  "description": "Material Components Web Components",
+  "description": "Mongol material Components Web Components",
   "license": "Apache-2.0",
   "scripts": {
-    "changelog": "standard-changelog -i CHANGELOG.md -k packages/material-components-web/package.json -w",
+    "changelog": "standard-changelog -i CHANGELOG.md -k packages/mongol-material-components-web/package.json -w",
     "clean": "del-cli build/** build .closure-tmp/** .closure-tmp packages/*/node_modules packages/*/package-lock.json",
     "dist": "npm run build && npm run build:min",
     "dev": "polyserve --npm --module-resolution=node",
@@ -79,5 +79,8 @@
         ]
       }
     }
+  },
+  "dependencies": {
+    "wct-browser-legacy": "^1.0.1"
   }
 }
