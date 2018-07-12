@@ -47,6 +47,6 @@ test('instantiating the element with default css properties works', async () => 
   assert.instanceOf(container, window.HTMLDivElement);
   assert.instanceOf(mvDiv, window.HTMLDivElement);
 
-  //assert.equal(element.style.margin, 'block');
-//  assert.equal(container.hasAttribute('height'), false);
+  // assert.equal(element.style.margin, 0);
+  // assert.equal(container.hasAttribute('height'), false);
 });
