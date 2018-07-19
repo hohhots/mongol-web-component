@@ -18,11 +18,14 @@ limitations under the License.
 import {LitElement, html} from '@polymer/lit-element/lit-element.js';
 import {style} from './mv-div-css.js';
 import '@material/mwc-icon/mwc-icon-font.js';
+//import {afterNextRender} from '@material/mwc-base/utils.js';
 
 export class Div extends LitElement {
   constructor() {
     super();
+    console.log('constructor()');
   }
+
 
   ready() {
     super.ready();
@@ -33,14 +36,11 @@ export class Div extends LitElement {
   }
 
   _render() {
-    console.log('_render()');
     return html`
       ${this._renderStyle()}
-        <div class="mv-div-container">
-          <div class="mv-div">
-            <slot></slot>
-          </div>
-        </div>
+      <div id="mongol">
+        <slot></slot>
+      </div>
     `;
   }
 
@@ -50,18 +50,48 @@ export class Div extends LitElement {
   }
 
   _didRender() {
+    if (!this.parentIsDiv()) {
+      this.style.display = 'none';
+      return;
+    }
     this.initElementStyles();
   }
 
   initElementStyles() {
-    const container = this.shadowRoot.querySelector('.mv-div-container');
-    const div = container.querySelector('.mv-div');
-    const containerStyle = window.getComputedStyle(container, null);
-    const divStyle = window.getComputedStyle(div, null);
+    //await afterNextRender();
+    //const rootElement = this.querySelector('mv-div');
+    //console.log(this._root.querySelector('#mongol'));
+    const mongol = this._root.querySelector('#mongol');
 
-    const containerH = containerStyle.getPropertyValue('height');
+    const parentStyle = window.getComputedStyle(this.parentNode, null);
+    const mongolStyle = window.getComputedStyle(mongol, null);
+    const hostStyle = window.getComputedStyle(this, null);
 
-    div.style.width = containerH;
+    this.style.height = this.parentNode.clientHeight + 'px';
+    mongol.style.width = this.clientHeight + 'px';
+
+    //console.log(parseInt(mongol.style.width.replace('px', '')), mongol.scrollWidth);
+     console.log(mongol.scrollWidth, mongol.offsetWidth);
+    console.log(this.parentNode.scrollHeight, this.parentNode.offsetHeight);
+    if (this.parentNode.offsetHeight < this.parentNode.scrollHeight) {
+      const h = this.parentNode.scrollHeight + 'px';
+      mongol.style.width = h;
+      this.style.height = h;
+    }
+
+    // Store origin value
+    //const hostH = hostStyle.getPropertyValue('height');
+
+
+    //mongol.style.width = hostH;
+
+    //const hostScrolW = hostStyle.getPropertyValue('scrollwidth');
+
+    //console.log(mongol.scrollWidth, mongolStyle.getPropertyValue('width'));
+
+    //await afterNextRender();
+    //console.log('after - ', mongolStyle.getPropertyValue('height'));
+    /**
     const divH = divStyle.getPropertyValue('height');
 
     // keep container height
@@ -69,8 +99,16 @@ export class Div extends LitElement {
     container.style.width = divH;
 
     div.style.height = divH;
-
     console.log('_didRender()', containerStyle.getPropertyValue('height'), divStyle.getPropertyValue('width'));
+    **/
+  }
+
+  parentIsDiv() {
+    const nodeName = this.parentNode.nodeName.toLowerCase();
+    if (nodeName == 'div') {
+      return true;
+    }
+    return false;
   }
 }
 
