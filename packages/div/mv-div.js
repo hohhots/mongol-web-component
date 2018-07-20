@@ -18,7 +18,7 @@ limitations under the License.
 import {LitElement, html} from '@polymer/lit-element/lit-element.js';
 import {style} from './mv-div-css.js';
 import '@material/mwc-icon/mwc-icon-font.js';
-//import {afterNextRender} from '@material/mwc-base/utils.js';
+import {afterNextRender} from '@material/mwc-base/utils.js';
 
 export class Div extends LitElement {
   constructor() {
@@ -57,27 +57,33 @@ export class Div extends LitElement {
     this.initElementStyles();
   }
 
-  initElementStyles() {
+  async initElementStyles() {
     //await afterNextRender();
     //const rootElement = this.querySelector('mv-div');
     //console.log(this._root.querySelector('#mongol'));
     const mongol = this._root.querySelector('#mongol');
 
     const parentStyle = window.getComputedStyle(this.parentNode, null);
-    const mongolStyle = window.getComputedStyle(mongol, null);
     const hostStyle = window.getComputedStyle(this, null);
+    const mongolStyle = window.getComputedStyle(mongol, null);
 
-    this.style.height = this.parentNode.clientHeight + 'px';
-    mongol.style.width = this.clientHeight + 'px';
+    //this.style.height = this.parentNode.clientHeight + 'px';
+    mongol.style.width = 0;
+    await afterNextRender();
+    mongol.style.width = mongol.scrollWidth + 'px';
+    console.log(mongol.scrollWidth, mongol.offsetWidth);
+    //this.style.height = this.parentNode.clientHeight + 'px';
 
     //console.log(parseInt(mongol.style.width.replace('px', '')), mongol.scrollWidth);
-     console.log(mongol.scrollWidth, mongol.offsetWidth);
-    console.log(this.parentNode.scrollHeight, this.parentNode.offsetHeight);
-    if (this.parentNode.offsetHeight < this.parentNode.scrollHeight) {
+    //console.log(mongol.scrollWidth, mongol.offsetWidth);
+    //console.log(this.parentNode.scrollHeight, this.parentNode.offsetHeight);
+    /**if (this.parentNode.offsetHeight < this.parentNode.scrollHeight) {
+      const sbarH = this.parentNode.offsetHeight - this.parentNode.clientHeight;
+      console.log(sbarH);
       const h = this.parentNode.scrollHeight + 'px';
       mongol.style.width = h;
       this.style.height = h;
-    }
+    }**/
 
     // Store origin value
     //const hostH = hostStyle.getPropertyValue('height');
