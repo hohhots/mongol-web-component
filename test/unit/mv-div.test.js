@@ -18,16 +18,26 @@ import {assert} from 'chai';
 import {Div} from '@material/mv-div';
 
 let parent;
+let parentStyle;
 let element;
+let elementStyle;
+let mongol;
+let mongolStyle;
 
 suite('mv-div');
 
-beforeEach(() => {
+beforeEach(async () => {
   parent = document.createElement('div');
-  document.body.appendChild(parent);
-
   element = document.createElement('mv-div');
   parent.appendChild(element);
+
+  document.body.appendChild(parent);
+
+  mongol = element.shadowRoot.querySelector('#mongol');
+
+  parentStyle = window.getComputedStyle(parent, null);
+  elementStyle = window.getComputedStyle(element, null);
+  mongolStyle = window.getComputedStyle(mongol, null);
 });
 
 afterEach(() => {
@@ -36,17 +46,52 @@ afterEach(() => {
 
 test('initializes as an mv-div', () => {
   assert.instanceOf(element, Div);
+  assert.instanceOf(mongol, window.HTMLDivElement);
 });
 
-test('instantiating the element with default css properties works', async () => {
+test('instantiating without container', () => {
+  element = document.createElement('mv-div');
+  document.body.appendChild(element);
+
+  assert.equal(element.style.display, 'none');
+});
+
+test('instantiating with container not div', () => {
+  parent = document.createElement('p');
+  element = document.createElement('mv-div');
+  parent.appendChild(element);
+  document.body.appendChild(parent);
+
+  assert.equal(element.style.display, 'none');
+});
+
+test('instantiating the empty element in a default div', async () => {
+  // element.requestRender();
+  // await element.renderComplete;
+  element._didRender();
+
+  assert.equal(parentStyle.getPropertyValue('margin'), '0px');
+  assert.equal(parentStyle.getPropertyValue('padding'), '0px');
+  // console.log(parent);
+  assert.equal(mongol.clientHeight, 0);
+  assert.equal(mongol.clientWidth, 0);
+});
+
+test('instantiating the element with content in a default div', async () => {
   await element.renderComplete;
 
-  const container = element.shadowRoot.querySelector('.mv-div-container');
-  const mvDiv = container.querySelector('.mv-div');
+//  assert.equal(mongol.offsetWidth, parent.clientHeight);
+});
+/**
+test('instantiating the element in a default div', async () => {
+  await element.renderComplete;
+
+  element.innerHTML = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.  1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.';
+  const mongol = element.shadowRoot.querySelector('#mongol');
 
   assert.instanceOf(container, window.HTMLDivElement);
   assert.instanceOf(mvDiv, window.HTMLDivElement);
 
   // assert.equal(element.style.margin, 0);
   // assert.equal(container.hasAttribute('height'), false);
-});
+});*/
