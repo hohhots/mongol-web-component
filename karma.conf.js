@@ -172,5 +172,5 @@ module.exports = function(config) {
 };
 
 function determineBrowsers() {
-  return USING_SL ? Object.keys(SL_LAUNCHERS) : ['Chrome'];
+  return USING_SL ? Object.keys(SL_LAUNCHERS) : ['ChromeHeadless']; // ['Chrome'];
 }

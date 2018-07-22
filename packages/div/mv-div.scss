@@ -16,7 +16,9 @@ limitations under the License.
 */
 
 :host {
+  position: relative;
   display: block;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -25,6 +27,8 @@ limitations under the License.
 }
 
 #mongol {
+  position: absolute;
+  box-sizing: border-box;
   -webkit-transform-origin:left top;
   -ms-transform-origin:left top;
     transform-origin:left top;

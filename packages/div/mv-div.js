@@ -69,19 +69,19 @@ export class Div extends LitElement {
 
     //console.log(this.mongol.offsetHeight, this.parentNode.clientHeight);
     // Auto height container
-    if (this.isFixedHeightParent() == 'unfixed') {
-      //console.log('unfixed');
 
+
+    if (this.isFixedHeightParent()) {console.log('fixed');
+      this.style.height = this.parentNode.clientHeight + 'px';
+      this.setMongolWidth(this.clientHeight);
+      this.style.width = this.mongol.scrollHeight + 'px';
+    } else {
       this.setMongolWidth(0);
       //await afterNextRender();
       const mongolSW = this.mongol.scrollWidth;
       this.setMongolWidth(mongolSW);
-      
-      this.setMongolHeightToParentWidth();
 
-      const mongolOSW = this.mongol.offsetWidth + 'px';
-      this.style.height = mongolOSW;
-      this.parentNode.style.height = mongolOSW;
+      this.setMongolHeightToParentWidth();
     }
   }
 
@@ -93,30 +93,38 @@ export class Div extends LitElement {
   }
 
   isFixedHeightParent() {
-    if ((this.parentHeightState == 'fixed') || (this.parentHeightState == 'unfixed')) {
-      return this.parentHeightState;
-    }
+    let isFixed = false;
 
-    const originH = this.style.height;
-    this.style.height = 0;
+    let moh = this.mongol.style.height;
+    let mob = this.mongol.style.border;
+    this.mongol.style.height = 0;
+    this.mongol.style.border = 0;
+
+    let eob = this.style.border;
+    this.style.border = 0;
+
     if (this.parentNode.clientHeight == 0) {
-      this.parentHeightState = 'unfixed';
+      isFixed = false;
     } else {
-      this.parentHeightState = 'fixed';
+      isFixed = true;
     }
+    this.mongol.style.height = moh;
+    this.mongol.style.border = mob;
+    this.style.border = eob;
 
-    this.style.height = originH;
-    return this.parentHeightState;
+    return isFixed;
   }
 
-  setMongolHeightToParentWidth() {
-    console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
-    while (this.parentNode.clientWidth < this.mongol.offsetHeight) {//console.log('add');
+  async setMongolHeightToParentWidth() {
+    //console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
+    while (this.parentNode.clientWidth < this.mongol.scrollHeight) {console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
       this.setMongolWidth(this.mongol.offsetWidth + 1);
+      await afterNextRender();
+      this.style.height = this.mongol.offsetWidth + 'px';
     }
   }
 
-  setMongolWidth(width) {console.log('style - ', width);
+  setMongolWidth(width) {// console.log('style - ', width);
     this.mongol.style.width = width + 'px';
   }
 }
