@@ -71,7 +71,7 @@ export class Div extends LitElement {
     // Auto height container
 
 
-    if (this.isFixedHeightParent()) {console.log('fixed');
+    if (this.isFixedHeightParent()) {
       this.style.height = this.parentNode.clientHeight + 'px';
       this.setMongolWidth(this.clientHeight);
       this.style.width = this.mongol.scrollHeight + 'px';
@@ -95,32 +95,28 @@ export class Div extends LitElement {
   isFixedHeightParent() {
     let isFixed = false;
 
-    let moh = this.mongol.style.height;
-    let mob = this.mongol.style.border;
-    this.mongol.style.height = 0;
-    this.mongol.style.border = 0;
-
-    let eob = this.style.border;
-    this.style.border = 0;
+    const eod = this.style.display;
+    this.style.display = 'none';
 
     if (this.parentNode.clientHeight == 0) {
       isFixed = false;
     } else {
       isFixed = true;
     }
-    this.mongol.style.height = moh;
-    this.mongol.style.border = mob;
-    this.style.border = eob;
+    this.style.display = eod;
 
     return isFixed;
   }
 
   async setMongolHeightToParentWidth() {
     //console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
-    while (this.parentNode.clientWidth < this.mongol.scrollHeight) {console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
+    while (this.parentNode.clientWidth < this.mongol.scrollHeight) {
       this.setMongolWidth(this.mongol.offsetWidth + 1);
-      await afterNextRender();
       this.style.height = this.mongol.offsetWidth + 'px';
+    }
+    await afterNextRender();
+    if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
+      this.setMongolHeightToParentWidth();
     }
   }
 
