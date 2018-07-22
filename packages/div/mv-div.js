@@ -67,21 +67,22 @@ export class Div extends LitElement {
   async initElementStyles() {
     await afterNextRender();
 
-    //console.log(this.mongol.offsetHeight, this.parentNode.clientHeight);
-    // Auto height container
-
-
     if (this.isFixedHeightParent()) {
       this.style.height = this.parentNode.clientHeight + 'px';
       this.setMongolWidth(this.clientHeight);
       this.style.width = this.mongol.scrollHeight + 'px';
     } else {
       this.setMongolWidth(0);
-      //await afterNextRender();
       const mongolSW = this.mongol.scrollWidth;
       this.setMongolWidth(mongolSW);
-
-      this.setMongolHeightToParentWidth();
+      if (this.parentNode.clientWidth >= this.mongol.scrollHeight) {
+        this.style.height = this.mongol.offsetWidth + 'px';
+      } else {
+        this.setMongolHeightToParentWidth();
+      }
+    }
+    if (this.parentNode.clienHeight < this.mongol.scrollWidth) {
+      this.initElementStyles();
     }
   }
 
@@ -109,7 +110,7 @@ export class Div extends LitElement {
   }
 
   async setMongolHeightToParentWidth() {
-    //console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
+    // console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
     while (this.parentNode.clientWidth < this.mongol.scrollHeight) {
       this.setMongolWidth(this.mongol.offsetWidth + 1);
       this.style.height = this.mongol.offsetWidth + 'px';
@@ -120,7 +121,7 @@ export class Div extends LitElement {
     }
   }
 
-  setMongolWidth(width) {// console.log('style - ', width);
+  setMongolWidth(width) {
     this.mongol.style.width = width + 'px';
   }
 }

@@ -74,13 +74,15 @@ test('instantiating the empty element in a default div', async () => {
   assert.equal(parentStyle.getPropertyValue('padding'), '0px');
   // console.log(parent);
   assert.equal(mongol.clientHeight, 0);
-  //assert.equal(mongol.clientWidth, 0);
+  assert.equal(mongol.clientWidth, 0);
 });
 
 test('instantiating the element with content in a default div', async () => {
   await element.renderComplete;
 
-//  assert.equal(mongol.offsetWidth, parent.clientHeight);
+  mongol.innerHTML = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.  1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.';
+
+  assert.equal(mongol.offsetWidth, parent.clientHeight);
 });
 /**
 test('instantiating the element in a default div', async () => {

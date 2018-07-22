@@ -81,7 +81,8 @@
     }
   },
   "dependencies": {
-    "wct-browser-legacy": "^1.0.1",
-    "resize-observer-polyfill": "^1.5.0"
+    "npm": "^6.2.0",
+    "resize-observer-polyfill": "^1.5.0",
+    "wct-browser-legacy": "^1.0.1"
   }
 }
