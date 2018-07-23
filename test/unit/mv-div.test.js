@@ -78,10 +78,23 @@ test('instantiating the empty element in a default div', async () => {
 });
 
 test('instantiating the element with content in a default div', async () => {
+  parent = document.createElement('div');
+  element = document.createElement('mv-div');
+  let t = document.createTextNode('Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.  1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.');
+  element.appendChild(t);
+  parent.appendChild(element);
+
+  document.body.appendChild(parent);
+
+  mongol = element.shadowRoot.querySelector('#mongol');
+
+  parentStyle = window.getComputedStyle(parent, null);
+  elementStyle = window.getComputedStyle(element, null);
+  mongolStyle = window.getComputedStyle(mongol, null);
+
+  element._render();
   await element.renderComplete;
-
-  mongol.innerHTML = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.  1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.';
-
+  console.log(element.offsetHeight);
   assert.equal(mongol.offsetWidth, parent.clientHeight);
 });
 /**

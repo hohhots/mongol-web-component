@@ -68,9 +68,9 @@ export class Div extends LitElement {
     await afterNextRender();
 
     if (this.isFixedHeightParent()) {
-      this.style.height = this.parentNode.clientHeight + 'px';
-      this.setMongolWidth(this.clientHeight);
-      this.style.width = this.mongol.scrollHeight + 'px';
+      this.setCssOfFixedHeightDiv();
+      // If parent's horizontal scrollbar disapear or hidden.
+      this.setCssOfFixedHeightDiv();
     } else {
       this.setMongolWidth(0);
       const mongolSW = this.mongol.scrollWidth;
@@ -81,9 +81,13 @@ export class Div extends LitElement {
         this.setMongolHeightToParentWidth();
       }
     }
-    if (this.parentNode.clienHeight < this.mongol.scrollWidth) {
-      this.initElementStyles();
-    }
+  }
+
+  async setCssOfFixedHeightDiv() {
+    await afterNextRender();
+    this.style.height = this.parentNode.clientHeight + 'px';
+    this.setMongolWidth(this.clientHeight);
+    this.style.width = this.mongol.scrollHeight + 'px';
   }
 
   parentIsDiv() {
