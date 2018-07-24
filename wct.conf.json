@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "plugins": {
+    "local": {
+      "browsers": ["chrome", "firefox"]
+    }
+  },
+  "suites": ["test/wct/index.test.html"]
+}

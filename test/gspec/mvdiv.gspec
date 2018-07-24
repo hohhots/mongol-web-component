@@ -1,0 +1,9 @@
+
+@objects
+  header-logo .auto-size
+  mvdiv       mv-div
+  mongol      #mongol
+
+= Header =
+  header-logo:
+    width 100 % of screen/width

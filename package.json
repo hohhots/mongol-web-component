@@ -13,6 +13,7 @@
     "lint:imports": "node scripts/check-imports.js",
     "lint": "npm-run-all --parallel lint:*",
     "test": "karma start --single-run",
+    "wct": "wct --skip-selenium-install",
     "bootstrap": "npm install && ./scripts/bootstrap-unreleased.sh",
     "update-styling": "./scripts/update-styling.sh",
     "update-gh-pages": "npm run bootstrap && ./scripts/publish-demos.sh"
@@ -83,6 +84,7 @@
   "dependencies": {
     "npm": "^6.2.0",
     "resize-observer-polyfill": "^1.5.0",
+    "test-fixture": "^1.0.2",
     "wct-browser-legacy": "^1.0.1"
   }
 }
