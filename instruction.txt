@@ -1,0 +1,9 @@
+1, npm run dev
+  access demos/div.html to visit demo page.
+
+2, npm run wct
+  use web component tester (wct) run test in project folder.
+
+-----  installation  -----
+
+

@@ -21,7 +21,7 @@ const fixture = (mvdivId) => {
   mvdiv = document.querySelector('#' + mvdivId);
   mongol = mvdiv.shadowRoot.querySelector('#' + innerDivId);
   parent = mvdiv.parentElement;
-}
+};
 
 const mvDivCommonTests = () => {
   assert.equal(getStyle(mongol, 'transform-origin'), '0px 0px');
@@ -30,6 +30,22 @@ const mvDivCommonTests = () => {
   assert.equal(mongol.offsetWidth, mvdiv.clientHeight, 'mongol.offsetWidth, mvdiv.clientHeight');
   assert.isAtLeast(mvdiv.clientWidth - mongol.offsetHeight, 0, '(mvdiv.clientWidth - mongol.offsetHeight) >= 0');
 
+  if (!parent.style.height) {
+    defaultHeightDivTests();
+  } else {
+    fixedHeightDivTests();
+  }
+};
+
+const defaultHeightDivTests = () => {
   assert.equal(mvdiv.offsetHeight, parent.clientHeight, 'mvdiv.offsetHeight, parent.clientHeight');
   assert.equal(mvdiv.offsetWidth, parent.clientWidth, 'mvdiv.offsetWidth, parent.clientWidth');
-}
+};
+
+const fixedHeightDivTests = () => {
+  assert.equal(mvdiv.offsetHeight, parent.scrollHeight, 'mvdiv.offsetHeight, parent.scrollHeight');
+  assert.isAtLeast(parent.scrollWidth - mvdiv.offsetWidth, 0, 'mvdiv.offsetWidth, parent.scrollWidth');
+  if ((mongol.offsetHeight >= parent.clientWidth)) {
+    assert.equal(mvdiv.clientWidth, mongol.offsetHeight, 'mvdiv.clientWidth, mongol.offsetHeight');
+  }
+};

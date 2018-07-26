@@ -46,7 +46,23 @@ limitations under the License.
     </mv-div>
   </div>
 
-  <script>
+  <div style="height: 300px">
+    <mv-div id="fhc-small-content">hello</mv-div>
+  </div>
+
+  <div style="height: 50px">
+    <mv-div id="fshc-large-content" >
+      2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.
+    </mv-div>
+  </div>
+
+  <div style="height: 300px">
+    <mv-div id="fhc-large-content" >
+      2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.
+    </mv-div>
+  </div>
+  
+<script>
   
     suite('<mv-div></mv-div>', async () => {
       await wait();
@@ -96,9 +112,26 @@ limitations under the License.
       
       test('All elements dimension is correct', () => {
         mvDivCommonTests();
+      });
+    });
 
-        assert.notEqual(getStyle(mongol, 'width'), '0px');
-        assert.notEqual(getStyle(mongol, 'height'), '0px');
+    suite('<div><mv-div>fshc-large-content</mv-div></div>', () => {
+      setup(() => {
+        fixture('fshc-large-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+
+    suite('<div><mv-div>fhc-large-content</mv-div></div>', () => {
+      setup(() => {
+        fixture('fhc-large-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
       });
     });
   </script>

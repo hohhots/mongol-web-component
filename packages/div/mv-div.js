@@ -88,9 +88,16 @@ export class Div extends LitElement {
 
   async setCssOfFixedHeightDiv() {
     await afterNextRender();
+
     this.style.height = this.parentNode.clientHeight + 'px';
     this.setMongolWidth(this.clientHeight);
     this.style.width = this.mongol.scrollHeight + 'px';
+
+    if (this.mongol.clientWidth < this.mongol.scrollWidth) {
+      this.setMongolWidth(this.mongol.scrollWidth);
+      this.style.width = this.mongol.offsetHeight + 'px';
+      this.style.height = this.mongol.offsetWidth + 'px';
+    }
   }
 
   parentIsDiv() {
