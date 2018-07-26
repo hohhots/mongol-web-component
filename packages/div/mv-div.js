@@ -21,10 +21,12 @@ import '@material/mwc-icon/mwc-icon-font.js';
 import {afterNextRender} from '@material/mwc-base/utils.js';
 
 export class Div extends LitElement {
+  static tag() {
+    return 'mv-div';
+  }
 
   constructor() {
     super();
-    this.parentHeightState;
   }
 
 
@@ -56,11 +58,11 @@ export class Div extends LitElement {
   }
 
   _didRender() {
-    if (!this.parentIsDiv()) {
+    if (!this.parentIsDiv() || this.nestedInMvdiv()) {
       this.style.display = 'none';
       return;
     }
-    this.style.display = '';
+    // this.style.display = '';
     this.initElementStyles();
   }
 
@@ -75,9 +77,10 @@ export class Div extends LitElement {
       this.setMongolWidth(0);
       const mongolSW = this.mongol.scrollWidth;
       this.setMongolWidth(mongolSW);
-      if (this.parentNode.clientWidth >= this.mongol.scrollHeight) {
-        this.style.height = this.mongol.offsetWidth + 'px';
-      } else {
+
+      this.style.height = this.mongol.offsetWidth + 'px';
+
+      if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
         this.setMongolHeightToParentWidth();
       }
     }
@@ -98,17 +101,15 @@ export class Div extends LitElement {
   }
 
   isFixedHeightParent() {
-    let isFixed = false;
+    let isFixed = true;
 
-    const eod = this.style.display;
-    this.style.display = 'none';
-
-    if (this.parentNode.clientHeight == 0) {
+    const eoh = this.style.height;
+    const poh = this.parentNode.clientHeight;
+    this.style.height = (poh + 100) + 'px';
+    if (poh != this.parentNode.clientHeight) {
       isFixed = false;
-    } else {
-      isFixed = true;
     }
-    this.style.display = eod;
+    this.style.height = eoh;
 
     return isFixed;
   }
@@ -128,6 +129,18 @@ export class Div extends LitElement {
   setMongolWidth(width) {
     this.mongol.style.width = width + 'px';
   }
+
+  nestedInMvdiv() {
+    let a = this.parentElement;
+    while (a) {
+      if (a.tagName.toLowerCase() == Div.tag()) {
+        return true;
+      }
+      a = a.parentElement;
+    }
+
+    return false;
+  }
 }
 
-customElements.define('mv-div', Div);
+customElements.define(Div.tag(), Div);
