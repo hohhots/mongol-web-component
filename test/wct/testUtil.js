@@ -48,4 +48,7 @@ const fixedHeightDivTests = () => {
   if ((mongol.offsetHeight >= parent.clientWidth)) {
     assert.equal(mvdiv.clientWidth, mongol.offsetHeight, 'mvdiv.clientWidth, mongol.offsetHeight');
   }
+  if ((mongol.offsetWidth >= parent.clientHeight)) {
+    assert.equal(mvdiv.clientHeight, mongol.offsetWidth, 'mvdiv.clientHeight, mongol.offsetWidth');
+  }
 };
