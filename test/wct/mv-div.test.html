@@ -33,6 +33,20 @@ limitations under the License.
   <mv-div id="alone"></mv-div>
   
   <div>
+    <mv-div>
+      <mv-div id="pure-nested"></mv-div>
+    </mv-div>
+  </div>
+
+  <div>  
+    <mv-div>
+      <div>
+        <mv-div id="nested"></mv-div>
+      </div>
+    </mv-div>
+  </div>
+
+  <div>
     <mv-div id="empty"></mv-div>
   </div>
 
@@ -51,19 +65,48 @@ limitations under the License.
   </div>
 
   <div style="height: 50px">
-    <mv-div id="fshc-large-content" >
+    <mv-div id="fshc-small-content">Hello</mv-div>
+  </div>
+
+  <div style="height: 50px">
+    <mv-div id="fshc-large-content">
       2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.
     </mv-div>
   </div>
 
   <div style="height: 300px">
-    <mv-div id="fhc-large-content" >
+    <mv-div id="fbhc-small-content">Hello</mv-div>
+  </div>  
+
+  <div style="height: 300px">
+    <mv-div id="fbhc-large-content">
+      2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.
+    </mv-div>
+  </div>
+
+  <div style="height: 50px; width: 80px">
+    <mv-div id="fshwc-small-content">Hello</mv-div>
+  </div>
+
+  <div style="height: 50px; width: 80px">
+    <mv-div id="fshwc-large-content">
+      2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.
+    </mv-div>
+  </div>
+
+  <div style="height: 300px; width: 400px">
+    <mv-div id="fbhwc-small-content">Hello</mv-div>
+  </div>
+  
+  <div style="height: 300px; width: 400px">
+    <mv-div id="fbhwc-large-content">
       2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio.
     </mv-div>
   </div>
   
 <script>
   
+    // The first time async and await is very important for check css.
     suite('<mv-div></mv-div>', async () => {
       await wait();
 
@@ -75,13 +118,38 @@ limitations under the License.
         assert.equal(mvdiv.style.display, 'none');
       });
     });
+
+    suite('<div><mv-div><mv-div></mv-div></mv-div></div>', async () => {
+      await wait();
+
+      setup(async () => {
+        fixture("pure-nested");
+      });
+
+      test('display none', () => {
+        assert.equal(mvdiv.style.display, 'none');
+      });
+    });
     
+    suite('<div><mv-div><div><mv-div></mv-div></div></mv-div></div>', async () => {
+      await wait();
+
+      setup(async () => {
+        fixture("nested");
+      });
+
+      test('display none', () => {
+        assert.equal(mvdiv.style.display, 'none');
+      });
+    });
+
+
     suite('<div><mv-div></mv-div></div>', () => {
       setup(async () => {
         fixture('empty');
       });
 
-      test('All elements dimension is correct', async () => {
+      test('All elements dimension is correct', () => {
         mvDivCommonTests();
 
         assert.equal(mongol.style.width, '0px', 'mongol.style.width');
@@ -93,7 +161,7 @@ limitations under the License.
     });
 
     suite('<div><mv-div>small-content</mv-div></div>', () => {
-      setup(() => {
+      setup(async () => {
         fixture('small-content');
       });
       
@@ -106,7 +174,7 @@ limitations under the License.
     });
 
     suite('<div><mv-div>large-content</mv-div></div>', () => {
-      setup(() => {
+      setup(async () => {
         fixture('large-content');
       });
       
@@ -115,8 +183,18 @@ limitations under the License.
       });
     });
 
+    suite('<div><mv-div>fshc-small-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fshc-small-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+
     suite('<div><mv-div>fshc-large-content</mv-div></div>', () => {
-      setup(() => {
+      setup(async () => {
         fixture('fshc-large-content');
       });
       
@@ -125,15 +203,66 @@ limitations under the License.
       });
     });
 
-    suite('<div><mv-div>fhc-large-content</mv-div></div>', () => {
-      setup(() => {
-        fixture('fhc-large-content');
+    suite('<div><mv-div>fbhc-small-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fbhc-small-content');
       });
       
       test('All elements dimension is correct', () => {
         mvDivCommonTests();
       });
     });
+
+    suite('<div><mv-div>fbhc-large-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fbhc-large-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+
+    suite('<div><mv-div>fshwc-small-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fshwc-small-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+
+    suite('<div><mv-div>fshwc-large-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fshwc-large-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+
+    suite('<div><mv-div>fbhwc-small-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fbhwc-small-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+
+    suite('<div><mv-div>fbhwc-large-content</mv-div></div>', () => {
+      setup(async () => {
+        fixture('fbhwc-large-content');
+      });
+      
+      test('All elements dimension is correct', () => {
+        mvDivCommonTests();
+      });
+    });
+      
   </script>
 
 </body>
