@@ -21,8 +21,6 @@ limitations under the License.
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
   <script type="module" src="../node_modules/@material/mv-div/mv-div.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
-  <link rel="stylesheet" href="demo-component.css">
   <style>
     body {
       text-align: center;
@@ -143,8 +141,8 @@ limitations under the License.
   <main>
     <script type="module">
       import {html} from '@polymer/lit-element/lit-element.js';
-      import {Div} from '@material/mv-div/mv-div.js';
-      class CustomMvdiv extends Div {
+      import {MvDiv} from '@material/mv-div/mv-div.js';
+      class CustomMvdiv extends MvDiv {
         _renderStyle(){
           return html`${super._renderStyle()}<style>.mv-div{border: 1px solid dark;border-radius: 8px}</style>`;
         }

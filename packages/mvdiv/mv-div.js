@@ -17,10 +17,11 @@ limitations under the License.
 
 import {LitElement, html} from '@polymer/lit-element/lit-element.js';
 import {style} from './mv-div-css.js';
-import '@material/mwc-icon/mwc-icon-font.js';
 import {afterNextRender} from '@material/mwc-base/utils.js';
+import ResizeObserver from 'resize-observer-polyfill';
 
-export class Div extends LitElement {
+export class MvDiv extends LitElement {
+
   static tag() {
     return 'mv-div';
   }
@@ -32,12 +33,6 @@ export class Div extends LitElement {
 
   ready() {
     super.ready();
-
-    this.mongol = this._root.querySelector('#mongol');
-
-    this.parentStyle = window.getComputedStyle(this.parentNode, null);
-    this.hostStyle = window.getComputedStyle(this, null);
-    this.mongolStyle = window.getComputedStyle(this.mongol, null);
   }
 
   _createRoot() {
@@ -58,11 +53,17 @@ export class Div extends LitElement {
   }
 
   _didRender() {
+    this.observer = new ResizeObserver(() => {
+      this.requestRender();
+    });
+    this.observer.observe(this.parentElement);
+
+    this.mongol = this._root.querySelector('#mongol');
+
     if (!this.parentIsDiv() || this.nestedInMvdiv()) {
       this.style.display = 'none';
       return;
     }
-    // this.style.display = '';
     this.initElementStyles();
   }
 
@@ -122,7 +123,6 @@ export class Div extends LitElement {
   }
 
   async setMongolHeightToParentWidth() {
-    // console.log(this.parentNode.clientWidth, this.mongol.offsetHeight);
     while (this.parentNode.clientWidth < this.mongol.scrollHeight) {
       this.setMongolWidth(this.mongol.offsetWidth + 1);
       this.style.height = this.mongol.offsetWidth + 'px';
@@ -140,7 +140,7 @@ export class Div extends LitElement {
   nestedInMvdiv() {
     let a = this.parentElement;
     while (a) {
-      if (a.tagName.toLowerCase() == Div.tag()) {
+      if (a.tagName.toLowerCase() == MvDiv.tag()) {
         return true;
       }
       a = a.parentElement;
@@ -150,4 +150,4 @@ export class Div extends LitElement {
   }
 }
 
-customElements.define(Div.tag(), Div);
+customElements.define(MvDiv.tag(), MvDiv);

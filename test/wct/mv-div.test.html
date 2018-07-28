@@ -119,9 +119,7 @@ limitations under the License.
       });
     });
 
-    suite('<div><mv-div><mv-div></mv-div></mv-div></div>', async () => {
-      await wait();
-
+    suite('<div><mv-div><mv-div></mv-div></mv-div></div>', () => {
       setup(async () => {
         fixture("pure-nested");
       });
@@ -131,9 +129,7 @@ limitations under the License.
       });
     });
     
-    suite('<div><mv-div><div><mv-div></mv-div></div></mv-div></div>', async () => {
-      await wait();
-
+    suite('<div><mv-div><div><mv-div></mv-div></div></mv-div></div>', () => {
       setup(async () => {
         fixture("nested");
       });
@@ -149,14 +145,8 @@ limitations under the License.
         fixture('empty');
       });
 
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
-
-        assert.equal(mongol.style.width, '0px', 'mongol.style.width');
-        assert.equal(mongol.clientHeight, 0, 'mongol.clientHeight');
-        assert.equal(mongol.clientWidth, 0, 'mongol.clientWidth');
-        
-        assert.equal(mvdiv.style.height, '0px', 'mvdiv.style.height');
+      test('All elements dimension is correct now and after window resized.', () => {
+        resizeWindowTest('empty', emptyMvdivTest);
       });
     });
 
@@ -165,11 +155,8 @@ limitations under the License.
         fixture('small-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
-
-        assert.notEqual(getStyle(mongol, 'width'), '0px');
-        assert.notEqual(getStyle(mongol, 'height'), '0px');
+      test('All elements dimension is correct now and after window resized.', () => {
+        resizeWindowTest('small-content', smallContenMvdivTest);
       });
     });
 
@@ -178,8 +165,8 @@ limitations under the License.
         fixture('large-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after window resized.', () => {
+        resizeWindowTest('large-content', mvDivCommonTests);
       });
     });
 
@@ -188,8 +175,8 @@ limitations under the License.
         fixture('fshc-small-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHeightTest('fshc-small-content', mvDivCommonTests);
       });
     });
 
@@ -198,8 +185,8 @@ limitations under the License.
         fixture('fshc-large-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHeightTest('fshc-large-content', mvDivCommonTests);
       });
     });
 
@@ -208,8 +195,8 @@ limitations under the License.
         fixture('fbhc-small-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHeightTest('fbhc-small-content', mvDivCommonTests);
       });
     });
 
@@ -218,8 +205,8 @@ limitations under the License.
         fixture('fbhc-large-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHeightTest('fbhc-large-content', mvDivCommonTests);
       });
     });
 
@@ -228,8 +215,8 @@ limitations under the License.
         fixture('fshwc-small-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHWTest('fshwc-small-content', mvDivCommonTests);
       });
     });
 
@@ -238,8 +225,8 @@ limitations under the License.
         fixture('fshwc-large-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHWTest('fshwc-large-content', mvDivCommonTests);
       });
     });
 
@@ -248,8 +235,8 @@ limitations under the License.
         fixture('fbhwc-small-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHWTest('fbhwc-small-content', mvDivCommonTests);
       });
     });
 
@@ -258,8 +245,8 @@ limitations under the License.
         fixture('fbhwc-large-content');
       });
       
-      test('All elements dimension is correct', () => {
-        mvDivCommonTests();
+      test('All elements dimension is correct now and after parent resized.', () => {
+        resizeParentHWTest('fbhwc-large-content', mvDivCommonTests);
       });
     });
       
