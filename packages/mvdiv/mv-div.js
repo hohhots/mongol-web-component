@@ -52,12 +52,14 @@ export class MvDiv extends LitElement {
     return style;
   }
 
-  _didRender() {
+  _firstRendered() {
     this.observer = new ResizeObserver(() => {
       this.requestRender();
     });
     this.observer.observe(this.parentElement);
+  }
 
+  _didRender() {
     this.mongol = this._root.querySelector('#mongol');
 
     if (!this.parentIsDiv() || this.nestedInMvdiv()) {
