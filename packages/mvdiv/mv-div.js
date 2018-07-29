@@ -28,6 +28,8 @@ export class MvDiv extends LitElement {
 
   constructor() {
     super();
+
+    this.mongol;
   }
 
 

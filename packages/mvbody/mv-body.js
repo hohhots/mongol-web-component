@@ -16,9 +16,9 @@ limitations under the License.
 */
 
 import {LitElement, html} from '@polymer/lit-element/lit-element.js';
-import {style} from './mv-body-css.js';
-import '@material/mwc-icon/mwc-icon-font.js';
 import {afterNextRender} from '@material/mwc-base/utils.js';
+import ResizeObserver from 'resize-observer-polyfill';
+import {style} from './mv-body-css.js';
 
 export class MvBody extends LitElement {
   static tag() {
@@ -41,7 +41,9 @@ export class MvBody extends LitElement {
   _render() {
     return html`
       ${this._renderStyle()}
-      <slot></slot>
+      <div id="mongol">
+        <slot></slot>
+      </div>
     `;
   }
 
@@ -50,6 +52,8 @@ export class MvBody extends LitElement {
   }
 
   _didRender() {
+    this.mongol = this._root.querySelector('#mongol');
+
     if (!this.parentIsBody()) {
       this.style.display = 'none';
       return;
@@ -59,6 +63,24 @@ export class MvBody extends LitElement {
 
   async initElementStyles() {
     await afterNextRender();
+
+    //console.log(window.pageYOffset);
+    this.style.height = this.windowClientHeight() + 'px';
+    this.setMongolWidth(this.clientHeight);
+
+    let y = 0;
+    window.scrollTo(0, 1);
+    while (window.pageYOffset > y) {
+      y = window.pageYOffset;
+      window.scrollTo(0, y + 1);
+    }
+    if (y) {
+      this.style.height = (this.getStyle(this, 'height') - y) + 'px';
+      this.setMongolWidth(this.clientHeight);
+    }
+
+    this.style.width = this.mongol.scrollHeight + 'px';
+    this.parentElement.style.width = this.style.width;
   }
 
   parentIsBody() {
@@ -67,6 +89,20 @@ export class MvBody extends LitElement {
     }
 
     return true;
+  }
+
+  setMongolWidth(width) {
+    this.mongol.style.width = width + 'px';
+  }
+
+  getStyle(el, property) {
+    return parseInt(window.getComputedStyle(el, null).getPropertyValue(property).replace('px', ''));
+  }
+
+  windowClientHeight() {
+    return window.innerHeight
+     - this.getStyle(this.parentElement, 'padding-top') - this.getStyle(this.parentElement, 'padding-bottom')
+     - this.getStyle(this.parentElement, 'margin-top') - this.getStyle(this.parentElement, 'margin-bottom');
   }
 }
 
