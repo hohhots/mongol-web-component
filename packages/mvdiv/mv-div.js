@@ -45,7 +45,9 @@ export class MvDiv extends LitElement {
     return html`
       ${this._renderStyle()}
       <div id="mongol">
-        <slot></slot>
+        <span class="mongol-text">
+          <slot></slot>
+        </span>
       </div>
     `;
   }
