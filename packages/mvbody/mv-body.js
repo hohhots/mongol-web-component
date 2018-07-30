@@ -51,10 +51,16 @@ export class MvBody extends LitElement {
     return style;
   }
 
+  _firstRendered() {
+    window.onresize = (event) => {
+      this.requestRender();
+    };
+  }
+
   _didRender() {
     this.mongol = this._root.querySelector('#mongol');
 
-    if (!this.parentIsBody()) {
+    if (!this.parentIsBody() || this.hasMultipleMvbody()) {
       this.style.display = 'none';
       return;
     }
@@ -64,10 +70,14 @@ export class MvBody extends LitElement {
   async initElementStyles() {
     await afterNextRender();
 
-    //console.log(window.pageYOffset);
+    this.setMongolWidth(0);
+    const mongolSW = this.mongol.scrollWidth;
+
     this.style.height = this.windowClientHeight() + 'px';
+
     this.setMongolWidth(this.clientHeight);
 
+    // fix this height to fit window height. erase right scroll bar.
     let y = 0;
     window.scrollTo(0, 1);
     while (window.pageYOffset > y) {
@@ -79,8 +89,14 @@ export class MvBody extends LitElement {
       this.setMongolWidth(this.clientHeight);
     }
 
+    // if window height is too small, smaller than mongol smallest height.
+    if (this.mongol.clientWidth < this.mongol.scrollWidth) {
+      this.setMongolWidth(this.mongol.scrollWidth);
+      this.style.height = this.mongol.offsetWidth + 'px';
+    }
+    
     this.style.width = this.mongol.scrollHeight + 'px';
-    this.parentElement.style.width = this.style.width;
+    this.parentElement.style.width = this.getStyle(this, 'width') + this.getStyle(this.parentElement, 'margin') + 'px';
   }
 
   parentIsBody() {
@@ -89,6 +105,13 @@ export class MvBody extends LitElement {
     }
 
     return true;
+  }
+
+  hasMultipleMvbody() {
+    if (document.querySelectorAll('mv-body').length > 1) {
+      return true;
+    }
+    return false;
   }
 
   setMongolWidth(width) {
