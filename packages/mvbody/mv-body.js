@@ -25,8 +25,18 @@ export class MvBody extends LitElement {
     return 'mv-body';
   }
 
+  static get properties() {
+    return {
+      maxheight: String,
+      float: String,
+    };
+  }
+
   constructor() {
     super();
+
+    this.maxheight = '900px'; // px unit
+    this.float = 'center'; // top, center
   }
 
 
@@ -73,7 +83,6 @@ export class MvBody extends LitElement {
     await afterNextRender();
 
     this.setMongolWidth(0);
-    const mongolSW = this.mongol.scrollWidth;
 
     this.style.height = this.windowClientHeight() + 'px';
 
@@ -87,7 +96,7 @@ export class MvBody extends LitElement {
       window.scrollTo(0, y + 1);
     }
     if (y) {
-      this.style.height = (this.getStyle(this, 'height') - y) + 'px';
+      this.style.height = (this.getComputedStyle(this, 'height') - y) + 'px';
       this.setMongolWidth(this.clientHeight);
     }
 
@@ -96,9 +105,23 @@ export class MvBody extends LitElement {
       this.setMongolWidth(this.mongol.scrollWidth);
       this.style.height = this.mongol.offsetWidth + 'px';
     }
+
+    // set element height with maxheight property
+    const mh = this.getDimensionNumber(this.maxheight);
+    if (mh < this.getComputedStyle(this, 'height')) {
+      this.style.height = mh + 'px';
+      this.setMongolWidth(this.clientHeight);
+    }
+
+    // set element float position.
+    if (this.float == 'center') {
+      const top = (window.innerHeight - this.getComputedStyle(this, 'height')) / 2;
+      this.style.top = top + 'px';
+    }
+
     
     this.style.width = this.mongol.scrollHeight + 'px';
-    this.parentElement.style.width = this.getStyle(this, 'width') + this.getStyle(this.parentElement, 'margin') + 'px';
+    this.parentElement.style.width = this.getComputedStyle(this, 'width') + this.getComputedStyle(this.parentElement, 'margin') + 'px';
   }
 
   parentIsBody() {
@@ -120,14 +143,22 @@ export class MvBody extends LitElement {
     this.mongol.style.width = width + 'px';
   }
 
-  getStyle(el, property) {
-    return parseInt(window.getComputedStyle(el, null).getPropertyValue(property).replace('px', ''));
+  getComputedStyle(el, property) {
+    const p = window.getComputedStyle(el, null).getPropertyValue(property);
+    if (p.indexOf('px') > 0) {
+      return this.getDimensionNumber(p);
+    }
+    return p;
+  }
+
+  getDimensionNumber(dimension) {
+    return parseInt(dimension.replace('px', ''));
   }
 
   windowClientHeight() {
     return window.innerHeight
-     - this.getStyle(this.parentElement, 'padding-top') - this.getStyle(this.parentElement, 'padding-bottom')
-     - this.getStyle(this.parentElement, 'margin-top') - this.getStyle(this.parentElement, 'margin-bottom');
+     - this.getComputedStyle(this.parentElement, 'padding-top') - this.getComputedStyle(this.parentElement, 'padding-bottom')
+     - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
   }
 }
 
