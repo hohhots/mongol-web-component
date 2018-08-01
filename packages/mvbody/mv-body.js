@@ -17,7 +17,6 @@ limitations under the License.
 
 import { LitElement, html } from '@polymer/lit-element/lit-element.js';
 import { afterNextRender } from '@material/mwc-base/utils.js';
-import ResizeObserver from 'resize-observer-polyfill';
 import { style } from './mv-body-css.js';
 
 export class MvBody extends LitElement {
@@ -80,7 +79,6 @@ export class MvBody extends LitElement {
   }
 
   async initElementStyles() {
-    //this.mongol.style.display = 'none';
     await afterNextRender();
 
     this.setMinMongolHeight();
@@ -107,7 +105,6 @@ export class MvBody extends LitElement {
 
     this.setMongolWidth(this.clientHeight);
     this.style.width = this.mongol.scrollHeight + 'px';
-    //this.parentElement.style.width = this.getComputedStyle(this, 'width') + this.getComputedStyle(this.parentElement, 'margin') + 'px';
   }
 
   parentIsBody() {
@@ -125,14 +122,15 @@ export class MvBody extends LitElement {
     return false;
   }
 
-  setMongolWidth(width) {
+  async setMongolWidth(width) {
     this.mongol.style.width = width + 'px';
 
     const mh = this.getDimensionNumber(this.maxheight);
     const bh = this.bodyHeight();
-    
+
+    const dh = document.documentElement.offsetHeight;
     if ((bh > this.minMongolHeight) && (bh < mh)) {
-      window.scrollTo(1, 1);
+      window.scrollTo(0, 1);
       while (window.pageYOffset > 0) {
         const h = this.getDimensionNumber(this.mongol.style.width);
         if (((h - 1) >= this.minMongolHeight)) {
@@ -142,9 +140,14 @@ export class MvBody extends LitElement {
           break;
         }
         window.scrollTo(0, 0);
-        window.scrollTo(1, 1);
-        scrollY += 1;
+        window.scrollTo(0, 1);
       }
+    }
+    // if scrollbar disappear, re render element.
+    await afterNextRender();
+
+    if ((dh + 10) < document.documentElement.offsetHeight) {
+      this.requestRender();
     }
   }
 
@@ -163,27 +166,6 @@ export class MvBody extends LitElement {
   bodyHeight() {
     return window.innerHeight
       - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
-  }
-
-  thisFixWindowHeight() {
-    return this.getComputedStyle(this, 'height') - - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
-  }
-
-  windowClientHeight() {
-    return window.innerHeight
-      - this.getComputedStyle(this.parentElement, 'padding-top') - this.getComputedStyle(this.parentElement, 'padding-bottom')
-      - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
-  }
-
-  async setThisHeightToParentHeight() {
-    while (this.parentElement.clientWidth < this.mongol.scrollHeight) {
-      this.style.height(this.mongol.offsetWidth + 1);
-      this.style.height = this.mongol.offsetWidth + 'px';
-    }
-    await afterNextRender();
-    if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
-      this.setMongolHeightToParentWidth();
-    }
   }
 
   setMinMongolHeight() {
