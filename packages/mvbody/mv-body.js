@@ -37,6 +37,7 @@ export class MvBody extends LitElement {
 
     this.maxheight = '900px'; // px unit
     this.float = 'center'; // top, center
+    this.minMongolHeight;  // min content height in mongol div.
   }
 
   ready() {
@@ -79,48 +80,34 @@ export class MvBody extends LitElement {
   }
 
   async initElementStyles() {
+    //this.mongol.style.display = 'none';
     await afterNextRender();
 
-    this.setMongolWidth(0);
-
-    this.style.height = this.windowClientHeight() + 'px';
-
-    this.setMongolWidth(this.clientHeight);
-
-    // fix this height to fit window height. erase right scroll bar.
-    let y = 0;
-    window.scrollTo(0, 1);
-    while (window.pageYOffset > y) {
-      y = window.pageYOffset;
-      window.scrollTo(0, y + 1);
-    }
-    if (y) {
-      this.style.height = (this.getComputedStyle(this, 'height') - y) + 'px';
-      this.setMongolWidth(this.clientHeight);
-    }
+    this.setMinMongolHeight();
+    this.style.height = this.bodyHeight() + 'px';
+    // clear this style top to default value.
+    this.style.top = '';
 
     // if window height is too small, smaller than mongol smallest height.
-    if (this.mongol.clientWidth < this.mongol.scrollWidth) {
-      this.setMongolWidth(this.mongol.scrollWidth);
-      this.style.height = this.mongol.offsetWidth + 'px';
-    }
-
-    // set element height with maxheight property
-    const mh = this.getDimensionNumber(this.maxheight);
-    if (mh < this.getComputedStyle(this, 'height')) {
-      this.style.height = mh + 'px';
-      this.setMongolWidth(this.clientHeight);
-      // set element float position.
-      if (this.float == 'center') {
-        const top = (window.innerHeight - this.getComputedStyle(this, 'height')) / 2;
-        this.style.top = top + 'px';
-      }
+    if (this.bodyHeight() <= this.minMongolHeight) {
+      this.style.height = this.minMongolHeight + 'px';
     } else {
-      this.style.top = '0px';
+      // set element height with maxheight property
+      const mh = this.getDimensionNumber(this.maxheight);
+      if (this.bodyHeight() < mh) {
+        this.style.height = this.bodyHeight() + 'px';
+      } else {
+        this.style.height = mh + 'px';
+        // set element float position.
+        if (this.float == 'center') {
+          this.style.top = (this.bodyHeight() - mh) / 2 + 'px';
+        }
+      }
     }
 
+    this.setMongolWidth(this.clientHeight);
     this.style.width = this.mongol.scrollHeight + 'px';
-    this.parentElement.style.width = this.getComputedStyle(this, 'width') + this.getComputedStyle(this.parentElement, 'margin') + 'px';
+    //this.parentElement.style.width = this.getComputedStyle(this, 'width') + this.getComputedStyle(this.parentElement, 'margin') + 'px';
   }
 
   parentIsBody() {
@@ -140,6 +127,25 @@ export class MvBody extends LitElement {
 
   setMongolWidth(width) {
     this.mongol.style.width = width + 'px';
+
+    const mh = this.getDimensionNumber(this.maxheight);
+    const bh = this.bodyHeight();
+    
+    if ((bh > this.minMongolHeight) && (bh < mh)) {
+      window.scrollTo(1, 1);
+      while (window.pageYOffset > 0) {
+        const h = this.getDimensionNumber(this.mongol.style.width);
+        if (((h - 1) >= this.minMongolHeight)) {
+          this.mongol.style.width = (h - 1) + 'px';
+          this.style.height = this.mongol.offsetWidth + 'px';
+        } else {
+          break;
+        }
+        window.scrollTo(0, 0);
+        window.scrollTo(1, 1);
+        scrollY += 1;
+      }
+    }
   }
 
   getComputedStyle(el, property) {
@@ -154,10 +160,35 @@ export class MvBody extends LitElement {
     return parseInt(dimension.replace('px', ''));
   }
 
+  bodyHeight() {
+    return window.innerHeight
+      - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
+  }
+
+  thisFixWindowHeight() {
+    return this.getComputedStyle(this, 'height') - - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
+  }
+
   windowClientHeight() {
     return window.innerHeight
       - this.getComputedStyle(this.parentElement, 'padding-top') - this.getComputedStyle(this.parentElement, 'padding-bottom')
       - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
+  }
+
+  async setThisHeightToParentHeight() {
+    while (this.parentElement.clientWidth < this.mongol.scrollHeight) {
+      this.style.height(this.mongol.offsetWidth + 1);
+      this.style.height = this.mongol.offsetWidth + 'px';
+    }
+    await afterNextRender();
+    if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
+      this.setMongolHeightToParentWidth();
+    }
+  }
+
+  setMinMongolHeight() {
+    this.setMongolWidth(0);
+    this.minMongolHeight = this.mongol.scrollWidth;
   }
 }
 
