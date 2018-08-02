@@ -64,6 +64,7 @@ export class MvBody extends LitElement {
 
   _firstRendered() {
     window.onresize = (event) => {
+      console.log('111');
       this.requestRender();
     };
   }
@@ -130,7 +131,6 @@ export class MvBody extends LitElement {
     const mh = this.getDimensionNumber(this.maxheight);
     const bh = this.bodyHeight();
 
-    const dh = document.documentElement.offsetHeight;
     if ((bh > this.minMongolHeight) && (bh < mh)) {
       window.scrollTo(0, 1);
       while (window.pageYOffset > 0) {
@@ -144,12 +144,16 @@ export class MvBody extends LitElement {
         window.scrollTo(0, 0);
         window.scrollTo(0, 1);
       }
-    }
-    // if scrollbar disappear, re render element.
-    await afterNextRender();
 
-    if ((dh + 10) < document.documentElement.offsetHeight) {
-      this.requestRender();
+      // if scrollbar disappear, re render element.
+      await afterNextRender();
+      const pp = this.parentElement.parentElement;
+
+      if ((window.innerWidth >= pp.offsetWidth)
+        && ((window.innerWidth - pp.offsetWidth) < 1)
+        && (window.innerHeight > this.getThisFixWindowHeight())) {
+        this.requestRender();
+      }
     }
   }
 
@@ -173,6 +177,12 @@ export class MvBody extends LitElement {
   setMinMongolHeight() {
     this.setMongolWidth(0);
     this.minMongolHeight = this.mongol.scrollWidth;
+  }
+
+  getThisFixWindowHeight() {
+    return this.getComputedStyle(this, 'height')
+      + this.getComputedStyle(this.parentElement, 'margin-top')
+      + this.getComputedStyle(this.parentElement, 'margin-bottom');
   }
 
   setBodyWidth() {
