@@ -63,13 +63,14 @@ export class MvBody extends LitElement {
   }
 
   _firstRendered() {
+    console.log('mvbody created.');
     window.onresize = (event) => {
-      console.log('111');
       this.requestRender();
     };
   }
 
   _didRender() {
+    console.log('mvbody reRendered.');
     this.mongol = this._root.querySelector('#mongol');
 
     if (!this.parentIsBody() || this.hasMultipleMvbody()) {
@@ -150,8 +151,8 @@ export class MvBody extends LitElement {
       const pp = this.parentElement.parentElement;
 
       if ((window.innerWidth >= pp.offsetWidth)
-        && ((window.innerWidth - pp.offsetWidth) < 1)
-        && (window.innerHeight > this.getThisFixWindowHeight())) {
+        && (window.innerHeight > this.getThisFixWindowHeight())
+        && ((window.innerHeight - this.getThisFixWindowHeight() > 10))) {
         this.requestRender();
       }
     }
