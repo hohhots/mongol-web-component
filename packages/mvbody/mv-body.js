@@ -85,6 +85,7 @@ export class MvBody extends LitElement {
     this.style.height = this.bodyHeight() + 'px';
     // clear this style top to default value.
     this.style.top = '';
+    this.parentElement.parentElement.removeAttribute('style');
 
     // if window height is too small, smaller than mongol smallest height.
     if (this.bodyHeight() <= this.minMongolHeight) {
@@ -105,6 +106,7 @@ export class MvBody extends LitElement {
 
     this.setMongolWidth(this.clientHeight);
     this.style.width = this.mongol.scrollHeight + 'px';
+    this.setBodyWidth();
   }
 
   parentIsBody() {
@@ -171,6 +173,22 @@ export class MvBody extends LitElement {
   setMinMongolHeight() {
     this.setMongolWidth(0);
     this.minMongolHeight = this.mongol.scrollWidth;
+  }
+
+  setBodyWidth() {
+    const p = this.parentElement;
+    const pp = this.parentElement.parentElement;
+    p.style.width = this.offsetWidth
+      + this.getComputedStyle(this, 'margin-left')
+      + this.getComputedStyle(this, 'margin-right') + 'px';
+
+    const ppWidth = this.getComputedStyle(p, 'width')
+      + this.getComputedStyle(p, 'margin-left')
+      + this.getComputedStyle(p, 'margin-right');
+
+    if (ppWidth > this.getComputedStyle(pp, 'width')) {
+      pp.style.width = ppWidth + 'px';
+    }
   }
 }
 
