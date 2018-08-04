@@ -34,9 +34,11 @@ export class MvBody extends LitElement {
   constructor() {
     super();
 
+    this.mongolId = '#mongol';
     this.maxheight = '900px'; // px unit
     this.float = 'center'; // top, center
     this.minMongolHeight;  // min content height in mongol div.
+    this.scrollBarHeight;
   }
 
   ready() {
@@ -64,6 +66,9 @@ export class MvBody extends LitElement {
 
   _firstRendered() {
     console.log('mvbody created.');
+
+    this.setScrollBarHeight();
+
     window.onresize = (event) => {
       this.requestRender();
     };
@@ -71,7 +76,7 @@ export class MvBody extends LitElement {
 
   _didRender() {
     console.log('mvbody reRendered.');
-    this.mongol = this._root.querySelector('#mongol');
+    this.mongol = this._root.querySelector(this.mongolId);
 
     if (!this.parentIsBody() || this.hasMultipleMvbody()) {
       this.style.display = 'none';
@@ -200,6 +205,34 @@ export class MvBody extends LitElement {
     if (ppWidth > this.getComputedStyle(pp, 'width')) {
       pp.style.width = ppWidth + 'px';
     }
+  }
+
+  setScrollBarHeight() {
+    const mongol = this._root.querySelector(this.mongolId);
+  
+    const h = this.style.height;
+    const w = this.style.width;
+    const md = mongol.style.display;
+  
+    mongol.style.display = 'none';
+    this.style.height = this.bodyHeight() + 'px';
+    this.style.width = window.innerWidth + 30 + 'px';
+  
+    let th;
+    let sh = 0;
+    window.scrollTo(0, 1);
+    while (window.pageYOffset > 0) {
+      th = this.getDimensionNumber(this.style.height);
+      this.style.height = (th - 1) + 'px';
+      window.scrollTo(0, 0);
+      window.scrollTo(0, 1);
+      sh++;
+    }
+    this.scrollBarHeight = sh;
+
+    this.style.height = h;
+    this.style.width = w;
+    mongol.style.display = md;
   }
 }
 
