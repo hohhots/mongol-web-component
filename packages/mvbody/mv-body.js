@@ -133,11 +133,11 @@ export class MvBody extends LitElement {
 
   setThisWidth() {
     const ot = this.getComputedStyle(this, 'top');
-    
+
     this.style.width = this.mongol.scrollHeight + 'px';
 
     if ((ot > 0) && (this.getThisFixWindowWidth() > window.innerWidth)) {
-      this.style.top = ot - (this.scrollBarHeight/2) + 'px';
+      this.style.top = ot - (this.scrollBarHeight / 2) + 'px';
     }
   }
 
@@ -148,29 +148,43 @@ export class MvBody extends LitElement {
     const bh = this.bodyHeight();
 
     if ((bh > this.minMongolHeight) && (bh < mh)) {
-      window.scrollTo(0, 1);
-      while (window.pageYOffset > 0) {
-        const h = this.getDimensionNumber(this.mongol.style.width);
-        if (((h - 1) >= this.minMongolHeight)) {
-          this.mongol.style.width = (h - 1) + 'px';
-          this.style.height = this.mongol.offsetWidth + 'px';
-        } else {
-          break;
-        }
-        window.scrollTo(0, 0);
-        window.scrollTo(0, 1);
-      }
+      this.setMongolWidthToFitWindow();
 
-      // if scrollbar disappear, re render element.
       await afterNextRender();
-      const pp = this.parentElement.parentElement;
 
-      if ((window.innerWidth >= pp.offsetWidth)
+      if ((window.innerWidth >= this.parentElement.parentElement.offsetWidth)
         && (window.innerHeight > this.getThisFixWindowHeight())
         && ((window.innerHeight - this.getThisFixWindowHeight() > 10))) {
         this.requestRender();
       }
     }
+  }
+
+  async setMongolWidthToFitWindow() {
+    while (this.wHasYScrollBar()) {
+      const h = this.getDimensionNumber(this.mongol.style.width);
+      if (((h - 1) >= this.minMongolHeight)) {
+        this.mongol.style.width = (h - 1) + 'px';
+        this.style.height = this.mongol.offsetWidth + 'px';
+      } else {
+        break;
+      }
+    }
+
+    await afterNextRender();
+    if (this.wHasYScrollBar()) {
+      this.setMongolWidthToFitWindow();
+    }
+    await afterNextRender();
+  }
+
+  wHasYScrollBar() {
+    window.scrollTo(0, 0);
+    window.scrollTo(0, 1);
+    if (window.pageYOffset > 0) {
+      return true;
+    }
+    return false;
   }
 
   getComputedStyle(el, property) {
@@ -223,26 +237,24 @@ export class MvBody extends LitElement {
     }
   }
 
-  setScrollBarHeight() {
+  async setScrollBarHeight() {
     const mongol = this._root.querySelector(this.mongolId);
-  
+
     const h = this.style.height;
     const w = this.style.width;
     const md = mongol.style.display;
-  
+
     mongol.style.display = 'none';
     this.style.height = this.bodyHeight() + 'px';
     this.style.width = window.innerWidth + 30 + 'px';
-  
+
     let th;
     let sh = 0;
-    window.scrollTo(0, 1);
-    while (window.pageYOffset > 0) {
+    while (this.wHasYScrollBar()) {
       th = this.getDimensionNumber(this.style.height);
       this.style.height = (th - 1) + 'px';
-      window.scrollTo(0, 0);
-      window.scrollTo(0, 1);
       sh++;
+      await afterNextRender;
     }
     this.scrollBarHeight = sh;
 
