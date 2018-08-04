@@ -112,7 +112,7 @@ export class MvBody extends LitElement {
     }
 
     this.setMongolWidth(this.clientHeight);
-    this.style.width = this.mongol.scrollHeight + 'px';
+    this.setThisWidth();
     this.setBodyWidth();
   }
 
@@ -129,6 +129,16 @@ export class MvBody extends LitElement {
       return true;
     }
     return false;
+  }
+
+  setThisWidth() {
+    const ot = this.getComputedStyle(this, 'top');
+    
+    this.style.width = this.mongol.scrollHeight + 'px';
+
+    if ((ot > 0) && (this.getThisFixWindowWidth() > window.innerWidth)) {
+      this.style.top = ot - (this.scrollBarHeight/2) + 'px';
+    }
   }
 
   async setMongolWidth(width) {
@@ -183,6 +193,12 @@ export class MvBody extends LitElement {
   setMinMongolHeight() {
     this.setMongolWidth(0);
     this.minMongolHeight = this.mongol.scrollWidth;
+  }
+
+  getThisFixWindowWidth() {
+    return this.getComputedStyle(this, 'width')
+      + this.getComputedStyle(this.parentElement, 'margin-left')
+      + this.getComputedStyle(this.parentElement, 'margin-right');
   }
 
   getThisFixWindowHeight() {
