@@ -37,8 +37,11 @@ export class MvBody extends LitElement {
     this.mongolId = '#mongol';
     this.maxheight = '900px'; // px unit
     this.float = 'center'; // top, center
-    this.minMongolHeight;  // min content height in mongol div.
-    this.scrollBarHeight;
+
+    // min content height in mongol div.
+    this.minMongolHeight;
+    // browser's horizontal scroll bar height.
+    this.scrollBarHeight;  
   }
 
   ready() {
@@ -64,10 +67,11 @@ export class MvBody extends LitElement {
     return style;
   }
 
-  _firstRendered() {
+  async _firstRendered() {
     console.log('mvbody created.');
 
-    this.setScrollBarHeight();
+    await this.setMinMongolHeight();
+    await this.setScrollBarHeight();
 
     window.onresize = (event) => {
       this.requestRender();
@@ -76,6 +80,7 @@ export class MvBody extends LitElement {
 
   _didRender() {
     console.log('mvbody reRendered.');
+
     this.mongol = this._root.querySelector(this.mongolId);
 
     if (!this.parentIsBody() || this.hasMultipleMvbody()) {
@@ -88,8 +93,7 @@ export class MvBody extends LitElement {
   async initElementStyles() {
     await afterNextRender();
 
-    this.setMinMongolHeight();
-    this.style.height = this.bodyHeight() + 'px';
+    this.style.height = this.getWindowClientHeight() + 'px';
     // clear this style top to default value.
     this.style.top = '';
     this.parentElement.parentElement.removeAttribute('style');
@@ -113,11 +117,18 @@ export class MvBody extends LitElement {
 
     this.setMongolWidth(this.clientHeight);
     this.setThisWidth();
-    this.setBodyWidth();
+    //this.setBodyStyle();
+  }
+
+  getWindowClientHeight() {
+    if (this.wHasXScrollBar()) {
+      return window.innerHeight - this.scrollBarHeight;
+    }
+    return window.innerHeight;
   }
 
   parentIsBody() {
-    if ((this.parentElement.tagName.toUpperCase() != 'BODY') && (this.parentElement.tagName.toUpperCase() != 'TEST-FIXTURE')) {
+    if (this.parentElement.tagName.toUpperCase() != 'BODY') {
       return false;
     }
 
@@ -131,13 +142,17 @@ export class MvBody extends LitElement {
     return false;
   }
 
-  setThisWidth() {
+  async setThisWidth() {
     const ot = this.getComputedStyle(this, 'top');
-
     this.style.width = this.mongol.scrollHeight + 'px';
 
-    if ((ot > 0) && (this.getThisFixWindowWidth() > window.innerWidth)) {
-      this.style.top = ot - (this.scrollBarHeight / 2) + 'px';
+    if ((ot > 0) && this.wHasXScrollBar()) {
+      let ht = this.scrollBarHeight / 2;
+      if (ot > ht) {
+        this.style.top = ot - ht + 'px';
+      } else {
+        this.style.top = '';
+      }
     }
   }
 
@@ -145,16 +160,17 @@ export class MvBody extends LitElement {
     this.mongol.style.width = width + 'px';
 
     const mh = this.getDimensionNumber(this.maxheight);
-    const bh = this.bodyHeight();
+    let bh = this.bodyHeight();
+    if (this.wHasXScrollBar) {
+      bh = bh - this.scrollBarHeight;
+    }
 
     if ((bh > this.minMongolHeight) && (bh < mh)) {
       this.setMongolWidthToFitWindow();
 
       await afterNextRender();
 
-      if ((window.innerWidth >= this.parentElement.parentElement.offsetWidth)
-        && (window.innerHeight > this.getThisFixWindowHeight())
-        && ((window.innerHeight - this.getThisFixWindowHeight() > 10))) {
+      if (this.wHasYScrollBar()) {
         this.requestRender();
       }
     }
@@ -187,6 +203,15 @@ export class MvBody extends LitElement {
     return false;
   }
 
+  wHasXScrollBar() {
+    window.scrollTo(0, 0);
+    window.scrollTo(1, 0);
+    if (window.pageXOffset > 0) {
+      return true;
+    }
+    return false;
+  }
+
   getComputedStyle(el, property) {
     const p = window.getComputedStyle(el, null).getPropertyValue(property);
     if (p.indexOf('px') > 0) {
@@ -204,11 +229,6 @@ export class MvBody extends LitElement {
       - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
   }
 
-  setMinMongolHeight() {
-    this.setMongolWidth(0);
-    this.minMongolHeight = this.mongol.scrollWidth;
-  }
-
   getThisFixWindowWidth() {
     return this.getComputedStyle(this, 'width')
       + this.getComputedStyle(this.parentElement, 'margin-left')
@@ -221,20 +241,47 @@ export class MvBody extends LitElement {
       + this.getComputedStyle(this.parentElement, 'margin-bottom');
   }
 
-  setBodyWidth() {
+  async setBodyStyle() {
+    await afterNextRender;
+
     const p = this.parentElement;
-    const pp = this.parentElement.parentElement;
+
+    p.style.height = '';
     p.style.width = this.offsetWidth
       + this.getComputedStyle(this, 'margin-left')
       + this.getComputedStyle(this, 'margin-right') + 'px';
 
-    const ppWidth = this.getComputedStyle(p, 'width')
-      + this.getComputedStyle(p, 'margin-left')
-      + this.getComputedStyle(p, 'margin-right');
+    const mh = this.getDimensionNumber(this.maxheight);
+    let bh = this.bodyHeight();
 
-    if (ppWidth > this.getComputedStyle(pp, 'width')) {
-      pp.style.width = ppWidth + 'px';
+    if (!this.wHasXScrollBar()) {
+      if (bh > mh) {
+        p.style.height = bh;
+      }
+    } else {
+      if ((bh - this.scrollBarHeight) > mh) {
+        p.style.height = bh - this.scrollBarHeight + 'px';
+      }
     }
+
+    this.setHtmlElementWidth();
+  }
+
+  async setHtmlElementWidth() {
+    await afterNextRender;
+
+    const he = this.parentElement.parentElement.HTMLElement;
+    console.log('unfinished!');
+  }
+
+  async setMinMongolHeight() {
+    const mongol = this._root.querySelector(this.mongolId);
+
+    mongol.style.width = '0px';
+    await afterNextRender;
+
+    this.minMongolHeight = mongol.scrollWidth;
+    console.log(mongol.scrollWidth);
   }
 
   async setScrollBarHeight() {
@@ -242,7 +289,6 @@ export class MvBody extends LitElement {
 
     const h = this.style.height;
     const w = this.style.width;
-    const md = mongol.style.display;
 
     mongol.style.display = 'none';
     this.style.height = this.bodyHeight() + 'px';
@@ -253,14 +299,16 @@ export class MvBody extends LitElement {
     while (this.wHasYScrollBar()) {
       th = this.getDimensionNumber(this.style.height);
       this.style.height = (th - 1) + 'px';
-      sh++;
+      ++sh;
       await afterNextRender;
     }
     this.scrollBarHeight = sh;
 
     this.style.height = h;
     this.style.width = w;
-    mongol.style.display = md;
+    mongol.style.display = '';
+
+    await afterNextRender;
   }
 }
 
