@@ -161,12 +161,9 @@ export class MvBody extends LitElement {
 
     const mh = this.getDimensionNumber(this.maxheight);
     let bh = this.bodyHeight();
-    if (this.wHasXScrollBar) {
-      bh = bh - this.scrollBarHeight;
-    }
 
     if ((bh > this.minMongolHeight) && (bh < mh)) {
-      this.setMongolWidthToFitWindow();
+      await this.setMongolWidthToFitWindow();
 
       await afterNextRender();
 
@@ -177,7 +174,11 @@ export class MvBody extends LitElement {
   }
 
   async setMongolWidthToFitWindow() {
+    const mh = this.getDimensionNumber(this.maxheight);
+    let bh = this.bodyHeight();
+
     while (this.wHasYScrollBar()) {
+      console.log('setMongolWidthToFitWindow');
       const h = this.getDimensionNumber(this.mongol.style.width);
       if (((h - 1) >= this.minMongolHeight)) {
         this.mongol.style.width = (h - 1) + 'px';
@@ -186,12 +187,6 @@ export class MvBody extends LitElement {
         break;
       }
     }
-
-    await afterNextRender();
-    if (this.wHasYScrollBar()) {
-      this.setMongolWidthToFitWindow();
-    }
-    await afterNextRender();
   }
 
   wHasYScrollBar() {
@@ -225,8 +220,12 @@ export class MvBody extends LitElement {
   }
 
   bodyHeight() {
-    return window.innerHeight
-      - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
+    let bh = window.innerHeight
+              - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
+    if (this.wHasXScrollBar()) {
+      bh = bh - this.scrollBarHeight;
+    }
+    return bh;
   }
 
   getThisFixWindowWidth() {
@@ -258,10 +257,6 @@ export class MvBody extends LitElement {
       if (bh > mh) {
         p.style.height = bh;
       }
-    } else {
-      if ((bh - this.scrollBarHeight) > mh) {
-        p.style.height = bh - this.scrollBarHeight + 'px';
-      }
     }
 
     this.setHtmlElementWidth();
@@ -281,7 +276,6 @@ export class MvBody extends LitElement {
     await afterNextRender;
 
     this.minMongolHeight = mongol.scrollWidth;
-    console.log(mongol.scrollWidth);
   }
 
   async setScrollBarHeight() {
@@ -297,6 +291,7 @@ export class MvBody extends LitElement {
     let th;
     let sh = 0;
     while (this.wHasYScrollBar()) {
+      console.log('setScrollBarHeight');
       th = this.getDimensionNumber(this.style.height);
       this.style.height = (th - 1) + 'px';
       ++sh;
