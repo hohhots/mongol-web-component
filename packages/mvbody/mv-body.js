@@ -123,7 +123,7 @@ export class MvBody extends LitElement {
     if (this.wHasXScrollBar()) {
       this.parentElement.style.height = (this.bodyHeight() - this.scrollBarHeight) + 'px';
     }
-    body.target.parentElement.style.width = this.getComputedStyle(this.parentElement, 'width') 
+    this.parentElement.parentElement.style.width = this.getComputedStyle(this.parentElement, 'width') 
       + this.getComputedStyle(this.parentElement, 'margin-left')
       + this.getComputedStyle(this.parentElement, 'margin-right') + 'px';
   }
