@@ -18,6 +18,7 @@ limitations under the License.
 import { LitElement, html } from '@polymer/lit-element/lit-element.js';
 import { afterNextRender } from '@material/mwc-base/utils.js';
 import { style } from './mv-body-css.js';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export class MvBody extends LitElement {
   static tag() {
@@ -41,7 +42,7 @@ export class MvBody extends LitElement {
     // min content height in mongol div.
     this.minMongolHeight;
     // browser's horizontal scroll bar height.
-    this.scrollBarHeight;  
+    this.scrollBarHeight;
   }
 
   ready() {
@@ -74,8 +75,27 @@ export class MvBody extends LitElement {
     await this.setScrollBarHeight();
 
     window.onresize = (event) => {
-      this.requestRender();
+      this.windowResized();
     };
+
+    this.resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target.tagName == 'BODY') {
+          this.bodyResized(entry);
+        }
+        if (entry.target.tagName == this.tagName) {
+          this.thisResized(entry);
+        }
+        if (entry.target.tagName == this.mongol.tagName) {
+          this.mongolResized(entry);
+        }
+      });
+    });
+    this.resizeObserver.observe(this.parentElement);
+    this.resizeObserver.observe(this);
+    this.resizeObserver.observe(this.mongol);
+
+    this.windowResized();
   }
 
   _didRender() {
@@ -87,44 +107,38 @@ export class MvBody extends LitElement {
       this.style.display = 'none';
       return;
     }
-    this.initElementStyles();
+    //this.initElementStyles();
   }
 
-  async initElementStyles() {
-    await afterNextRender();
+  windowResized() {
+    console.log('window resized');
 
-    this.style.height = this.getWindowClientHeight() + 'px';
-    // clear this style top to default value.
-    this.style.top = '';
-    this.parentElement.parentElement.removeAttribute('style');
-
-    // if window height is too small, smaller than mongol smallest height.
-    if (this.bodyHeight() <= this.minMongolHeight) {
-      this.style.height = this.minMongolHeight + 'px';
-    } else {
-      // set element height with maxheight property
-      const mh = this.getDimensionNumber(this.maxheight);
-      if (this.bodyHeight() < mh) {
-        this.style.height = this.bodyHeight() + 'px';
-      } else {
-        this.style.height = mh + 'px';
-        // set element float position.
-        if (this.float == 'center') {
-          this.style.top = (this.bodyHeight() - mh) / 2 + 'px';
-        }
-      }
-    }
-
-    this.setMongolWidth(this.clientHeight);
-    this.setThisWidth();
-    //this.setBodyStyle();
+    this.bodyResized();
   }
 
-  getWindowClientHeight() {
+  bodyResized(body) {
+    console.log('body resized');
+
+    this.parentElement.style.height = this.bodyHeight() + 'px';
     if (this.wHasXScrollBar()) {
-      return window.innerHeight - this.scrollBarHeight;
+      this.parentElement.style.height = (this.bodyHeight() - this.scrollBarHeight) + 'px';
     }
-    return window.innerHeight;
+    body.target.parentElement.style.width = this.getComputedStyle(this.parentElement, 'width') 
+      + this.getComputedStyle(this.parentElement, 'margin-left')
+      + this.getComputedStyle(this.parentElement, 'margin-right') + 'px';
+  }
+
+  thisResized(mvbody) {
+    console.log('mv-body resized');
+    const {left, top, width, height} = mvbody.contentRect;
+    this.mongol.style.width = height + 'px';
+  }
+
+  mongolResized(mongol) {
+    console.log('mongol resized');
+    const {left, top, width, height} = mongol.contentRect;
+
+    this.parentElement.style.width = height + 'px';
   }
 
   parentIsBody() {
@@ -140,53 +154,6 @@ export class MvBody extends LitElement {
       return true;
     }
     return false;
-  }
-
-  async setThisWidth() {
-    const ot = this.getComputedStyle(this, 'top');
-    this.style.width = this.mongol.scrollHeight + 'px';
-
-    if ((ot > 0) && this.wHasXScrollBar()) {
-      let ht = this.scrollBarHeight / 2;
-      if (ot > ht) {
-        this.style.top = ot - ht + 'px';
-      } else {
-        this.style.top = '';
-      }
-    }
-  }
-
-  async setMongolWidth(width) {
-    this.mongol.style.width = width + 'px';
-
-    const mh = this.getDimensionNumber(this.maxheight);
-    let bh = this.bodyHeight();
-
-    if ((bh > this.minMongolHeight) && (bh < mh)) {
-      await this.setMongolWidthToFitWindow();
-
-      await afterNextRender();
-
-      if (this.wHasYScrollBar()) {
-        this.requestRender();
-      }
-    }
-  }
-
-  async setMongolWidthToFitWindow() {
-    const mh = this.getDimensionNumber(this.maxheight);
-    let bh = this.bodyHeight();
-
-    while (this.wHasYScrollBar()) {
-      console.log('setMongolWidthToFitWindow');
-      const h = this.getDimensionNumber(this.mongol.style.width);
-      if (((h - 1) >= this.minMongolHeight)) {
-        this.mongol.style.width = (h - 1) + 'px';
-        this.style.height = this.mongol.offsetWidth + 'px';
-      } else {
-        break;
-      }
-    }
   }
 
   wHasYScrollBar() {
@@ -220,50 +187,13 @@ export class MvBody extends LitElement {
   }
 
   bodyHeight() {
-    let bh = window.innerHeight
-              - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
-    if (this.wHasXScrollBar()) {
-      bh = bh - this.scrollBarHeight;
-    }
-    return bh;
+    return window.innerHeight
+      - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
   }
 
-  getThisFixWindowWidth() {
-    return this.getComputedStyle(this, 'width')
-      + this.getComputedStyle(this.parentElement, 'margin-left')
-      + this.getComputedStyle(this.parentElement, 'margin-right');
-  }
-
-  getThisFixWindowHeight() {
-    return this.getComputedStyle(this, 'height')
-      + this.getComputedStyle(this.parentElement, 'margin-top')
-      + this.getComputedStyle(this.parentElement, 'margin-bottom');
-  }
-
-  setBodyStyle() {
-
-    const p = this.parentElement;
-
-    p.style.height = '';
-    p.style.width = this.offsetWidth
-      + this.getComputedStyle(this, 'margin-left')
-      + this.getComputedStyle(this, 'margin-right') + 'px';
-
-    const mh = this.getDimensionNumber(this.maxheight);
-    let bh = this.bodyHeight();
-
-    if (!this.wHasXScrollBar()) {
-      if (bh > mh) {
-        p.style.height = bh;
-      }
-    }
-
-    this.setHtmlElementWidth();
-  }
-
-  setHtmlElementWidth() {
-    const he = this.parentElement.parentElement.HTMLElement;
-    console.log('unfinished!');
+  bodyWidth() {
+    return window.innerWidth
+      - this.getComputedStyle(this.parentElement, 'margin-left') - this.getComputedStyle(this.parentElement, 'margin-right');
   }
 
   setMinMongolHeight() {
@@ -287,7 +217,6 @@ export class MvBody extends LitElement {
     let th;
     let sh = 0;
     while (this.wHasYScrollBar()) {
-      console.log('setScrollBarHeight');
       th = this.getDimensionNumber(this.style.height);
       this.style.height = (th - 1) + 'px';
       ++sh;
