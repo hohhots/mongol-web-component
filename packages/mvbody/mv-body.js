@@ -240,8 +240,7 @@ export class MvBody extends LitElement {
       + this.getComputedStyle(this.parentElement, 'margin-bottom');
   }
 
-  async setBodyStyle() {
-    await afterNextRender;
+  setBodyStyle() {
 
     const p = this.parentElement;
 
@@ -262,23 +261,20 @@ export class MvBody extends LitElement {
     this.setHtmlElementWidth();
   }
 
-  async setHtmlElementWidth() {
-    await afterNextRender;
-
+  setHtmlElementWidth() {
     const he = this.parentElement.parentElement.HTMLElement;
     console.log('unfinished!');
   }
 
-  async setMinMongolHeight() {
+  setMinMongolHeight() {
     const mongol = this._root.querySelector(this.mongolId);
 
     mongol.style.width = '0px';
-    await afterNextRender;
 
     this.minMongolHeight = mongol.scrollWidth;
   }
 
-  async setScrollBarHeight() {
+  setScrollBarHeight() {
     const mongol = this._root.querySelector(this.mongolId);
 
     const h = this.style.height;
@@ -295,15 +291,12 @@ export class MvBody extends LitElement {
       th = this.getDimensionNumber(this.style.height);
       this.style.height = (th - 1) + 'px';
       ++sh;
-      await afterNextRender;
     }
     this.scrollBarHeight = sh;
 
     this.style.height = h;
     this.style.width = w;
     mongol.style.display = '';
-
-    await afterNextRender;
   }
 }
 
