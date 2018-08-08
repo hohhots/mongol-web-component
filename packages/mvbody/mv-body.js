@@ -71,7 +71,6 @@ export class MvBody extends LitElement {
   async _firstRendered() {
     console.log('mvbody created.');
 
-    await this.setMinMongolHeight();
     await this.setScrollBarHeight();
 
     window.onresize = (event) => {
@@ -94,11 +93,6 @@ export class MvBody extends LitElement {
     this.resizeObserver.observe(this.parentElement);
     this.resizeObserver.observe(this);
     this.resizeObserver.observe(this.mongol);
-
-    //this.windowResized();
-    setTimeout(function() {
-      window.dispatchEvent(new Event('resize'));
-    }, 100);
   }
 
   _didRender() {
@@ -116,11 +110,8 @@ export class MvBody extends LitElement {
     console.log('window resized');
 
     let h = this.bodyHeight();
-    if (event) {
-      console.log(this.wHasXScrollBar());
-      if (this.wHasXScrollBar()) {
-        h = h - this.scrollBarHeight;
-      }
+    if (event && this.wHasXScrollBar()) {
+      h = h - this.scrollBarHeight;
     }
     this.parentElement.style.height = h + 'px';
   }
@@ -136,13 +127,14 @@ export class MvBody extends LitElement {
 
   thisResized(mvbody) {
     console.log('mv-body resized');
-    const { left, top, width, height } = mvbody.contentRect;
+    //const { left, top, width, height } = mvbody.contentRect;
+    const height = mvbody.contentRect.height;
     this.mongol.style.width = height + 'px';
   }
 
   mongolResized(mongol) {
     console.log('mongol resized');
-    const { left, top, width, height } = mongol.contentRect;
+    const height = mongol.contentRect.height;
 
     this.parentElement.style.width = height + 'px';
   }
@@ -192,34 +184,9 @@ export class MvBody extends LitElement {
     return parseInt(dimension.replace('px', ''));
   }
 
-  bodyOffHeight() {
-    return this.getComputedStyle(this.parentElement, 'height')
-      + this.getComputedStyle(this.parentElement, 'margin-top')
-      + this.getComputedStyle(this.parentElement, 'margin-bottom');
-  }
-
-  bodyOffWidth() {
-    return this.getComputedStyle(this.parentElement, 'width')
-      + this.getComputedStyle(this.parentElement, 'margin-left')
-      + this.getComputedStyle(this.parentElement, 'margin-right');
-  }
-
   bodyHeight() {
     return window.innerHeight
       - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
-  }
-
-  bodyWidth() {
-    return window.innerWidth
-      - this.getComputedStyle(this.parentElement, 'margin-left') - this.getComputedStyle(this.parentElement, 'margin-right');
-  }
-
-  setMinMongolHeight() {
-    const mongol = this._root.querySelector(this.mongolId);
-
-    mongol.style.width = '0px';
-
-    this.minMongolHeight = mongol.scrollWidth;
   }
 
   setScrollBarHeight() {
