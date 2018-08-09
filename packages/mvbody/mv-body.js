@@ -41,6 +41,7 @@ export class MvBody extends LitElement {
 
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
+
   }
 
   ready() {
@@ -89,7 +90,7 @@ export class MvBody extends LitElement {
       });
     });
     // this.resizeObserver.observe(this.parent);
-    // this.resizeObserver.observe(this);
+    this.resizeObserver.observe(this);
     //this.resizeObserver.observe(this.mongol);
   }
 
@@ -105,38 +106,49 @@ export class MvBody extends LitElement {
     }
   }
 
-  windowResized(event) {
+  async windowResized(event) {
     console.log('window resized');
-    /*
-    let h = this.bodyHeight();
-    if (event && this.wHasXScrollBar()) {
-      h = h - this.scrollBarHeight;
+
+    if (this.wHasYScrollBar()) {
+      this.mongol.style.width = (this.bodyHeight() - this.scrollBarHeight) + 'px';
+    } else {
+      if (this.wHasXScrollBar()) {
+        this.mongol.style.width = (this.bodyHeight() - this.scrollBarHeight) + 'px';
+      } else {
+        this.mongol.style.width = this.bodyHeight() + 'px';
+      }
     }
-    this.parent.style.height = h + 'px';
-    */
   }
 
-  bodyResized(body) {
+  resizeBody() {
     console.log('body resized');
 
+    this.parent.style.width = this.getComputedStyle(this.mongol, 'height') + 'px';
     // emulate horizontal text html behavior.
     this.parent.parentElement.style.width = this.getComputedStyle(this.parent, 'width')
       + this.getComputedStyle(this.parent, 'margin-left')
       + this.getComputedStyle(this.parent, 'margin-right') + 'px';
+
+    if (this.wHasYScrollBar()) {
+      this.mongol.style.width = (this.getComputedStyle(this.mongol, 'width') - this.scrollBarHeight) + 'px';
+    }
   }
 
   thisResized(mvbody) {
     console.log('mv-body resized');
     //const { left, top, width, height } = mvbody.contentRect;
     const height = mvbody.contentRect.height;
-    this.mongol.style.width = height + 'px';
+
+    this.resizeMongol(mvbody);
   }
 
-  mongolResized(mongol) {
+  resizeMongol(mvbody) {
     console.log('mongol resized');
-    const height = mongol.contentRect.height;
+    const height = mvbody.contentRect.height;
 
-    this.parent.style.width = height + 'px';
+    this.mongol.style.width = height + 'px';
+
+    this.resizeBody();
   }
 
   parentIsBody() {
@@ -206,7 +218,7 @@ export class MvBody extends LitElement {
       div.style.height = (th - 1) + 'px';
       ++sh;
     }
-    this.scrollBarHeight = sh;console.log(sh);
+    this.scrollBarHeight = sh;
 
     document.body.removeChild(div);
     document.body.appendChild(this);
