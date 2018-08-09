@@ -16,5 +16,5 @@ limitations under the License.
 */
 import {html} from '@polymer/lit-element/lit-element.js';
 
-export const style = html`<style>:host{position:relative;display:block;box-sizing:border-box;margin:0;padding:0;border:0;height:100%}#mongol{position:absolute;box-sizing:border-box;-webkit-transform-origin:left top;-ms-transform-origin:left top;transform-origin:left top;-webkit-transform:rotate(-90deg) rotateY(180deg);transform:rotate(-90deg) rotateY(180deg)}.mongol-text{cursor:vertical-text}
+export const style = html`<style>:host{position:relative;display:block;box-sizing:border-box;margin:0;padding:0;border:0;height:100%;width:100%}#mongol{position:absolute;box-sizing:border-box;-webkit-transform-origin:left top;-ms-transform-origin:left top;transform-origin:left top;-webkit-transform:rotate(-90deg) rotateY(180deg);transform:rotate(-90deg) rotateY(180deg)}.mongol-text{cursor:vertical-text}
 </style>`;

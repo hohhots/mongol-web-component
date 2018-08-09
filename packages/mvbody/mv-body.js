@@ -90,14 +90,15 @@ export class MvBody extends LitElement {
         }
       });
     });
-    this.resizeObserver.observe(this.parentElement);
-    this.resizeObserver.observe(this);
-    this.resizeObserver.observe(this.mongol);
+    // this.resizeObserver.observe(this.parent);
+    // this.resizeObserver.observe(this);
+    //this.resizeObserver.observe(this.mongol);
   }
 
   _didRender() {
     console.log('mvbody reRendered.');
 
+    this.parent = this.parentElement;
     this.mongol = this._root.querySelector(this.mongolId);
 
     if (!this.parentIsBody() || this.hasMultipleMvbody()) {
@@ -108,21 +109,22 @@ export class MvBody extends LitElement {
 
   windowResized(event) {
     console.log('window resized');
-
+    /*
     let h = this.bodyHeight();
     if (event && this.wHasXScrollBar()) {
       h = h - this.scrollBarHeight;
     }
-    this.parentElement.style.height = h + 'px';
+    this.parent.style.height = h + 'px';
+    */
   }
 
   bodyResized(body) {
     console.log('body resized');
 
     // emulate horizontal text html behavior.
-    this.parentElement.parentElement.style.width = this.getComputedStyle(this.parentElement, 'width')
-      + this.getComputedStyle(this.parentElement, 'margin-left')
-      + this.getComputedStyle(this.parentElement, 'margin-right') + 'px';
+    this.parent.parentElement.style.width = this.getComputedStyle(this.parent, 'width')
+      + this.getComputedStyle(this.parent, 'margin-left')
+      + this.getComputedStyle(this.parent, 'margin-right') + 'px';
   }
 
   thisResized(mvbody) {
@@ -136,11 +138,11 @@ export class MvBody extends LitElement {
     console.log('mongol resized');
     const height = mongol.contentRect.height;
 
-    this.parentElement.style.width = height + 'px';
+    this.parent.style.width = height + 'px';
   }
 
   parentIsBody() {
-    if (this.parentElement.tagName.toUpperCase() != 'BODY') {
+    if (this.parent.tagName.toUpperCase() != 'BODY') {
       return false;
     }
 
@@ -186,31 +188,30 @@ export class MvBody extends LitElement {
 
   bodyHeight() {
     return window.innerHeight
-      - this.getComputedStyle(this.parentElement, 'margin-top') - this.getComputedStyle(this.parentElement, 'margin-bottom');
+      - this.getComputedStyle(this.parent, 'margin-top') - this.getComputedStyle(this.parent, 'margin-bottom');
   }
 
   setScrollBarHeight() {
-    const mongol = this._root.querySelector(this.mongolId);
+    document.body.removeChild(this);
 
-    const h = this.style.height;
-    const w = this.style.width;
+    const div = document.createElement('div');
 
-    mongol.style.display = 'none';
-    this.style.height = this.bodyHeight() + 'px';
-    this.style.width = window.innerWidth + 30 + 'px';
+    div.style.height = this.bodyHeight() + 'px';
+    div.style.width = window.innerWidth + 30 + 'px';
+
+    document.body.appendChild(div);
 
     let th;
     let sh = 0;
     while (this.wHasYScrollBar()) {
-      th = this.getDimensionNumber(this.style.height);
-      this.style.height = (th - 1) + 'px';
+      th = this.getDimensionNumber(div.style.height);
+      div.style.height = (th - 1) + 'px';
       ++sh;
     }
-    this.scrollBarHeight = sh;
+    this.scrollBarHeight = sh;console.log(sh);
 
-    this.style.height = h;
-    this.style.width = w;
-    mongol.style.display = '';
+    document.body.removeChild(div);
+    document.body.appendChild(this);
   }
 }
 
