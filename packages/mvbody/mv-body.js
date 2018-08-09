@@ -39,8 +39,6 @@ export class MvBody extends LitElement {
     this.maxheight = '900px'; // px unit
     this.float = 'center'; // top, center
 
-    // min content height in mongol div.
-    this.minMongolHeight;
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
   }
