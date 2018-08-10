@@ -36,12 +36,12 @@ export class MvBody extends LitElement {
     super();
 
     this.mongolId = '#mongol';
-    this.maxheight = '900px'; // px unit
-    this.float = 'center'; // top, center
 
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
 
+    this.resizeDelay = 100;
+    this.resizeTimer;
   }
 
   ready() {
@@ -72,22 +72,10 @@ export class MvBody extends LitElement {
 
     await this.setScrollBarHeight();
 
-    window.onresize = (event) => {
-      this.windowResized(event);
-    };
-
     this.resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.target.tagName == this.tagName) {
-          this.thisResized(entry);
-        }
-        if (entry.target.tagName == this.mongol.tagName) {
-          this.mongolResized(entry);
-        }
-      });
+      this.triggerResize();
     });
-    // this.resizeObserver.observe(this.parent);
-    this.resizeObserver.observe(this);
+    this.resizeObserver.observe(this.parent);
     this.resizeObserver.observe(this.mongol);
   }
 
@@ -103,14 +91,12 @@ export class MvBody extends LitElement {
     }
   }
 
-  async windowResized(event) {
-    console.log('window resized');
+  triggerResize() {
+    clearTimeout(this.resizeTimer);
 
-    if (this.wHasYScrollBar() || this.wHasXScrollBar()) {
-      this.mongol.style.width = (this.bodyHeight() - this.scrollBarHeight) + 'px';
-    } else {
-      this.mongol.style.width = this.bodyHeight() + 'px';
-    }
+    this.resizeTimer = setTimeout(() => {
+      this.resizeMongol();
+    }, this.resizeDelay);
   }
 
   resizeBody() {
@@ -121,45 +107,18 @@ export class MvBody extends LitElement {
     this.parent.parentElement.style.width = this.getComputedStyle(this.parent, 'width')
       + this.getComputedStyle(this.parent, 'margin-left')
       + this.getComputedStyle(this.parent, 'margin-right') + 'px';
-
-    if (this.wHasYScrollBar()) {
-      this.mongol.style.width = (this.getComputedStyle(this.mongol, 'width') - this.scrollBarHeight) + 'px';
-    }
   }
 
-  thisResized(mvbody) {
-    console.log('mv-body resized');
-    //const { left, top, width, height } = mvbody.contentRect;
-    const height = mvbody.contentRect.height;
-
-    this.resizeMongol(mvbody);
-  }
-
-  resizeMongol(mvbody) {
+  resizeMongol() {
     console.log('resize mongol');
-    const height = mvbody.contentRect.height;
 
-    this.mongol.style.width = height + 'px';
+    const th = this.bodyHeight();
+    this.mongol.style.width = th + 'px';
+    if (this.wHasYScrollBar()) {
+      this.mongol.style.width = (th - this.scrollBarHeight) + 'px';
+    }
 
     this.resizeBody();
-  }
-
-  mongolResized(mongol) {
-    console.log('mongol resized', mongol);
-    const { left, top, width, height } = mongol.contentRect;
-
-    if (this.wHasYScrollBar() || this.wHasXScrollBar()) {
-      if ((width == this.bodyHeight() - this.scrollBarHeight) && (height != this.getComputedStyle(this, 'width'))) {
-        console.log('1 mongol rsized');
-        this.resizeBody();
-      }
-    } else {
-      if ((width == this.bodyHeight()) && (height != this.getComputedStyle(this, 'width'))) {
-        console.log('2 mongol resized');
-        this.resizeBody();
-      }
-    }
-
   }
 
   parentIsBody() {
