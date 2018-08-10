@@ -78,9 +78,6 @@ export class MvBody extends LitElement {
 
     this.resizeObserver = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.target.tagName == 'BODY') {
-          this.bodyResized(entry);
-        }
         if (entry.target.tagName == this.tagName) {
           this.thisResized(entry);
         }
@@ -91,7 +88,7 @@ export class MvBody extends LitElement {
     });
     // this.resizeObserver.observe(this.parent);
     this.resizeObserver.observe(this);
-    //this.resizeObserver.observe(this.mongol);
+    this.resizeObserver.observe(this.mongol);
   }
 
   _didRender() {
@@ -109,14 +106,10 @@ export class MvBody extends LitElement {
   async windowResized(event) {
     console.log('window resized');
 
-    if (this.wHasYScrollBar()) {
+    if (this.wHasYScrollBar() || this.wHasXScrollBar()) {
       this.mongol.style.width = (this.bodyHeight() - this.scrollBarHeight) + 'px';
     } else {
-      if (this.wHasXScrollBar()) {
-        this.mongol.style.width = (this.bodyHeight() - this.scrollBarHeight) + 'px';
-      } else {
-        this.mongol.style.width = this.bodyHeight() + 'px';
-      }
+      this.mongol.style.width = this.bodyHeight() + 'px';
     }
   }
 
@@ -143,12 +136,30 @@ export class MvBody extends LitElement {
   }
 
   resizeMongol(mvbody) {
-    console.log('mongol resized');
+    console.log('resize mongol');
     const height = mvbody.contentRect.height;
 
     this.mongol.style.width = height + 'px';
 
     this.resizeBody();
+  }
+
+  mongolResized(mongol) {
+    console.log('mongol resized', mongol);
+    const { left, top, width, height } = mongol.contentRect;
+
+    if (this.wHasYScrollBar() || this.wHasXScrollBar()) {
+      if ((width == this.bodyHeight() - this.scrollBarHeight) && (height != this.getComputedStyle(this, 'width'))) {
+        console.log('1 mongol rsized');
+        this.resizeBody();
+      }
+    } else {
+      if ((width == this.bodyHeight()) && (height != this.getComputedStyle(this, 'width'))) {
+        console.log('2 mongol resized');
+        this.resizeBody();
+      }
+    }
+
   }
 
   parentIsBody() {
