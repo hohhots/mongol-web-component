@@ -28,5 +28,24 @@ const mvFixture = (mvbodyId) => {
   mvbody = document.querySelector('#' + mvbodyId);
   mongol = mvbody.shadowRoot.querySelector('#' + innerDivId);
   parent = mvbody.parentElement;
-  console.log(parent.parentElement.tagName, parent, mvbody, mongol);
+  console.log(parent.parentElement.tagName, parent.tagName);
 };
+
+const getComputedStyle = (el, property) => {
+  const p = window.getComputedStyle(el, null).getPropertyValue(property);
+  if (p.indexOf('px') > 0) {
+    return getDimensionNumber(p);
+  }
+  return p;
+};
+
+const getDimensionNumber = (dimension) => {
+  return parseInt(dimension.replace('px', ''));
+};
+
+const bodyHeight = () => {
+  return window.innerHeight
+    - getComputedStyle(parent, 'margin-top') - getComputedStyle(parent, 'margin-bottom');
+};
+
+

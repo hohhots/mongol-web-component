@@ -63,19 +63,6 @@
       });
     });
 
-    suite('<mv-body>big-content</mv-body>', () => {
-
-      setup(async () => {
-        fixture('mvbodyFixture');
-        await wait(300);
-        mvFixture('mvbody');
-      });
-
-      test('should display content.', async () => {
-        assert.equal(mvbody.style.display, '');
-      });
-    });
-
   </script>
 </body>
 
