@@ -1,84 +1,48 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <title>mv body wct test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
   <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
   <script src="../../node_modules/wct-browser-legacy/browser.js"></script>
-  <script src="../../node_modules/@polymer/test-fixture/test-fixture.js"></script>
   <script src="testMvbody.js"></script>
   <script type="module" src="../../node_modules/@material/mv-body/mv-body.js"></script>
 </head>
 
 <body>
-  <template id="parentNotBodyFixture">
-    <div>
-      <mv-body id="parentNotBody"></mv-body>
-    </div>
-  </template>
 
-  <template id="multipleMvbodyFixture">
-    <mv-body id="multipleMvbody"></mv-body>
-    <mv-body></mv-body>
-  </template>
+  <test-fixture id="parentNotBodyTemp">
+    <template>
+      <div>
+        <mv-body id="parentNotBody"></mv-body>
+      </div>
+    </template>
+  </test-fixture>
 
-  <template id="emptyFixture">
-    <mv-body id="empty"></mv-body>
-  </template>
+  <test-fixture id="multiMvbodyTemp">
+    <template>
+        <mv-body id="multiMvbody"></mv-body>
+        <mv-body></mv-body>
+    </template>
+  </test-fixture>
 
-  <template id="smallContentFixture">
-    <mv-body id="small-content">Hello</mv-body>
-  </template>
-
-  <template id="largeContentFixture">
-    <mv-body id="large-content">
-      1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum
-      quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit
-      amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti
-      ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing
-      elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste
-      voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam
-      ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati
-      suscipit distinctio.
-    </mv-body>
-  </template>
-
-  <template id="mxheightFixture">
-    <mv-body id="mxheight" mxheight="100px">
-      1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum
-      quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit
-      amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti
-      ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing
-      elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste
-      voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam
-      ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati
-      suscipit distinctio.
-    </mv-body>
-  </template>
-
-  <template>
+  <test-fixture id="mvbodyFixture">
+      <template>
+          <mv-body id="mvbody"></mv-body>
+      </template>
+    </test-fixture>
 
 
 
-
-    <mv-body id="float" float="top" style="display: none">
-      1111Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum
-      quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit
-      amet consectetur adipisicing elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti
-      ducimus, dolores iste voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing
-      elit. Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste
-      voluptate dolore obcaecati suscipit distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni aliquam
-      ipsam non nobis! Fugit quidem itaque odio illum quam porro rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati
-      suscipit distinctio.
-    </mv-body>
-  </template>
   <script>
 
     suite('<div><mv-body></mv-body></div>', () => {
 
       setup(async () => {
-        fixture('parentNotBodyFixture');
-        await wait();
+        fixture('parentNotBodyTemp');
+        await wait(200);
         mvFixture('parentNotBody');
       });
 
@@ -88,11 +52,10 @@
     });
 
     suite('<mv-body><mv-body></mv-body></mv-body>', () => {
-
       setup(async () => {
-        fixture('multipleMvbodyFixture');
-        await wait();
-        mvFixture('multipleMvbody');
+        fixture('multiMvbodyTemp');
+        await wait(200);
+        mvFixture('multiMvbody');
       });
 
       test('display none', () => {
@@ -100,22 +63,18 @@
       });
     });
 
-    suite('<mv-body></mv-body>', () => {
+    suite('<mv-body>big-content</mv-body>', () => {
 
       setup(async () => {
-        fixture('emptyFixture');
-        mvFixture('empty');
+        fixture('mvbodyFixture');
+        await wait(300);
+        mvFixture('mvbody');
       });
 
-      test('height is same with default mxheight', async () => {
-        mvbody.requestRender();
-        await mvbody.renderCompleted;
-        await wait();
-        //mvFixture('empty');
-        assert.equal(parent, mxheight);
+      test('should display content.', async () => {
+        assert.equal(mvbody.style.display, '');
       });
     });
-
 
   </script>
 </body>

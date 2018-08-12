@@ -6,8 +6,6 @@ let mvdiv;
 let mongol;
 
 const wait = async (milliseconds) => {
-  await mvdiv.renderCompleted;
-
   milliseconds = milliseconds || 1500;
   const start = new Date().getTime();
   for (let i = 0; i < 1e7; i++) {

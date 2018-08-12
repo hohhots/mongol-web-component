@@ -16,7 +16,6 @@ limitations under the License.
 */
 
 import { LitElement, html } from '@polymer/lit-element/lit-element.js';
-import { afterNextRender } from '@material/mwc-base/utils.js';
 import { style } from './mv-body-css.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
@@ -70,7 +69,15 @@ export class MvBody extends LitElement {
   async _firstRendered() {
     console.log('mvbody created.');
 
+    if (!this.validMvbody()) {
+      return;
+    }
+
     await this.setScrollBarHeight();
+
+    window.onresize = () => {
+      this.triggerResize();
+    };
 
     this.resizeObserver = new ResizeObserver((entries) => {
       this.triggerResize();
@@ -82,13 +89,12 @@ export class MvBody extends LitElement {
   _didRender() {
     console.log('mvbody reRendered.');
 
-    this.parent = this.parentElement;
-    this.mongol = this._root.querySelector(this.mongolId);
-
-    if (!this.parentIsBody() || this.hasMultipleMvbody()) {
-      this.style.display = 'none';
+    if (!this.validMvbody()) {
       return;
     }
+
+    this.parent = this.parentElement;
+    this.mongol = this._root.querySelector(this.mongolId);
   }
 
   triggerResize() {
@@ -102,7 +108,9 @@ export class MvBody extends LitElement {
   resizeBody() {
     console.log('body resized');
 
+    this.parent.style.height = this.getComputedStyle(this.mongol, 'width') + 'px';
     this.parent.style.width = this.getComputedStyle(this.mongol, 'height') + 'px';
+
     // emulate horizontal text html behavior.
     this.parent.parentElement.style.width = this.getComputedStyle(this.parent, 'width')
       + this.getComputedStyle(this.parent, 'margin-left')
@@ -122,7 +130,8 @@ export class MvBody extends LitElement {
   }
 
   parentIsBody() {
-    if (this.parent.tagName.toUpperCase() != 'BODY') {
+    const name = this.parentElement.tagName.toUpperCase();
+    if ((name != 'BODY') && (name != 'TEST-FIXTURE')) {
       return false;
     }
 
@@ -169,6 +178,14 @@ export class MvBody extends LitElement {
   bodyHeight() {
     return window.innerHeight
       - this.getComputedStyle(this.parent, 'margin-top') - this.getComputedStyle(this.parent, 'margin-bottom');
+  }
+
+  validMvbody() {
+    if (!this.parentIsBody() || this.hasMultipleMvbody()) {
+      this.style.display = 'none';
+      return false;
+    }
+    return true;
   }
 
   setScrollBarHeight() {

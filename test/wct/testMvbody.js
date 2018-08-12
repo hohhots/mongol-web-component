@@ -1,9 +1,10 @@
 const innerDivId = 'mongol';
-const mxheight = '900px';
 
 let parent;
 let mvbody;
 let mongol;
+
+let clone;
 
 const wait = async (milliseconds) => {
   milliseconds = milliseconds || 1500;
@@ -17,8 +18,15 @@ const wait = async (milliseconds) => {
 
 const getStyle = (el, property) => window.getComputedStyle(el, null).getPropertyValue(property);
 
+const template = async (tempId) => {
+  const t = document.querySelector('#' + tempId);
+  clone = document.importNode(t.content, true);
+  
+};
+
 const mvFixture = (mvbodyId) => {
   mvbody = document.querySelector('#' + mvbodyId);
   mongol = mvbody.shadowRoot.querySelector('#' + innerDivId);
   parent = mvbody.parentElement;
+  console.log(parent.parentElement.tagName, parent, mvbody, mongol);
 };

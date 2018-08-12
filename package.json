@@ -13,7 +13,7 @@
     "lint:imports": "node scripts/check-imports.js",
     "lint": "npm-run-all --parallel lint:*",
     "test": "karma start --single-run",
-    "wct": "wct --skip-selenium-install",
+    "wct": "wct -p --skip-selenium-install",
     "bootstrap": "npm install && ./scripts/bootstrap-unreleased.sh",
     "update-styling": "./scripts/update-styling.sh",
     "update-gh-pages": "npm run bootstrap && ./scripts/publish-demos.sh"
