@@ -85,7 +85,7 @@ export class MvDiv extends LitElement {
       const mongolSW = this.mongol.scrollWidth;
       this.setMongolWidth(mongolSW);
 
-      this.style.height = this.mongol.offsetWidth + 'px';
+      this.style.height = `${this.mongol.offsetWidth}px`;
 
       if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
         this.setMongolHeightToParentWidth();
@@ -96,14 +96,14 @@ export class MvDiv extends LitElement {
   async setCssOfFixedHeightDiv() {
     await afterNextRender();
 
-    this.style.height = this.parentNode.clientHeight + 'px';
+    this.style.height = `${this.parentNode.clientHeight}px`;
     this.setMongolWidth(this.clientHeight);
-    this.style.width = this.mongol.scrollHeight + 'px';
+    this.style.width = `${this.mongol.scrollHeight}px`;
 
     if (this.mongol.clientWidth < this.mongol.scrollWidth) {
       this.setMongolWidth(this.mongol.scrollWidth);
-      this.style.width = this.mongol.offsetHeight + 'px';
-      this.style.height = this.mongol.offsetWidth + 'px';
+      this.style.width = `${this.mongol.offsetHeight}px`;
+      this.style.height = `${this.mongol.offsetWidth}px`;
     }
   }
 
@@ -119,7 +119,7 @@ export class MvDiv extends LitElement {
 
     const eoh = this.style.height;
     const poh = this.parentNode.clientHeight;
-    this.style.height = (poh + 100) + 'px';
+    this.style.height = `${poh + 100}px`;
     if (poh != this.parentNode.clientHeight) {
       isFixed = false;
     }
@@ -131,7 +131,7 @@ export class MvDiv extends LitElement {
   async setMongolHeightToParentWidth() {
     while (this.parentNode.clientWidth < this.mongol.scrollHeight) {
       this.setMongolWidth(this.mongol.offsetWidth + 1);
-      this.style.height = this.mongol.offsetWidth + 'px';
+      this.style.height = `${this.mongol.offsetWidth}px`;
     }
     await afterNextRender();
     if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
@@ -140,7 +140,7 @@ export class MvDiv extends LitElement {
   }
 
   setMongolWidth(width) {
-    this.mongol.style.width = width + 'px';
+    this.mongol.style.width = `${width}px`;
   }
 
   nestedInMvdiv() {

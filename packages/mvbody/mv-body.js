@@ -108,22 +108,22 @@ export class MvBody extends LitElement {
   resizeBody() {
     console.log('body resized');
 
-    this.parent.style.height = this.getComputedStyle(this.mongol, 'width') + 'px';
-    this.parent.style.width = this.getComputedStyle(this.mongol, 'height') + 'px';
+    this.parent.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
+    this.parent.style.width = `${this.getComputedStyle(this.mongol, 'height')}px`;
 
     // emulate horizontal text html behavior.
-    this.parent.parentElement.style.width = this.getComputedStyle(this.parent, 'width')
+    this.parent.parentElement.style.width = `${this.getComputedStyle(this.parent, 'width')
       + this.getComputedStyle(this.parent, 'margin-left')
-      + this.getComputedStyle(this.parent, 'margin-right') + 'px';
+      + this.getComputedStyle(this.parent, 'margin-right')}px`;
   }
 
   resizeMongol() {
     console.log('resize mongol');
 
     const th = this.bodyHeight();
-    this.mongol.style.width = th + 'px';
+    this.mongol.style.width = `${th}px`;
     if (this.wHasYScrollBar()) {
-      this.mongol.style.width = (th - this.scrollBarHeight) + 'px';
+      this.mongol.style.width = `${th - this.scrollBarHeight}px`;
     }
 
     this.resizeBody();
@@ -193,8 +193,8 @@ export class MvBody extends LitElement {
 
     const div = document.createElement('div');
 
-    div.style.height = this.bodyHeight() + 'px';
-    div.style.width = window.innerWidth + 30 + 'px';
+    div.style.height = `${this.bodyHeight()}px`;
+    div.style.width = `${window.innerWidth + 30}px`;
 
     document.body.appendChild(div);
 
@@ -202,7 +202,7 @@ export class MvBody extends LitElement {
     let sh = 0;
     while (this.wHasYScrollBar()) {
       th = this.getDimensionNumber(div.style.height);
-      div.style.height = (th - 1) + 'px';
+      div.style.height = `${th - 1}px`;
       ++sh;
     }
     this.scrollBarHeight = sh;
