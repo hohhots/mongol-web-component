@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+@license
+Copyright 2018 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+
+<head>
+  <title>mon-button demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../node_modules/@material/mv-div/mv-div.js"></script>
+  <script type="module" src="../node_modules/@material/mon-button/mon-button.js"></script>
+  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+
+  <link rel="stylesheet" href="demo-component.css">
+  <style>
+    .light {
+      --mdc-theme-on-primary: black;
+      --mdc-theme-primary: white;
+      --mdc-theme-on-secondary: black;
+      --mdc-theme-secondary: white;
+    }
+
+    .pink {
+      --mdc-theme-on-primary: white;
+      --mdc-theme-primary: #e9437a;
+      --mdc-theme-on-secondary: white;
+      --mdc-theme-secondary: #e9437a;
+    }
+
+    .wide {
+      width: 250px;
+    }
+  </style>
+</head>
+
+<body class="unresolved">
+  <header>
+    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+      <span>Buttons</span></a>
+  </header>
+
+  <main>
+
+    <h4>labeled</h4>
+    <div>
+      <mv-div>
+        <div class="demo-group-spaced">
+          <mon-button label="Normal"></mon-button>
+          <mon-button class="light" raised label="raised"></mon-button>
+          <mon-button unelevated label="unelevated"></mon-button>
+          <mon-button outlined label="outlined"></mon-button>
+          <mon-button class="pink" dense label="dense"></mon-button>
+          <mon-button class="pink wide" raised label="wide"></mon-button>
+          <mon-button disabled label="disabled"></mon-button>
+        </div>
+      </mv-div>
+    </div>
+
+    <h4>icon labeled</h4>
+    <div>
+      <mv-div>
+        <div class="demo-group-spaced">
+          <mon-button label="Normal" icon="explore"></mon-button>
+          <mon-button class="light" raised label="raised" icon="code"></mon-button>
+          <mon-button unelevated label="unelevated" icon="check"></mon-button>
+          <mon-button outlined label="outlined" icon="alarm"></mon-button>
+          <mon-button class="pink" dense label="dense" icon="feedback"></mon-button>
+          <mon-button class="pink wide" raised label="wide" icon="code"></mon-button>
+          <mon-button disabled label="disabled" icon="fingerprint"></mon-button>
+        </div>
+      </mv-div>
+    </div>
+
+
+    <script type="module">
+      import { html } from '@polymer/lit-element/lit-element.js';
+      import { Button } from '@material/mon-button/mon-button.js';
+      class CustomButton extends Button {
+        _renderStyle() {
+          return html`${super._renderStyle()}<style>.mdc-button{border-radius: 8px}</style>`;
+        }
+      }
+      customElements.define('custom-button', CustomButton);
+    </script>
+
+    <h4>custom button</h4>
+
+    <div>
+      <mv-div>
+        <custom-button label="Custom!" raised></custom-button>
+      </mv-div>
+    </div>
+    
+    <script>
+      addEventListener('load', () => document.body.classList.remove('unresolved'));
+    </script>
+
+  </main>
+</body>
+
+</html>

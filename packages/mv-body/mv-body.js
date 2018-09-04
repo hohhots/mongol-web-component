@@ -39,7 +39,7 @@ export class MvBody extends LitElement {
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
 
-    this.resizeDelay = 100;
+    this.resizeDelay = 10;
     this.resizeTimer;
   }
 
