@@ -51,7 +51,7 @@ export class Button extends LitElement {
   async ready() {
     super.ready();
     await afterNextRender();
-    this._ripple = new MDCWCRipple(this._root.querySelector('.mdc-vbutton'));
+    this._ripple = new MDCWCRipple(this._root.querySelector('.mdc-button'));
   }
 
   _renderStyle() {
@@ -60,15 +60,15 @@ export class Button extends LitElement {
 
   _render({raised, unelevated, outlined, dense, disabled, icon, label}) {
     const hostClasses = c$({
-      'mdc-vbutton--raised': raised,
-      'mdc-vbutton--unelevated': unelevated,
-      'mdc-vbutton--outlined': outlined,
-      'mdc-vbutton--dense': dense,
+      'mdc-button--raised': raised,
+      'mdc-button--unelevated': unelevated,
+      'mdc-button--outlined': outlined,
+      'mdc-button--dense': dense,
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-vbutton ${hostClasses}" disabled?="${disabled}">
-        ${icon ? html`<span class="material-icons mdc-vbutton__icon">${icon}</span>` : ''}
+      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}">
+        ${icon ? html`<span class="material-icons mdc-button__icon">${icon}</span>` : ''}
         ${label || ''}
         <slot></slot>
       </button>`;

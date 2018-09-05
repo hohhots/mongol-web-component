@@ -2,13 +2,10 @@
 <!--
 @license
 Copyright 2018 Google Inc. All Rights Reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,13 +15,12 @@ limitations under the License.
 <html>
 
 <head>
-  <title>mon-button demo</title>
+  <title>button demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
   <script type="module" src="../node_modules/@material/mv-div/mv-div.js"></script>
   <script type="module" src="../node_modules/@material/mon-button/mon-button.js"></script>
   <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
-
   <link rel="stylesheet" href="demo-component.css">
   <style>
     .light {
@@ -44,6 +40,10 @@ limitations under the License.
     .wide {
       width: 250px;
     }
+
+    .mvContainer {
+      height: 200px;
+    }
   </style>
 </head>
 
@@ -56,7 +56,7 @@ limitations under the License.
   <main>
 
     <h4>labeled</h4>
-    <div>
+    <div class="mvContainer">
       <mv-div>
         <div class="demo-group-spaced">
           <mon-button label="Normal"></mon-button>
@@ -71,7 +71,8 @@ limitations under the License.
     </div>
 
     <h4>icon labeled</h4>
-    <div>
+
+    <div class="mvContainer">
       <mv-div>
         <div class="demo-group-spaced">
           <mon-button label="Normal" icon="explore"></mon-button>
@@ -84,7 +85,6 @@ limitations under the License.
         </div>
       </mv-div>
     </div>
-
 
     <script type="module">
       import { html } from '@polymer/lit-element/lit-element.js';
@@ -99,12 +99,12 @@ limitations under the License.
 
     <h4>custom button</h4>
 
-    <div>
+    <div class="mvContainer">
       <mv-div>
         <custom-button label="Custom!" raised></custom-button>
       </mv-div>
     </div>
-    
+
     <script>
       addEventListener('load', () => document.body.classList.remove('unresolved'));
     </script>
