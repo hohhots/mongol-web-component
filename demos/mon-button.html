@@ -42,7 +42,14 @@ limitations under the License.
     }
 
     .mvContainer {
-      height: 200px;
+      display: block;
+      clear: both;
+    }
+
+    mon-button {
+      display: block;
+      clear: both;
+      margin: 20px 8px;
     }
   </style>
 </head>
@@ -58,7 +65,7 @@ limitations under the License.
     <h4>labeled</h4>
     <div class="mvContainer">
       <mv-div>
-        <div class="demo-group-spaced">
+        <div>
           <mon-button label="Normal"></mon-button>
           <mon-button class="light" raised label="raised"></mon-button>
           <mon-button unelevated label="unelevated"></mon-button>
@@ -74,7 +81,7 @@ limitations under the License.
 
     <div class="mvContainer">
       <mv-div>
-        <div class="demo-group-spaced">
+        <div>
           <mon-button label="Normal" icon="explore"></mon-button>
           <mon-button class="light" raised label="raised" icon="code"></mon-button>
           <mon-button unelevated label="unelevated" icon="check"></mon-button>

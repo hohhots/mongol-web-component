@@ -81,10 +81,10 @@ export class MvDiv extends LitElement {
       // If parent's horizontal scrollbar disapear or hidden.
       this.setCssOfFixedHeightDiv();
     } else {
-      this.setMongolWidth(0);
-      const mongolSW = this.mongol.scrollWidth;
-      this.setMongolWidth(mongolSW);
-
+      const mongolSW = this._getMongolScrollWidth();
+      if (mongolSW) {
+        this.setMongolWidth(mongolSW);
+      }
       this.style.height = `${this.mongol.offsetWidth}px`;
 
       if (this.parentNode.clientWidth < this.mongol.scrollHeight) {
@@ -153,6 +153,17 @@ export class MvDiv extends LitElement {
     }
 
     return false;
+  }
+
+  _getMongolScrollWidth() {
+    const OriWidth = this.mongol.style.width;
+
+    this.setMongolWidth(0);
+    const mongolSW = this.mongol.scrollWidth;
+
+    this.mongol.style.width = OriWidth;
+
+    return mongolSW;
   }
 }
 
