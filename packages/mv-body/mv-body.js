@@ -123,9 +123,11 @@ export class MvBody extends LitElement {
     const th = this.bodyHeight();
     this.mongol.style.width = `${th}px`;
     if (this.wHasYScrollBar()) {
+      console.log(window.innerHeight, this.mongol.style.width, this.scrollBarHeight);
       this.mongol.style.width = `${th - this.scrollBarHeight}px`;
     }
 
+    // this.style.height = this.mongol.style.width;
     this.resizeBody();
   }
 
@@ -189,26 +191,21 @@ export class MvBody extends LitElement {
   }
 
   setScrollBarHeight() {
-    document.body.removeChild(this);
+    if (!this.scrollBarHeight) {
+      this.style.display = 'none';
 
-    const div = document.createElement('div');
+      const div = document.createElement('div');
+      div.style.height = '100vh';
+      div.style.width = '110vw';
+      document.body.appendChild(div);
 
-    div.style.height = `${this.bodyHeight()}px`;
-    div.style.width = `${window.innerWidth + 30}px`;
-
-    document.body.appendChild(div);
-
-    let th;
-    let sh = 0;
-    while (this.wHasYScrollBar()) {
-      th = this.getDimensionNumber(div.style.height);
-      div.style.height = `${th - 1}px`;
-      ++sh;
+      window.scrollTo(0, div.scrollHeight);
+      this.scrollBarHeight = Math.ceil(window.pageYOffset)
+                            - this.getComputedStyle(this.parent, 'margin-top')
+                            - this.getComputedStyle(this.parent, 'margin-bottom');
+      document.body.removeChild(div);
+      this.style.display = '';
     }
-    this.scrollBarHeight = sh;
-
-    document.body.removeChild(div);
-    document.body.appendChild(this);
   }
 }
 

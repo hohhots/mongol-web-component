@@ -7,7 +7,7 @@
     "changelog": "standard-changelog -i CHANGELOG.md -k packages/mongol-material-components-web/package.json -w",
     "clean": "del-cli build/** build .closure-tmp/** .closure-tmp packages/*/node_modules packages/*/package-lock.json",
     "dist": "npm run build && npm run build:min",
-    "dev": "polyserve --npm --module-resolution=node -H 192.168.3.18",
+    "dev": "polyserve --npm --module-resolution=node -H 127.0.0.1",
     "fix": "npm-run-all --parallel fix:*",
     "lint:js": "eslint packages test scripts webpack.config.js demos/webpack.config.js karma.conf.js",
     "lint:imports": "node scripts/check-imports.js",
