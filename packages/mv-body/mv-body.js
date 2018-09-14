@@ -39,7 +39,7 @@ export class MvBody extends LitElement {
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
 
-    this.resizeDelay = 10;
+    this.resizeDelay = 20;
     this.resizeTimer;
   }
 
@@ -122,12 +122,10 @@ export class MvBody extends LitElement {
 
     const th = this.bodyHeight();
     this.mongol.style.width = `${th}px`;
-    if (this.wHasYScrollBar()) {
-      console.log(window.innerHeight, this.mongol.style.width, this.scrollBarHeight);
+    if (this.wHasXScrollBar()) {
       this.mongol.style.width = `${th - this.scrollBarHeight}px`;
     }
 
-    // this.style.height = this.mongol.style.width;
     this.resizeBody();
   }
 
@@ -179,7 +177,8 @@ export class MvBody extends LitElement {
 
   bodyHeight() {
     return window.innerHeight
-      - this.getComputedStyle(this.parent, 'margin-top') - this.getComputedStyle(this.parent, 'margin-bottom');
+      - this.getComputedStyle(this.parent, 'margin-top')
+      - this.getComputedStyle(this.parent, 'margin-bottom');
   }
 
   validMvbody() {
