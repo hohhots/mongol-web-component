@@ -76,6 +76,7 @@ export class MvBody extends LitElement {
     await this.setScrollBarHeight();
 
     window.onresize = () => {
+      this.parent.style.overflowY = 'hidden';
       this.triggerResize();
     };
 
@@ -102,6 +103,7 @@ export class MvBody extends LitElement {
 
     this.resizeTimer = setTimeout(() => {
       this.resizeMongol();
+      this.parent.style.overflowY = '';
     }, this.resizeDelay);
   }
 
@@ -121,12 +123,16 @@ export class MvBody extends LitElement {
     console.log('resize mongol');
 
     const th = this.bodyHeight();
-    this.mongol.style.width = `${th}px`;
+    this.setMongolWidth(th);
     if (this.wHasXScrollBar()) {
-      this.mongol.style.width = `${th - this.scrollBarHeight}px`;
+      this.setMongolWidth(th - this.scrollBarHeight);
     }
 
     this.resizeBody();
+  }
+
+  setMongolWidth(width) {
+    this.mongol.style.width = `${width}px`;
   }
 
   parentIsBody() {
@@ -200,8 +206,8 @@ export class MvBody extends LitElement {
 
       window.scrollTo(0, div.scrollHeight);
       this.scrollBarHeight = Math.ceil(window.pageYOffset)
-                            - this.getComputedStyle(this.parent, 'margin-top')
-                            - this.getComputedStyle(this.parent, 'margin-bottom');
+        - this.getComputedStyle(this.parent, 'margin-top')
+        - this.getComputedStyle(this.parent, 'margin-bottom');
       document.body.removeChild(div);
       this.style.display = '';
     }
