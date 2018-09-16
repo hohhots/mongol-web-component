@@ -110,13 +110,20 @@ export class MvBody extends LitElement {
   resizeBody() {
     console.log('resize body');
 
-    this.parent.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
-    this.parent.style.width = `${this.getComputedStyle(this.mongol, 'height')}px`;
+    // this.parent.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
+    this.parent.style.width = `${this.getComputedStyle(this, 'width')}px`;
 
     // emulate horizontal text html behavior.
     this.parent.parentElement.style.width = `${this.getComputedStyle(this.parent, 'width')
       + this.getComputedStyle(this.parent, 'margin-left')
       + this.getComputedStyle(this.parent, 'margin-right')}px`;
+  }
+
+  resizeThis() {
+    this.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
+    this.style.width = `${this.getComputedStyle(this.mongol, 'height')}px`;
+
+    this.resizeBody();
   }
 
   resizeMongol() {
@@ -128,7 +135,7 @@ export class MvBody extends LitElement {
       this.setMongolWidth(th - this.scrollBarHeight);
     }
 
-    this.resizeBody();
+    this.resizeThis();
   }
 
   setMongolWidth(width) {
@@ -184,7 +191,7 @@ export class MvBody extends LitElement {
   bodyHeight() {
     // for browser on pc
     let height = window.innerHeight;
-
+    console.log(height + ' - height');
     // for chrome in android and with big content
     if (window.innerHeight > window.outerHeight) {
       height = window.outerHeight;
