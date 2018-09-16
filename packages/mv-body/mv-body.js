@@ -108,7 +108,7 @@ export class MvBody extends LitElement {
   }
 
   resizeBody() {
-    console.log('body resized');
+    console.log('resize body');
 
     this.parent.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
     this.parent.style.width = `${this.getComputedStyle(this.mongol, 'height')}px`;
@@ -120,11 +120,11 @@ export class MvBody extends LitElement {
   }
 
   resizeMongol() {
-    console.log('resize mongol');
+    console.log('resize mongol', this.scrollBarHeight);
 
     const th = this.bodyHeight();
     this.setMongolWidth(th);
-    if (this.wHasXScrollBar()) {
+    if (this.scrollBarHeight && this.wHasXScrollBar()) {
       this.setMongolWidth(th - this.scrollBarHeight);
     }
 
@@ -182,7 +182,15 @@ export class MvBody extends LitElement {
   }
 
   bodyHeight() {
-    return window.innerHeight
+    // for browser on pc
+    let height = window.innerHeight;
+
+    // for chrome in android and with big content
+    if (window.innerHeight > window.outerHeight) {
+      height = window.outerHeight;
+    }
+
+    return height
       - this.getComputedStyle(this.parent, 'margin-top')
       - this.getComputedStyle(this.parent, 'margin-bottom');
   }
