@@ -16,9 +16,9 @@ limitations under the License.
 */
 import {LitElement, html, classString as c$} from '@polymer/lit-element/lit-element.js';
 import {style} from './mon-button-css.js';
-import {MDCWCRipple} from '@material/mwc-ripple/mwc-ripple.js';
-import {afterNextRender} from '@material/mwc-base/utils.js';
-import '@material/mwc-icon/mwc-icon-font.js';
+import {MDCWCRipple} from '@material/mon-ripple/mon-ripple.js';
+import {afterNextRender} from '@material/mon-base/utils.js';
+import '@material/mon-icon/mon-icon-font.js';
 
 export class Button extends LitElement {
   static get properties() {
