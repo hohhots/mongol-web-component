@@ -127,7 +127,7 @@ export class MvBody extends LitElement {
   }
 
   resizeMongol() {
-    console.log('resize mongol', this.scrollBarHeight);
+    console.log('resize mongol');
 
     const th = this.bodyHeight();
     this.setMongolWidth(th);
@@ -191,7 +191,6 @@ export class MvBody extends LitElement {
   bodyHeight() {
     // for browser on pc
     let height = window.innerHeight;
-    console.log(height + ' - height');
     // for chrome in android and with big content
     if (window.innerHeight > window.outerHeight) {
       height = window.outerHeight;
