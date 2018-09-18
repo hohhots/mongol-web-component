@@ -18,14 +18,18 @@
 
 set -e
 
-sassfiles=(`find packages -name "*.scss"`)
+dirs=("mv-" "mon-")
 
-for sassfile in ${sassfiles[@]}; do
-  # skip mwc-icon, it is used as a partial
-  if [ `basename ${sassfile}` = "mwc-icon.scss" ]; then
-    continue
-  fi
-  cssjs=`echo ${sassfile} | sed -e 's/.scss/-css.js/'`
-  echo "Generating ${cssjs}"
-  node packages/sass-render/bin/sass-render.js -t sass-template.tmpl -s ${sassfile} -o ${cssjs}
+for dir in ${dirs[@]}; do
+  sassfiles=(`find packages/${dir}* -name "*.scss"`)
+
+  for sassfile in ${sassfiles[@]}; do
+    # skip mwc-icon, it is used as a partial
+    if [ `basename ${sassfile}` = "mon-icon.scss" ]; then
+      continue
+    fi
+    cssjs=`echo ${sassfile} | sed -e 's/.scss/-css.js/'`
+    echo "Generating ${cssjs}"
+    node packages/sass-render/bin/sass-render.js -t sass-template.tmpl -s ${sassfile} -o ${cssjs}
+  done
 done

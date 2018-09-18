@@ -14,19 +14,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+import {html} from '@polymer/lit-element/lit-element.js';
 
-@import "@material/mon-icon/mon-icon.scss";
-@import "@material/vmdc-button/mdc-button.scss";
-
-.material-icons {
-  @extend %material-icons;
-}
-
-:host {
-  display: inline-flex;
-  outline: none;
-}
-
-.mon-button {
-  flex: 1;
-}
+export const style = html`<style></style>`;
