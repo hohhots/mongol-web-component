@@ -70,7 +70,7 @@ export class Button extends LitElement {
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}" style$="width: ${window.getComputedStyle(this, null).getPropertyValue('width')}px">
+      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}" style$="width: ${this._getComputedStyle(this, 'width')}">
         ${icon ? html`<span class="material-icons mdc-button__icon">${icon}</span>` : ''}
         ${label || ''}
         <slot></slot>
@@ -79,7 +79,14 @@ export class Button extends LitElement {
 
   _firstRendered() {
     this.button = this._root.querySelector('button');
-    console.log(this.button);
+  }
+
+  _getComputedStyle(el, property) {
+    const w = window.getComputedStyle(this, null).getPropertyValue('width');
+    if ((w == 'auto') || (w == '0px')) {
+      return;
+    }
+    return window.getComputedStyle(el, null).getPropertyValue(property);
   }
 }
 
