@@ -15,10 +15,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import {LitElement, html, classString as c$} from '@polymer/lit-element/lit-element.js';
-import {style} from './mon-button-css.js';
-import {MDCWCRipple} from '@material/mon-ripple/mon-ripple.js';
-import {afterNextRender} from '@material/mon-base/utils.js';
-import '@material/mon-icon/mon-icon-font.js';
+import {style} from './mwc-button-css.js';
+import {MDCWCRipple} from '@material/mwc-ripple/mwc-ripple.js';
+import {afterNextRender} from '@material/mwc-base/utils.js';
+import '@material/mwc-icon/mwc-icon-font.js';
 
 export class Button extends LitElement {
   static get properties() {
@@ -42,9 +42,6 @@ export class Button extends LitElement {
     this.disabled = false;
     this.icon = '';
     this.label = '';
-
-    // sub elements
-    this.button;
   }
 
   _createRoot() {
@@ -70,17 +67,12 @@ export class Button extends LitElement {
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}" style$="width: ${window.getComputedStyle(this, null).getPropertyValue('width')}px">
+      <button class$="mdc-button ${hostClasses}" disabled?="${disabled}">
         ${icon ? html`<span class="material-icons mdc-button__icon">${icon}</span>` : ''}
         ${label || ''}
         <slot></slot>
       </button>`;
   }
-
-  _firstRendered() {
-    this.button = this._root.querySelector('button');
-    console.log(this.button);
-  }
 }
 
-customElements.define('mon-button', Button);
+customElements.define('mwc-button', Button);
