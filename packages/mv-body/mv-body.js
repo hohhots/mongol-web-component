@@ -28,6 +28,7 @@ export class MvBody extends LitElement {
     return {
       maxheight: String,
       float: String,
+      mongolWidth: Number,
     };
   }
 
@@ -35,6 +36,7 @@ export class MvBody extends LitElement {
     super();
 
     this.mongolId = '#mongol';
+    this.mongolWidth = 0;
 
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
@@ -54,7 +56,7 @@ export class MvBody extends LitElement {
   _render() {
     return html`
       ${this._renderStyle()}
-      <div id="mongol">
+      <div id="mongol" style$="width: ${this.mongolWidth}px">
         <span class="mongol-text">
           <slot></slot>
         </span>
@@ -75,15 +77,17 @@ export class MvBody extends LitElement {
 
     await this.setScrollBarHeight();
 
-    window.onresize = () => {
+    window.onresize = (event) => {
       this.parent.style.overflowY = 'hidden';
-      this.triggerResize();
+
+      this.triggerResize(event);
     };
 
     this.resizeObserver = new ResizeObserver((entries) => {
-      this.triggerResize();
+      for (const entry of entries) {
+        this.triggerResize(entry);
+      }
     });
-    this.resizeObserver.observe(this.parent);
     this.resizeObserver.observe(this.mongol);
   }
 
@@ -98,19 +102,20 @@ export class MvBody extends LitElement {
     this.mongol = this._root.querySelector(this.mongolId);
   }
 
-  triggerResize() {
+  triggerResize(event) {
     clearTimeout(this.resizeTimer);
 
     this.resizeTimer = setTimeout(() => {
-      this.resizeMongol();
-      this.parent.style.overflowY = '';
+      this.resizeMongol(event);
+      setTimeout(() => {
+        this.parent.style.overflowY = '';
+      }, 300);
     }, this.resizeDelay);
   }
 
   resizeBody() {
     console.log('resize body');
 
-    // this.parent.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
     this.parent.style.width = `${this.getComputedStyle(this, 'width')}px`;
 
     // emulate horizontal text html behavior.
@@ -126,11 +131,12 @@ export class MvBody extends LitElement {
     this.resizeBody();
   }
 
-  resizeMongol() {
+  resizeMongol(event) {
     console.log('resize mongol');
 
     const th = this.bodyHeight();
     this.setMongolWidth(th);
+
     if (this.scrollBarHeight && this.wHasXScrollBar()) {
       this.setMongolWidth(th - this.scrollBarHeight);
     }
@@ -139,7 +145,7 @@ export class MvBody extends LitElement {
   }
 
   setMongolWidth(width) {
-    this.mongol.style.width = `${width}px`;
+    this.mongolWidth = width;
   }
 
   parentIsBody() {
