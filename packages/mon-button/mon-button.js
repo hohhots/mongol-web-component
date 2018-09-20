@@ -70,7 +70,7 @@ export class Button extends LitElement {
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}" style$="width: ${this._getComputedStyle(this, 'width')}">
+      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}">
         ${icon ? html`<span class="material-icons mdc-button__icon">${icon}</span>` : ''}
         ${label || ''}
         <slot></slot>
