@@ -28,7 +28,6 @@ export class MvBody extends LitElement {
     return {
       maxheight: String,
       float: String,
-      mongolWidth: Number,
     };
   }
 
@@ -36,7 +35,6 @@ export class MvBody extends LitElement {
     super();
 
     this.mongolId = '#mongol';
-    this.mongolWidth = 0;
 
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
@@ -56,7 +54,7 @@ export class MvBody extends LitElement {
   _render() {
     return html`
       ${this._renderStyle()}
-      <div id="mongol" style$="width: ${this.mongolWidth}px">
+      <div id="mongol">
         <span class="mongol-text">
           <slot></slot>
         </span>
@@ -69,7 +67,10 @@ export class MvBody extends LitElement {
   }
 
   async _firstRendered() {
-    console.log('mvbody created.');
+    console.log('mvbody first rendered.');
+
+    this.parent = this.parentElement;
+    this.mongol = this._root.querySelector(this.mongolId);
 
     if (!this.validMvbody()) {
       return;
@@ -97,9 +98,6 @@ export class MvBody extends LitElement {
     if (!this.validMvbody()) {
       return;
     }
-
-    this.parent = this.parentElement;
-    this.mongol = this._root.querySelector(this.mongolId);
   }
 
   triggerResize(event) {
@@ -137,6 +135,7 @@ export class MvBody extends LitElement {
     const th = this.bodyHeight();
     this.setMongolWidth(th);
 
+    // mobile browser has no scroll bar height.
     if (this.scrollBarHeight && this.wHasXScrollBar()) {
       this.setMongolWidth(th - this.scrollBarHeight);
     }
@@ -145,7 +144,7 @@ export class MvBody extends LitElement {
   }
 
   setMongolWidth(width) {
-    this.mongolWidth = width;
+    this.mongol.style.width = `${width}px`;
   }
 
   parentIsBody() {
