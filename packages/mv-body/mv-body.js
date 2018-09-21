@@ -16,7 +16,6 @@ limitations under the License.
 */
 
 import { LitElement, html } from '@polymer/lit-element/lit-element.js';
-import {afterNextRender} from '@material/mwc-base/utils.js';
 import { style } from './mv-body-css.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
@@ -110,10 +109,12 @@ export class MvBody extends LitElement {
     this.resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         console.log('observe mongol');
+
         this.triggerResize(entry);
       }
     });
-    this.enableMongolResizeOberver();
+
+    this.resizeMongol();
   }
 
   _didRender() {
@@ -122,14 +123,14 @@ export class MvBody extends LitElement {
     this.parent = this.parentElement;
     this.mongol = this._root.querySelector(this.mongolId);
 
-    if (!this.validMvbody()) {
-      return;
+    if (this.getComputedStyle(this.mongol, 'width')) {
+      this.resizeThis();
+      //this.enableMongolResizeOberver();
     }
-
-    this.resizeThis();
   }
 
   triggerResize(event) {
+
     clearTimeout(this.resizeTimer);
 
     this.resizeTimer = setTimeout(() => {
@@ -159,11 +160,11 @@ export class MvBody extends LitElement {
     this.resizeBody();
   }
 
-  resizeMongol(event) {
-    console.log('resize mongol');
+  async resizeMongol(event) {
+    console.log('resize mongol', event);
 
     const th = this.bodyHeight();
-    this.setMongolWidth(th);
+    await this.setMongolWidth(th);
 
     // mobile browser has no scroll bar height.
     if (this.wHasXScrollBar()) {
@@ -174,8 +175,21 @@ export class MvBody extends LitElement {
     } else {
       this.previousScrollBar = false;
     }
-
     this.setPreviousDimensions();
+
+    if (event && (event.target != window)) {
+      const h = event.contentRect.height;
+      const w = event.contentRect.width;
+
+      if (this.previousMongolWidth == w) {
+        if (this.previousMongolHeight != h) {
+          this._didRender();
+          this.previousMongolHeight = h;
+        }
+      } else {
+        this.previousMongolWidth = w;
+      }
+    }
   }
 
   setMongolWidth(width) {
