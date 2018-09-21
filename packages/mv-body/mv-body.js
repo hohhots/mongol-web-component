@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import { LitElement, html } from '@polymer/lit-element/lit-element.js';
+import {afterNextRender} from '@material/mwc-base/utils.js';
 import { style } from './mv-body-css.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
@@ -28,6 +29,7 @@ export class MvBody extends LitElement {
     return {
       maxheight: String,
       float: String,
+      mongolWidth: Number,
     };
   }
 
@@ -35,12 +37,16 @@ export class MvBody extends LitElement {
     super();
 
     this.mongolId = '#mongol';
+    this.mongolWidth = 0;
 
     // browser's horizontal scroll bar height.
     this.scrollBarHeight;
+    this.previousScrollBar = false;
 
     this.resizeDelay = 20;
     this.resizeTimer;
+
+    this.previousWindowDimensions = {};
   }
 
   ready() {
@@ -54,7 +60,7 @@ export class MvBody extends LitElement {
   _render() {
     return html`
       ${this._renderStyle()}
-      <div id="mongol">
+      <div id="mongol" style$="width: ${this.mongolWidth}px">
         <span class="mongol-text">
           <slot></slot>
         </span>
@@ -69,9 +75,6 @@ export class MvBody extends LitElement {
   async _firstRendered() {
     console.log('mvbody first rendered.');
 
-    this.parent = this.parentElement;
-    this.mongol = this._root.querySelector(this.mongolId);
-
     if (!this.validMvbody()) {
       return;
     }
@@ -79,25 +82,51 @@ export class MvBody extends LitElement {
     await this.setScrollBarHeight();
 
     window.onresize = (event) => {
-      this.parent.style.overflowY = 'hidden';
+      if (this.previousScrollBar) {
+        // if window has scroll bar and just become small, do nothing.
+        if (this.justLessWindowWidth()) {
+          console.log('just less window width');
+          this.setPreviousDimensions();
+          return;
+        }
+      } else {
+        // if window has no scroll bar and just become large, do nothing.
+        if (this.justLargeWindowWidth()) {
+          console.log('just large window width');
+          this.setPreviousDimensions();
+          return;
+        }
+      }
 
-      this.triggerResize(event);
+      if ((this.previousScrollBar != this.wHasXScrollBar()) || this.changeWidowHeight()) {
+        this.disableMongolResizeOberver();
+
+        this.parent.style.overflowY = 'hidden';
+
+        this.triggerResize(event);
+      }
     };
 
     this.resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
+        console.log('observe mongol');
         this.triggerResize(entry);
       }
     });
-    this.resizeObserver.observe(this.mongol);
+    this.enableMongolResizeOberver();
   }
 
   _didRender() {
-    console.log('mvbody reRendered.');
+    console.log('mvbody rendered.');
+
+    this.parent = this.parentElement;
+    this.mongol = this._root.querySelector(this.mongolId);
 
     if (!this.validMvbody()) {
       return;
     }
+
+    this.resizeThis();
   }
 
   triggerResize(event) {
@@ -105,9 +134,8 @@ export class MvBody extends LitElement {
 
     this.resizeTimer = setTimeout(() => {
       this.resizeMongol(event);
-      setTimeout(() => {
-        this.parent.style.overflowY = '';
-      }, 300);
+
+      this.parent.style.overflowY = '';
     }, this.resizeDelay);
   }
 
@@ -123,6 +151,8 @@ export class MvBody extends LitElement {
   }
 
   resizeThis() {
+    console.log('resize mv-body');
+
     this.style.height = `${this.getComputedStyle(this.mongol, 'width')}px`;
     this.style.width = `${this.getComputedStyle(this.mongol, 'height')}px`;
 
@@ -136,15 +166,20 @@ export class MvBody extends LitElement {
     this.setMongolWidth(th);
 
     // mobile browser has no scroll bar height.
-    if (this.scrollBarHeight && this.wHasXScrollBar()) {
-      this.setMongolWidth(th - this.scrollBarHeight);
+    if (this.wHasXScrollBar()) {
+      this.previousScrollBar = true;
+      if (this.scrollBarHeight) {
+        this.setMongolWidth(th - this.scrollBarHeight);
+      }
+    } else {
+      this.previousScrollBar = false;
     }
 
-    this.resizeThis();
+    this.setPreviousDimensions();
   }
 
   setMongolWidth(width) {
-    this.mongol.style.width = `${width}px`;
+    this.mongolWidth = width;
   }
 
   parentIsBody() {
@@ -212,6 +247,42 @@ export class MvBody extends LitElement {
       return false;
     }
     return true;
+  }
+
+  enableMongolResizeOberver() {
+    this.resizeObserver.observe(this.mongol);
+  }
+
+  disableMongolResizeOberver() {
+    this.resizeObserver.disconnect(this.mongol);
+  }
+
+  changeWidowHeight() {
+    if (window.innerHeight != this.previousWindowDimensions.innerHeight) {
+      return true;
+    }
+    return false;
+  }
+
+  justLessWindowWidth() {
+    if ((window.innerHeight == this.previousWindowDimensions.innerHeight)
+      && (window.innerWidth < this.previousWindowDimensions.innerWidth)) {
+      return true;
+    }
+    return false;
+  }
+
+  justLargeWindowWidth() {
+    if ((window.innerHeight == this.previousWindowDimensions.innerHeight)
+      && (window.innerWidth > this.previousWindowDimensions.innerWidth)) {
+      return true;
+    }
+    return false;
+  }
+
+  setPreviousDimensions() {
+    this.previousWindowDimensions.innerHeight = window.innerHeight;
+    this.previousWindowDimensions.innerWidth = window.innerWidth;
   }
 
   setScrollBarHeight() {
