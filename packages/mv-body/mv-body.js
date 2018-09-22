@@ -81,29 +81,13 @@ export class MvBody extends LitElement {
     await this.setScrollBarHeight();
 
     window.onresize = (event) => {
-      if (this.previousScrollBar) {
-        // if window has scroll bar and just become small, do nothing.
-        if (this.justLessWindowWidth()) {
-          console.log('just less window width');
-          this.setPreviousDimensions();
-          return;
-        }
-      } else {
-        // if window has no scroll bar and just become large, do nothing.
-        if (this.justLargeWindowWidth()) {
-          console.log('just large window width');
-          this.setPreviousDimensions();
-          return;
-        }
-      }
-
       if ((this.previousScrollBar != this.wHasXScrollBar()) || this.changeWidowHeight()) {
-        this.disableMongolResizeOberver();
-
         this.parent.style.overflowY = 'hidden';
 
         this.triggerResize(event);
       }
+
+      this.setPreviousDimensions();
     };
 
     this.resizeObserver = new ResizeObserver((entries) => {
@@ -130,6 +114,7 @@ export class MvBody extends LitElement {
   }
 
   triggerResize(event) {
+    this.disableMongolResizeOberver();
 
     clearTimeout(this.resizeTimer);
 
@@ -278,25 +263,8 @@ export class MvBody extends LitElement {
     return false;
   }
 
-  justLessWindowWidth() {
-    if ((window.innerHeight == this.previousWindowDimensions.innerHeight)
-      && (window.innerWidth < this.previousWindowDimensions.innerWidth)) {
-      return true;
-    }
-    return false;
-  }
-
-  justLargeWindowWidth() {
-    if ((window.innerHeight == this.previousWindowDimensions.innerHeight)
-      && (window.innerWidth > this.previousWindowDimensions.innerWidth)) {
-      return true;
-    }
-    return false;
-  }
-
   setPreviousDimensions() {
     this.previousWindowDimensions.innerHeight = window.innerHeight;
-    this.previousWindowDimensions.innerWidth = window.innerWidth;
   }
 
   setScrollBarHeight() {
