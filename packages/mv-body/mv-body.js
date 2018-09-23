@@ -83,6 +83,8 @@ export class MvBody extends LitElement {
 
     window.onresize = (event) => {
       if ((this.previousScrollBar != this.wHasXScrollBar()) || this.changeWidowHeight()) {
+        this.disableMongolResizeOberver();
+
         this.parent.style.overflowY = 'hidden';
 
         this.triggerResize(event);
@@ -118,6 +120,7 @@ export class MvBody extends LitElement {
     this.resizeTimer = setTimeout(() => {
       this.resizeMongol(event);
 
+      this.enableMongolResizeOberver();
       this.parent.style.overflowY = '';
     }, this.resizeDelay);
   }
@@ -170,6 +173,8 @@ export class MvBody extends LitElement {
     console.log('set mongol width - ', width);
     if (this.mongolWidth != width) {
       this.mongolWidth = width;
+    } else {
+      this._didRender();
     }
   }
 
@@ -262,9 +267,11 @@ export class MvBody extends LitElement {
   }
 
   mongolUnchanged(event) {
+    // if is init and window resize event.
     if (!event || (event.target == window)) {
       return false;
     } else {
+      // if is mongol div resize event.
       if ((this.previousMongolDimension.height == this.getComputedStyle(this.mongol, 'height'))
         && (this.previousMongolDimension.width == this.getComputedStyle(this.mongol, 'width'))) {
         return true;
