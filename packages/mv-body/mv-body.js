@@ -46,6 +46,7 @@ export class MvBody extends LitElement {
     this.resizeTimer;
 
     this.previousWindowDimensions = {};
+    this.previousMongolDimension = {};
   }
 
   ready() {
@@ -96,7 +97,7 @@ export class MvBody extends LitElement {
         this.triggerResize(entry);
       }
     });
-    // this.enableMongolResizeOberver();
+    this.enableMongolResizeOberver();
 
     this.resizeMongol();
   }
@@ -144,6 +145,10 @@ export class MvBody extends LitElement {
   async resizeMongol(event) {
     console.log('resize mongol', event);
 
+    if (this.mongolUnchanged(event)) {
+      return;
+    }
+
     const th = this.bodyHeight();
     await this.setMongolWidth(th);
 
@@ -156,17 +161,9 @@ export class MvBody extends LitElement {
     } else {
       this.previousScrollBar = false;
     }
-    this.setPreviousDimensions();
 
-    // if mongol div just height resized.
-    /*   if (event && (event.target != window)) {
-        const h = event.contentRect.height;
-  
-        if (this.previousMongolHeight != h) {
-          this._didRender();
-          this.previousMongolHeight = h;
-        }
-      } */
+    this.setPreviousDimensions();
+    this.setPreviousMongolDimensions();
   }
 
   setMongolWidth(width) {
@@ -262,6 +259,23 @@ export class MvBody extends LitElement {
 
   setPreviousDimensions() {
     this.previousWindowDimensions.innerHeight = window.innerHeight;
+  }
+
+  mongolUnchanged(event) {
+    if (!event || (event.target == window)) {
+      return false;
+    } else {
+      if ((this.previousMongolDimension.height == this.getComputedStyle(this.mongol, 'height'))
+        && (this.previousMongolDimension.width == this.getComputedStyle(this.mongol, 'width'))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  setPreviousMongolDimensions() {
+    this.previousMongolDimension.height = this.getComputedStyle(this.mongol, 'height');
+    this.previousMongolDimension.width = this.getComputedStyle(this.mongol, 'width');
   }
 
   setScrollBarHeight() {
