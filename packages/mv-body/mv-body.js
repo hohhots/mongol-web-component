@@ -91,31 +91,27 @@ export class MvBody extends LitElement {
     };
 
     this.resizeObserver = new ResizeObserver((entries) => {
+      console.log('observe mongol');
       for (const entry of entries) {
-        console.log('observe mongol');
-
         this.triggerResize(entry);
       }
     });
+    // this.enableMongolResizeOberver();
 
     this.resizeMongol();
   }
 
   _didRender() {
-    console.log('mvbody rendered.');
+    console.log('_didRender');
 
     this.parent = this.parentElement;
     this.mongol = this._root.querySelector(this.mongolId);
-
     if (this.getComputedStyle(this.mongol, 'width')) {
       this.resizeThis();
-      //this.enableMongolResizeOberver();
     }
   }
 
   triggerResize(event) {
-    this.disableMongolResizeOberver();
-
     clearTimeout(this.resizeTimer);
 
     this.resizeTimer = setTimeout(() => {
@@ -155,30 +151,29 @@ export class MvBody extends LitElement {
     if (this.wHasXScrollBar()) {
       this.previousScrollBar = true;
       if (this.scrollBarHeight) {
-        this.setMongolWidth(th - this.scrollBarHeight);
+        await this.setMongolWidth(th - this.scrollBarHeight);
       }
     } else {
       this.previousScrollBar = false;
     }
     this.setPreviousDimensions();
 
-    if (event && (event.target != window)) {
-      const h = event.contentRect.height;
-      const w = event.contentRect.width;
-
-      if (this.previousMongolWidth == w) {
+    // if mongol div just height resized.
+    /*   if (event && (event.target != window)) {
+        const h = event.contentRect.height;
+  
         if (this.previousMongolHeight != h) {
           this._didRender();
           this.previousMongolHeight = h;
         }
-      } else {
-        this.previousMongolWidth = w;
-      }
-    }
+      } */
   }
 
   setMongolWidth(width) {
-    this.mongolWidth = width;
+    console.log('set mongol width - ', width);
+    if (this.mongolWidth != width) {
+      this.mongolWidth = width;
+    }
   }
 
   parentIsBody() {
@@ -249,10 +244,12 @@ export class MvBody extends LitElement {
   }
 
   enableMongolResizeOberver() {
+    console.log('e-nabled');
     this.resizeObserver.observe(this.mongol);
   }
 
   disableMongolResizeOberver() {
+    console.log('d-isabled');
     this.resizeObserver.disconnect(this.mongol);
   }
 
