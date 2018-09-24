@@ -82,10 +82,9 @@ export class MvBody extends LitElement {
     await this.setScrollBarHeight();
 
     window.onresize = (event) => {
-      if ((this.previousScrollBar != this.wHasXScrollBar()) || this.changeWidowHeight()) {
+      if ((this.previousScrollBar != this.wHasXScrollBar()) || this.widowHeightChanged()) {
+        // Temporary disable resize observer for fix bug on firefox
         this.disableMongolResizeOberver();
-
-        this.parent.style.overflowY = 'hidden';
 
         this.triggerResize(event);
       }
@@ -109,9 +108,8 @@ export class MvBody extends LitElement {
 
     this.parent = this.parentElement;
     this.mongol = this._root.querySelector(this.mongolId);
-    if (this.getComputedStyle(this.mongol, 'width')) {
-      this.resizeThis();
-    }
+
+    this.resizeThis();
   }
 
   triggerResize(event) {
@@ -121,7 +119,6 @@ export class MvBody extends LitElement {
       this.resizeMongol(event);
 
       this.enableMongolResizeOberver();
-      this.parent.style.overflowY = '';
     }, this.resizeDelay);
   }
 
@@ -146,18 +143,18 @@ export class MvBody extends LitElement {
   }
 
   async resizeMongol(event) {
-    console.log('resize mongol', event);
+    console.log('resize mongol', this.scrollBarHeight, event);
 
-    if (this.mongolUnchanged(event)) {
+    if (this.mongolSameSize(event)) {
       return;
     }
 
     const th = this.bodyHeight();
     await this.setMongolWidth(th);
 
-    // mobile browser has no scroll bar height.
     if (this.wHasXScrollBar()) {
       this.previousScrollBar = true;
+      // mobile browser has no scroll bar height.
       if (this.scrollBarHeight) {
         await this.setMongolWidth(th - this.scrollBarHeight);
       }
@@ -166,7 +163,6 @@ export class MvBody extends LitElement {
     }
 
     this.setPreviousDimensions();
-    this.setPreviousMongolDimensions();
   }
 
   setMongolWidth(width) {
@@ -179,8 +175,7 @@ export class MvBody extends LitElement {
   }
 
   parentIsBody() {
-    const name = this.parentElement.tagName.toUpperCase();
-    if ((name != 'BODY') && (name != 'TEST-FIXTURE')) {
+    if (this.parentElement.tagName.toUpperCase() != 'BODY') {
       return false;
     }
 
@@ -189,15 +184,6 @@ export class MvBody extends LitElement {
 
   hasMultipleMvbody() {
     if (document.querySelectorAll('mv-body').length > 1) {
-      return true;
-    }
-    return false;
-  }
-
-  wHasYScrollBar() {
-    window.scrollTo(0, 0);
-    window.scrollTo(0, 1);
-    if (window.pageYOffset > 0) {
       return true;
     }
     return false;
@@ -248,14 +234,16 @@ export class MvBody extends LitElement {
   enableMongolResizeOberver() {
     console.log('e-nabled');
     this.resizeObserver.observe(this.mongol);
+    this.parent.style.overflowY = '';
   }
 
   disableMongolResizeOberver() {
     console.log('d-isabled');
     this.resizeObserver.disconnect(this.mongol);
+    this.parent.style.overflowY = 'hidden';
   }
 
-  changeWidowHeight() {
+  widowHeightChanged() {
     if (window.innerHeight != this.previousWindowDimensions.innerHeight) {
       return true;
     }
@@ -264,10 +252,13 @@ export class MvBody extends LitElement {
 
   setPreviousDimensions() {
     this.previousWindowDimensions.innerHeight = window.innerHeight;
+
+    this.previousMongolDimension.height = this.getComputedStyle(this.mongol, 'height');
+    this.previousMongolDimension.width = this.getComputedStyle(this.mongol, 'width');
   }
 
-  mongolUnchanged(event) {
-    // if is init and window resize event.
+  mongolSameSize(event) {
+    // if is init or window resize event.
     if (!event || (event.target == window)) {
       return false;
     } else {
@@ -278,11 +269,6 @@ export class MvBody extends LitElement {
       }
     }
     return false;
-  }
-
-  setPreviousMongolDimensions() {
-    this.previousMongolDimension.height = this.getComputedStyle(this.mongol, 'height');
-    this.previousMongolDimension.width = this.getComputedStyle(this.mongol, 'width');
   }
 
   setScrollBarHeight() {
