@@ -14,7 +14,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {LitElement, html, classString as c$} from '@polymer/lit-element/lit-element.js';
+import {
+  LitElement,
+  html,
+  classString as c$,
+} from '@polymer/lit-element/lit-element.js';
 import {MDCWebComponentMixin} from '@material/mon-base/mdc-web-component.js';
 import {style} from './mon-ripple-css.js';
 import {MDCRipple} from '@material/vmdc-ripple';
@@ -27,10 +31,12 @@ function applyPassive(globalObj = window, forceRefresh = false) {
   if (supportsPassive_ === undefined || forceRefresh) {
     let isSupported = false;
     try {
-      globalObj.document.addEventListener('test', null, {get passive() {
-        isSupported = true;
-      }});
-    } catch (e) { }
+      globalObj.document.addEventListener('test', null, {
+        get passive() {
+          isSupported = true;
+        },
+      });
+    } catch (e) {}
 
     supportsPassive_ = isSupported;
   }
@@ -39,9 +45,9 @@ function applyPassive(globalObj = window, forceRefresh = false) {
 }
 
 function getMatchesProperty(HTMLElementPrototype) {
-  return [
-    'webkitMatchesSelector', 'msMatchesSelector', 'matches',
-  ].filter((p) => p in HTMLElementPrototype).pop();
+  return ['webkitMatchesSelector', 'msMatchesSelector', 'matches']
+    .filter((p) => p in HTMLElementPrototype)
+    .pop();
 }
 
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
@@ -55,7 +61,8 @@ export class MDCWCRippleContainer extends MDCWCRipple {
       isSurfaceActive: () => container[MATCHES](':active'),
       isSurfaceDisabled: () => container.disabled,
       containsEventTarget: (target) => container.contains(target),
-      registerInteractionHandler: (evtType, handler) => container.addEventListener(evtType, handler, applyPassive()),
+      registerInteractionHandler: (evtType, handler) =>
+        container.addEventListener(evtType, handler, applyPassive()),
       deregisterInteractionHandler: (evtType, handler) =>
         container.removeEventListener(evtType, handler, applyPassive()),
       computeBoundingRect: () => container.getBoundingClientRect(),
@@ -91,7 +98,11 @@ export class Ripple extends LitElement {
     });
     return html`
       ${this._renderStyle()}
-      <div class$="mdc-ripple-surface ${classes}" data-mdc-ripple-is-unbounded?="${unbounded}"></div>`;
+      <div
+        class$="mdc-ripple-surface ${classes}"
+        data-mdc-ripple-is-unbounded?="${unbounded}"
+      ></div>
+    `;
   }
 
   async ready() {

@@ -15,8 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { LitElement, html } from '@polymer/lit-element/lit-element.js';
-import { style } from './mv-body-css.js';
+import {LitElement, html} from '@polymer/lit-element/lit-element.js';
+import {style} from './mv-body-css.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
 export class MvBody extends LitElement {
@@ -54,7 +54,7 @@ export class MvBody extends LitElement {
   }
 
   _createRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
+    return this.attachShadow({mode: 'open', delegatesFocus: true});
   }
 
   _render() {
@@ -82,7 +82,10 @@ export class MvBody extends LitElement {
     await this.setScrollBarHeight();
 
     window.onresize = (event) => {
-      if ((this.previousScrollBar != this.wHasXScrollBar()) || this.widowHeightChanged()) {
+      if (
+        this.previousScrollBar != this.wHasXScrollBar() ||
+        this.widowHeightChanged()
+      ) {
         // Temporary disable resize observer for fix bug on firefox
         this.disableMongolResizeOberver();
 
@@ -128,9 +131,12 @@ export class MvBody extends LitElement {
     this.parent.style.width = `${this.getComputedStyle(this, 'width')}px`;
 
     // emulate horizontal text html behavior.
-    this.parent.parentElement.style.width = `${this.getComputedStyle(this.parent, 'width')
-      + this.getComputedStyle(this.parent, 'margin-left')
-      + this.getComputedStyle(this.parent, 'margin-right')}px`;
+    this.parent.parentElement.style.width = `${this.getComputedStyle(
+      this.parent,
+      'width'
+    ) +
+      this.getComputedStyle(this.parent, 'margin-left') +
+      this.getComputedStyle(this.parent, 'margin-right')}px`;
   }
 
   resizeThis() {
@@ -218,9 +224,11 @@ export class MvBody extends LitElement {
       height = window.outerHeight;
     }
 
-    return height
-      - this.getComputedStyle(this.parent, 'margin-top')
-      - this.getComputedStyle(this.parent, 'margin-bottom');
+    return (
+      height -
+      this.getComputedStyle(this.parent, 'margin-top') -
+      this.getComputedStyle(this.parent, 'margin-bottom')
+    );
   }
 
   validMvbody() {
@@ -253,18 +261,28 @@ export class MvBody extends LitElement {
   setPreviousDimensions() {
     this.previousWindowDimensions.innerHeight = window.innerHeight;
 
-    this.previousMongolDimension.height = this.getComputedStyle(this.mongol, 'height');
-    this.previousMongolDimension.width = this.getComputedStyle(this.mongol, 'width');
+    this.previousMongolDimension.height = this.getComputedStyle(
+      this.mongol,
+      'height'
+    );
+    this.previousMongolDimension.width = this.getComputedStyle(
+      this.mongol,
+      'width'
+    );
   }
 
   mongolSameSize(event) {
     // if is init or window resize event.
-    if (!event || (event.target == window)) {
+    if (!event || event.target == window) {
       return false;
     } else {
       // if is mongol div resize event.
-      if ((this.previousMongolDimension.height == this.getComputedStyle(this.mongol, 'height'))
-        && (this.previousMongolDimension.width == this.getComputedStyle(this.mongol, 'width'))) {
+      if (
+        this.previousMongolDimension.height ==
+          this.getComputedStyle(this.mongol, 'height') &&
+        this.previousMongolDimension.width ==
+          this.getComputedStyle(this.mongol, 'width')
+      ) {
         return true;
       }
     }
@@ -281,9 +299,10 @@ export class MvBody extends LitElement {
       document.body.appendChild(div);
 
       window.scrollTo(0, div.scrollHeight);
-      this.scrollBarHeight = Math.ceil(window.pageYOffset)
-        - this.getComputedStyle(this.parent, 'margin-top')
-        - this.getComputedStyle(this.parent, 'margin-bottom');
+      this.scrollBarHeight =
+        Math.ceil(window.pageYOffset) -
+        this.getComputedStyle(this.parent, 'margin-top') -
+        this.getComputedStyle(this.parent, 'margin-bottom');
       document.body.removeChild(div);
       this.style.display = '';
     }

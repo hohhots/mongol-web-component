@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import '@material/ripple/mdc-ripple.scss';
+@import "@material/ripple/mdc-ripple.scss";
 
 .mdc-ripple-surface {
   pointer-events: none;
@@ -24,4 +24,10 @@ limitations under the License.
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.mdc-ripple-surface[data-mdc-ripple-is-unbounded].mdc-ripple-upgraded::before,
+.mdc-ripple-surface[data-mdc-ripple-is-unbounded].mdc-ripple-upgraded::after {
+  top: var(--mdc-ripple-left, calc(50% - 50%));
+  left: var(--mdc-ripple-top, calc(50% - 50%));
 }

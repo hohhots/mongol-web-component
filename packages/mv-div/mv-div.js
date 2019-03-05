@@ -21,7 +21,6 @@ import {afterNextRender} from '@material/mwc-base/utils.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
 export class MvDiv extends LitElement {
-
   static tag() {
     return 'mv-div';
   }
@@ -31,7 +30,6 @@ export class MvDiv extends LitElement {
 
     this.mongol;
   }
-
 
   ready() {
     super.ready();
