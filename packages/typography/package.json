@@ -1,19 +1,19 @@
 {
-  "name": "@material/mwc-typography",
+  "name": "@vmaterial/mon-typography",
   "version": "0.1.2",
   "description": "",
-  "main": "mwc-typography-css.js",
+  "main": "mon-typography-css.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@material/mwc-icon": "^0.1.2",
+    "@vmaterial/mon-icon": "^0.1.2",
     "@polymer/lit-element": "^0.5.2"
   },
   "devDependencies": {
-    "@material/mwc-sass-render": "^0.1.2",
+    "@vmaterial/mon-sass-render": "^0.1.2",
     "@material/typography": "^0.35.0"
   },
   "publishConfig": {

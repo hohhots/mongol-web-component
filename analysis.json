@@ -465,7 +465,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 25,
               "column": 6
@@ -488,7 +488,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 26,
               "column": 6
@@ -511,7 +511,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 27,
               "column": 6
@@ -534,7 +534,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 28,
               "column": 6
@@ -557,7 +557,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 29,
               "column": 6
@@ -580,7 +580,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 30,
               "column": 6
@@ -603,7 +603,7 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 31,
               "column": 6
@@ -627,7 +627,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 50,
               "column": 2
@@ -690,7 +690,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 46,
               "column": 2
@@ -867,7 +867,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 60,
               "column": 2
@@ -1034,7 +1034,7 @@
           "name": "raised",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 25,
               "column": 6
@@ -1052,7 +1052,7 @@
           "name": "unelevated",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 26,
               "column": 6
@@ -1070,7 +1070,7 @@
           "name": "outlined",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 27,
               "column": 6
@@ -1088,7 +1088,7 @@
           "name": "dense",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 28,
               "column": 6
@@ -1106,7 +1106,7 @@
           "name": "disabled",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 29,
               "column": 6
@@ -1124,7 +1124,7 @@
           "name": "icon",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 30,
               "column": 6
@@ -1142,7 +1142,7 @@
           "name": "label",
           "description": "",
           "sourceRange": {
-            "file": "../../@material/mwc-button/mwc-button.js",
+            "file": "../../@vmaterial/mon-button/mwc-button.js",
             "start": {
               "line": 31,
               "column": 6

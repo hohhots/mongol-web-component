@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {Radio} from '@material/mwc-radio';
+import {Radio} from '@vmaterial/mon-radio';
 
 let element;
 

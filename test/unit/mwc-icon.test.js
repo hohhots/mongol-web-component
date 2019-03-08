@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {Icon} from '@material/mwc-icon';
+import {Icon} from '@vmaterial/mon-icon';
 
 let element;
 

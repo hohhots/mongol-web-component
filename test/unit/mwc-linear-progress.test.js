@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {LinearProgress} from '@material/mwc-linear-progress';
+import {LinearProgress} from '@vmaterial/mon-linear-progress';
 
 let element;
 

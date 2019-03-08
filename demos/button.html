@@ -17,8 +17,8 @@ limitations under the License.
   <title>button demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-button/mwc-button.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-button/mon-button.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/mon-icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
   <style>
     .light {
@@ -40,7 +40,7 @@ limitations under the License.
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Buttons</span></a>
   </header>
 
@@ -49,30 +49,30 @@ limitations under the License.
     <h4>labeled</h4>
 
     <div class="demo-group-spaced">
-      <mwc-button label="Normal"></mwc-button>
-      <mwc-button class="light" raised label="raised"></mwc-button>
-      <mwc-button unelevated label="unelevated"></mwc-button>
-      <mwc-button outlined label="outlined"></mwc-button>
-      <mwc-button class="pink" dense label="dense"></mwc-button>
-      <mwc-button class="pink wide" raised label="wide"></mwc-button>
-      <mwc-button disabled label="disabled"></mwc-button>
+      <button label="Normal"></button>
+      <button class="light" raised label="raised"></button>
+      <button unelevated label="unelevated"></button>
+      <button outlined label="outlined"></button>
+      <button class="pink" dense label="dense"></button>
+      <button class="pink wide" raised label="wide"></button>
+      <button disabled label="disabled"></button>
     </div>
 
     <h4>icon labeled</h4>
 
     <div class="demo-group-spaced">
-      <mwc-button label="Normal" icon="explore"></mwc-button>
-      <mwc-button class="light" raised label="raised" icon="code"></mwc-button>
-      <mwc-button unelevated label="unelevated" icon="check"></mwc-button>
-      <mwc-button outlined label="outlined" icon="alarm"></mwc-button>
-      <mwc-button class="pink" dense label="dense" icon="feedback"></mwc-button>
-      <mwc-button class="pink wide" raised label="wide" icon="code"></mwc-button>
-      <mwc-button disabled label="disabled" icon="fingerprint"></mwc-button>
+      <button label="Normal" icon="explore"></button>
+      <button class="light" raised label="raised" icon="code"></button>
+      <button unelevated label="unelevated" icon="check"></button>
+      <button outlined label="outlined" icon="alarm"></button>
+      <button class="pink" dense label="dense" icon="feedback"></button>
+      <button class="pink wide" raised label="wide" icon="code"></button>
+      <button disabled label="disabled" icon="fingerprint"></button>
     </div>
 
     <script type="module">
       import {html} from '@polymer/lit-element/lit-element.js';
-      import {Button} from '@material/mwc-button/mwc-button.js';
+      import {Button} from '@vmaterial/mon-button/mon-button.js';
       class CustomButton extends Button {
         _renderStyle(){
           return html`${super._renderStyle()}<style>.mdc-button{border-radius: 8px}</style>`;

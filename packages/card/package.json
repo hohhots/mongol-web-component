@@ -1,8 +1,8 @@
 {
-  "name": "@material/mwc-card",
+  "name": "@vmaterial/mon-card",
   "version": "0.1.2",
   "description": "",
-  "main": "mwc-card.js",
+  "main": "mon-card.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@material/card": "^0.35.0",
-    "@material/mwc-sass-render": "^0.1.2"
+    "@vmaterial/mon-sass-render": "^0.1.2"
   },
   "publishConfig": {
     "access": "public"

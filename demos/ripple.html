@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 @license
 Copyright 2018 Google Inc. All Rights Reserved.
@@ -16,59 +16,76 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html>
-<head>
-  <title>ripple demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-ripple/mwc-ripple.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
-  <link rel="stylesheet" href="demo-component.css">
-  <style>
+  <head>
+    <title>ripple demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-ripple/mon-ripple.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+    <style>
+      .demo-box,
+      .demo-box1 {
+        width: 128px;
+        height: 128px;
+        border: 1px solid gray;
+        display: inline-flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        padding: 8px;
+      }
 
-    .demo-box {
-      width: 128px;
-      height: 128px;
-      border: 1px solid gray;
-      display: inline-flex;
-      justify-content: center;
-      text-align: center;
-      flex-direction: column;
-      padding: 8px;
-    }
+      .demo-box1 {
+        width: 200px;
+        height: 200px;
+      }
 
-    .demo-container {
-      display: flex;
-      align-items: center;
-    }
+      .demo-container {
+        display: flex;
+        align-items: center;
+      }
 
-    .demo-container > * {
-      margin: 16px;
-    }
+      .demo-container > * {
+        margin: 16px;
+      }
 
-    .demo-unbounded {
-      padding: 8px;
-    }
+      .demo-unbounded {
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body class="unresolved">
+    <header>
+      <a href="index.html"
+        ><icon>arrow_back</icon> <span>Ripple</span></a
+      >
+    </header>
 
-  </style>
-</head>
-<body class="unresolved">
+    <main>
+      <div class="demo-container">
+        <div class="demo-box">Primary<ripple primary></ripple></div>
+        <div class="demo-box1">Primary<ripple primary></ripple></div>
+        <div class="demo-box">Accent<ripple accent></ripple></div>
+        <div class="demo-box">
+          <input placeholder="Say something..." /><ripple></ripple>
+        </div>
+        <div class="demo-unbounded">
+          Unbounded<ripple unbounded></ripple>
+        </div>
+      </div>
+    </main>
 
-  <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
-    <span>Ripple</span></a>
-  </header>
-
-  <main>
-    <div class="demo-container">
-      <div class="demo-box">Primary<mwc-ripple primary></mwc-ripple></div>
-      <div class="demo-box">Accent<mwc-ripple accent></mwc-ripple></div>
-      <div class="demo-box"><input placeholder="Say something..."><mwc-ripple></mwc-ripple></div>
-      <div class="demo-unbounded">Unbounded<mwc-ripple unbounded></mwc-ripple></div>
-    </div>
-  </main>
-
-  <script>
-    addEventListener('load', () => document.body.classList.remove('unresolved'));
-  </script>
-</body>
+    <script>
+      addEventListener("load", () =>
+        document.body.classList.remove("unresolved")
+      );
+    </script>
+  </body>
 </html>

@@ -20,8 +20,8 @@ limitations under the License.
   <title>select demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-select/mwc-select.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-select/select.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
 
   <style>
@@ -39,62 +39,62 @@ limitations under the License.
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Select</span></a>
   </header>
 
   <main>
 
-    <mwc-select label="Choose an item...">
-      <mwc-list-item label="this is choice one"></mwc-list-item>
-      <mwc-list-item label="this is choice two"></mwc-list-item>
-      <mwc-list-item label="this is choice three"></mwc-list-item>
-      <mwc-list-item disabled label="this is choice four"></mwc-list-item>
-      <mwc-list-item-separator></mwc-list-item-separator>
-      <mwc-list-item label="this is choice aaa"></mwc-list-item>
-      <mwc-list-item label="this is choice bbb"></mwc-list-item>
-    </mwc-select>
+    <select label="Choose an item...">
+      <list-item label="this is choice one"></list-item>
+      <list-item label="this is choice two"></list-item>
+      <list-item label="this is choice three"></list-item>
+      <list-item disabled label="this is choice four"></list-item>
+      <list-item-separator></list-item-separator>
+      <list-item label="this is choice aaa"></list-item>
+      <list-item label="this is choice bbb"></list-item>
+    </select>
 
     <h3>box</h3>
 
-    <mwc-select box label="Box: Choose an item...">
-      <mwc-list-item label="this is choice one"></mwc-list-item>
-      <mwc-list-item label="this is choice two"></mwc-list-item>
-      <mwc-list-item label="this is choice three"></mwc-list-item>
-      <mwc-list-item disabled label="this is choice four"></mwc-list-item>
-      <mwc-list-item-separator></mwc-list-item-separator>
-      <mwc-list-item label="this is choice aaa"></mwc-list-item>
-      <mwc-list-item label="this is choice bbb"></mwc-list-item>
-    </mwc-select>
+    <select box label="Box: Choose an item...">
+      <list-item label="this is choice one"></list-item>
+      <list-item label="this is choice two"></list-item>
+      <list-item label="this is choice three"></list-item>
+      <list-item disabled label="this is choice four"></list-item>
+      <list-item-separator></list-item-separator>
+      <list-item label="this is choice aaa"></list-item>
+      <list-item label="this is choice bbb"></list-item>
+    </select>
 
     <h3>box - sized</h3>
 
-    <mwc-select box style="width: 500px;" label="Box: Choose an item...">
-      <mwc-list-item label="this is choice one"></mwc-list-item>
-      <mwc-list-item label="this is choice two"></mwc-list-item>
-      <mwc-list-item label="this is choice three"></mwc-list-item>
-      <mwc-list-item disabled label="this is choice four"></mwc-list-item>
-      <mwc-list-item-separator></mwc-list-item-separator>
-      <mwc-list-item label="this is choice aaa"></mwc-list-item>
-      <mwc-list-item label="this is choice bbb"></mwc-list-item>
-    </mwc-select>
+    <select box style="width: 500px;" label="Box: Choose an item...">
+      <list-item label="this is choice one"></list-item>
+      <list-item label="this is choice two"></list-item>
+      <list-item label="this is choice three"></list-item>
+      <list-item disabled label="this is choice four"></list-item>
+      <list-item-separator></list-item-separator>
+      <list-item label="this is choice aaa"></list-item>
+      <list-item label="this is choice bbb"></list-item>
+    </select>
 
     <h3>disabled</h3>
 
-    <mwc-select disabled label="Disabled...">
-      <mwc-list-item label="this is choice one"></mwc-list-item>
-      <mwc-list-item label="this is choice two"></mwc-list-item>
-    </mwc-select>
+    <select disabled label="Disabled...">
+      <list-item label="this is choice one"></list-item>
+      <list-item label="this is choice two"></list-item>
+    </select>
 
-    <mwc-select class="abs" label="Choose an item...">
-      <mwc-list-item label="this is choice one"></mwc-list-item>
-      <mwc-list-item label="this is choice two"></mwc-list-item>
-      <mwc-list-item label="this is choice three"></mwc-list-item>
-      <mwc-list-item label="this is choice four"></mwc-list-item>
-      <mwc-list-item-separator></mwc-list-item-separator>
-      <mwc-list-item label="this is choice aaa"></mwc-list-item>
-      <mwc-list-item label="this is choice bbb"></mwc-list-item>
-    </mwc-select>
+    <select class="abs" label="Choose an item...">
+      <list-item label="this is choice one"></list-item>
+      <list-item label="this is choice two"></list-item>
+      <list-item label="this is choice three"></list-item>
+      <list-item label="this is choice four"></list-item>
+      <list-item-separator></list-item-separator>
+      <list-item label="this is choice aaa"></list-item>
+      <list-item label="this is choice bbb"></list-item>
+    </select>
   </main>
   <script>
     addEventListener('load', () => document.body.classList.remove('unresolved'));

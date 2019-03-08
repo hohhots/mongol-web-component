@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--
+@license
+Copyright 2018 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+  <head>
+    <title>mon-div demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-div/mon-div.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+    <style>
+      body {
+        text-align: center;
+      }
+      .light {
+        --mdc-theme-on-primary: black;
+        --mdc-theme-primary: white;
+        --mdc-theme-on-secondary: black;
+        --mdc-theme-secondary: white;
+      }
+
+      .pink {
+        --mdc-theme-on-primary: white;
+        --mdc-theme-primary: #e9437a;
+        --mdc-theme-on-secondary: white;
+        --mdc-theme-secondary: #e9437a;
+      }
+
+      .wide {
+        width: 250px;
+      }
+    </style>
+  </head>
+  <body class="unresolved" style="margin-top: 100px">
+    <header>
+      <a href="index.html"
+        ><mon-icon>arrow_back</mon-icon> <span>mon-divs</span></a
+      >
+      <style>
+        div {
+          clear: both;
+          border: 1px solid black;
+        }
+        div.auto-size {
+          background-color: gray;
+        }
+        div.fixed-height {
+          display: block;
+          height: 400px;
+          left: 20px;
+          background-color: gray;
+          overflow: auto;
+        }
+        div.size-fixed {
+          display: block;
+          width: 300px;
+          height: 400px;
+          left: 20px;
+          background-color: gray;
+          overflow: auto;
+        }
+      </style>
+    </header>
+
+    <h4>empty mon-div in default div</h4>
+    <div>
+      <mon-div></mon-div>
+    </div>
+
+    <h4>small content mon-div in default div</h4>
+    <div class="auto-size">
+      <mon-div>hello</mon-div>
+    </div>
+
+    <h4>large content mon-div in default div</h4>
+    <div class="auto-size">
+      <mon-div>
+        2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+        aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem!
+        Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.2222Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.
+      </mon-div>
+    </div>
+
+    <h4>small content mon-div in small fixed height div</h4>
+    <div class="fixed-height" style="height: 50px">
+      <mon-div>Hello</mon-div>
+    </div>
+
+    <h4>large content mon-div in small fixed height div</h4>
+    <div class="fixed-height" style="height: 50px">
+      <mon-div>
+        2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+        aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem!
+        Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.2222Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.
+      </mon-div>
+    </div>
+
+    <h4>small content mon-div in big fixed height div</h4>
+    <div class="fixed-height">
+      <mon-div>Hello</mon-div>
+    </div>
+
+    <h4>large content mon-div in big fixed height div</h4>
+    <div class="fixed-height">
+      <mon-div>
+        2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+        aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem!
+        Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.2222Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.
+      </mon-div>
+    </div>
+
+    <h4>small content mon-div in small fixed height and width div</h4>
+    <div class="fixed-height" style="height: 50px; width: 100px">
+      <mon-div>Hello</mon-div>
+    </div>
+
+    <h4>large content mon-div in small fixed height and width div</h4>
+    <div class="fixed-height" style="height: 50px; width: 100px">
+      <mon-div>
+        2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+        aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem!
+        Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.2222Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.
+      </mon-div>
+    </div>
+
+    <h4>small content mon-div in big fixed height and width div</h4>
+    <div class="fixed-height" style="height: 300px; width: 400px">
+      <mon-div>Hello</mon-div>
+    </div>
+
+    <h4>large content mon-div in big fixed height and width div</h4>
+    <div class="fixed-height" style="height: 300px; width: 400px">
+      <mon-div>
+        2222Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+        aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro rem!
+        Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.2222Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Magni aliquam ipsam non nobis! Fugit quidem itaque odio illum quam porro
+        rem! Corrupti ducimus, dolores iste voluptate dolore obcaecati suscipit
+        distinctio.
+      </mon-div>
+    </div>
+    <main>
+      <script type="module">
+        import { html } from "@polymer/lit-element/lit-element.js";
+        import { MonDiv } from "@vmaterial/mon-div/mon-div.js";
+        class CustomMvdiv extends MonDiv {
+          _renderStyle() {
+            return html`
+              ${super._renderStyle()}<style>
+                .mon-div {
+                  border: 1px solid dark;
+                  border-radius: 8px;
+                }
+              </style>
+            `;
+          }
+        }
+        customElements.define("custom-mvdiv", CustomMvdiv);
+      </script>
+
+      <h4>custom button</h4>
+
+      <div class="auto-size">
+        <custom-mvdiv>custom element content</custom-mvdiv>
+      </div>
+
+      <script>
+        addEventListener("load", () =>
+          document.body.classList.remove("unresolved")
+        );
+      </script>
+    </main>
+  </body>
+</html>

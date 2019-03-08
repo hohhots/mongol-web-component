@@ -20,11 +20,11 @@ limitations under the License.
   <title>menu demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-button/mwc-button.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-menu/mwc-menu.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-list/mwc-list-item.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-list/mwc-list-item-separator.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-button/mon-button.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-menu/menu.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-list/list-item.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-list/list-item-separator.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
 
   <style>
@@ -45,23 +45,23 @@ limitations under the License.
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Menu</span></a>
   </header>
 
   <main>
 
     <div class="demo-mdc-menu-anchor">
-      <mwc-button id="button" raised ripple label="Go"></mwc-button>
-      <mwc-menu id="menu">
-        <mwc-list-item label="one"></mwc-list-item>
-        <mwc-list-item label="two"></mwc-list-item>
-        <mwc-list-item label="three"></mwc-list-item>
-        <mwc-list-item disabled label="four"></mwc-list-item>
-        <mwc-list-item-separator></mwc-list-item-separator>
-        <mwc-list-item label="aaa"></mwc-list-item>
-        <mwc-list-item label="bbb"></mwc-list-item>
-      </mwc-menu>
+      <button id="button" raised ripple label="Go"></button>
+      <menu id="menu">
+        <list-item label="one"></list-item>
+        <list-item label="two"></list-item>
+        <list-item label="three"></list-item>
+        <list-item disabled label="four"></list-item>
+        <list-item-separator></list-item-separator>
+        <list-item label="aaa"></list-item>
+        <list-item label="bbb"></list-item>
+      </menu>
     </div>
     <div class="demo-log" id="log"></div>
   </main>

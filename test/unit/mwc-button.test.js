@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {Button} from '@material/mwc-button';
+import {Button} from '@vmaterial/mon-button';
 
 const ICON_SELECTOR = '.mdc-button__icon';
 

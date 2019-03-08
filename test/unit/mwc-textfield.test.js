@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {Textfield} from '@material/mwc-textfield';
+import {Textfield} from '@vmaterial/mon-textfield';
 
 let element;
 

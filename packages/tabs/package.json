@@ -1,21 +1,21 @@
 {
-  "name": "@material/mwc-tabs",
+  "name": "@vmaterial/mon-tabs",
   "version": "0.1.2",
   "description": "",
-  "main": "mwc-tab.js",
+  "main": "mon-tab.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@material/mwc-base": "^0.1.2",
-    "@material/mwc-icon": "^0.1.2",
+    "@vmaterial/mon-base": "^0.1.2",
+    "@vmaterial/mon-icon": "^0.1.2",
     "@material/tabs": "^0.35.0",
     "@polymer/lit-element": "^0.5.2"
   },
   "devDependencies": {
-    "@material/mwc-sass-render": "^0.1.2"
+    "@vmaterial/mon-sass-render": "^0.1.2"
   },
   "publishConfig": {
     "access": "public"

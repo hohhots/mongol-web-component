@@ -26,15 +26,15 @@ A [Material Components](https://material.io/components/) icon implementation usi
 
   1. Add mwc-checkbox to your project:
 
-      ```npm i @material/mwc-checkbox```
+      ```npm i @vmaterial/mon-checkbox```
 
   1. Import the mwc-checkbox definition into your HTML page:
 
-      ```<script type="module" src="@material/mwc-checkbox/index.js"></script>```
+      ```<script type="module" src="@vmaterial/mon-checkbox/index.js"></script>```
 
       Or into your module script:
 
-      ```import {Checkbox} from "@material/mwc-checkbox"```
+      ```import {Checkbox} from "@vmaterial/mon-checkbox"```
 
   1. Create an instance of mwc-checkbox in your HTML page, or via any framework that [supports rendering Custom Elements](https://custom-elements-everywhere.com/):
 
@@ -48,7 +48,7 @@ A [Material Components](https://material.io/components/) icon implementation usi
 
       ```polymer serve```
 
-  > mwc-checkbox is published on [npm](https://www.npmjs.com/package/@material/mwc-checkbox) using JavaScript Modules.
+  > mwc-checkbox is published on [npm](https://www.npmjs.com/package/@vmaterial/mon-checkbox) using JavaScript Modules.
   This means it can take advantage of the standard native JavaScript module loader available in all current major browsers.
   >
   > However, since mwc-checkbox uses npm convention to reference dependencies by name, a light transform to rewrite specifiers to URLs is required to get it to run in the browser. The polymer-cli's development server `polymer serve` automatically handles this transform.

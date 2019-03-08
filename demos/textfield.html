@@ -20,84 +20,84 @@ limitations under the License.
   <title>textfield demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-textfield/mwc-textfield.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-textfield/textfield.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Text Field</span></a>
   </header>
 
   <main>
     <div class="demo-group-spaced">
 
-      <mwc-textfield></mwc-textfield>
-      <mwc-textfield label="Say something..."></mwc-textfield>
-      <mwc-textfield label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield icon="event" label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield icon="mail" iconTrailing label="Say something..." value="hi"></mwc-textfield>
+      <textfield></textfield>
+      <textfield label="Say something..."></textfield>
+      <textfield label="Say something..." value="hi"></textfield>
+      <textfield icon="event" label="Say something..." value="hi"></textfield>
+      <textfield icon="mail" iconTrailing label="Say something..." value="hi"></textfield>
     </div>
 
     <h4>box</h4>
     <div class="demo-group-spaced">
 
-      <mwc-textfield box></mwc-textfield>
-      <mwc-textfield box label="Say something..."></mwc-textfield>
-      <mwc-textfield box label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield box icon="event" label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield box icon="event" iconTrailing label="Say something..." value="hi"></mwc-textfield>
+      <textfield box></textfield>
+      <textfield box label="Say something..."></textfield>
+      <textfield box label="Say something..." value="hi"></textfield>
+      <textfield box icon="event" label="Say something..." value="hi"></textfield>
+      <textfield box icon="event" iconTrailing label="Say something..." value="hi"></textfield>
 
     </div>
 
     <h4>box - required</h4>
     <div class="demo-group-spaced">
 
-      <mwc-textfield required box></mwc-textfield>
-      <mwc-textfield required box label="Say something..."></mwc-textfield>
-      <mwc-textfield required box label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield required box icon="event" label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield required box iconTrailing icon="event" label="Say something..." value="hi"></mwc-textfield>
+      <textfield required box></textfield>
+      <textfield required box label="Say something..."></textfield>
+      <textfield required box label="Say something..." value="hi"></textfield>
+      <textfield required box icon="event" label="Say something..." value="hi"></textfield>
+      <textfield required box iconTrailing icon="event" label="Say something..." value="hi"></textfield>
     </div>
 
     <h4>outlined</h4>
     <div class="demo-group-spaced">
 
-      <mwc-textfield outlined></mwc-textfield>
-      <mwc-textfield outlined label="Say something..."></mwc-textfield>
-      <mwc-textfield outlined label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield outlined icon="event" label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield outlined iconTrailing icon="event" label="Say something..." value="hi"></mwc-textfield>
+      <textfield outlined></textfield>
+      <textfield outlined label="Say something..."></textfield>
+      <textfield outlined label="Say something..." value="hi"></textfield>
+      <textfield outlined icon="event" label="Say something..." value="hi"></textfield>
+      <textfield outlined iconTrailing icon="event" label="Say something..." value="hi"></textfield>
     </div>
 
     <h4>outlined - required - email - helperText</h4>
     <div class="demo-group-spaced">
 
-      <mwc-textfield outlined required type="email" helperText="Make sure to include an @"></mwc-textfield>
-      <mwc-textfield outlined required type="email" label="Enter email..." helperText="Make sure to include an @"></mwc-textfield>
-      <mwc-textfield outlined required type="email"  label="Enter email..." value="hi" helperText="Make sure to include an @"></mwc-textfield>
-      <mwc-textfield outlined required type="email" icon="event" label="Say something..." value="hi" helperText="Make sure to include an @"></mwc-textfield>
-      <mwc-textfield outlined iconTrailing required type="email" icon="event" label="Say something..." value="hi" helperText="Make sure to include an @"></mwc-textfield>
+      <textfield outlined required type="email" helperText="Make sure to include an @"></textfield>
+      <textfield outlined required type="email" label="Enter email..." helperText="Make sure to include an @"></textfield>
+      <textfield outlined required type="email"  label="Enter email..." value="hi" helperText="Make sure to include an @"></textfield>
+      <textfield outlined required type="email" icon="event" label="Say something..." value="hi" helperText="Make sure to include an @"></textfield>
+      <textfield outlined iconTrailing required type="email" icon="event" label="Say something..." value="hi" helperText="Make sure to include an @"></textfield>
     </div>
 
     <h4>box disabled</h4>
     <div class="demo-group-spaced">
 
-      <mwc-textfield box disabled></mwc-textfield>
-      <mwc-textfield box disabled label="Say something..."></mwc-textfield>
-      <mwc-textfield box disabled label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield box disabled icon="event" label="Say something..." value="hi"></mwc-textfield>
-      <mwc-textfield box disabled iconTrailing icon="event" label="Say something..." value="hi"></mwc-textfield>
+      <textfield box disabled></textfield>
+      <textfield box disabled label="Say something..."></textfield>
+      <textfield box disabled label="Say something..." value="hi"></textfield>
+      <textfield box disabled icon="event" label="Say something..." value="hi"></textfield>
+      <textfield box disabled iconTrailing icon="event" label="Say something..." value="hi"></textfield>
 
     </div>
 
     <h4>fullWidth</h4>
 
-    <mwc-textfield fullwidth></mwc-textfield>
-    <mwc-textfield fullwidth placeholder="Say something.." ></mwc-textfield>
-    <mwc-textfield fullwidth label="Say something..."></mwc-textfield>
-    <mwc-textfield fullwidth label="Say something..." value="hi"></mwc-textfield>
+    <textfield fullwidth></textfield>
+    <textfield fullwidth placeholder="Say something.." ></textfield>
+    <textfield fullwidth label="Say something..."></textfield>
+    <textfield fullwidth label="Say something..." value="hi"></textfield>
 
   </main>
 

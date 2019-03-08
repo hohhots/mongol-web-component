@@ -20,46 +20,46 @@ limitations under the License.
   <title>chips demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-chips/mwc-chip.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-chips/mwc-chip-set.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-chips/chip.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-chips/chip-set.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
   <style>
-    mwc-chip-set {
-      --mwc-theme-primary: lightblue;
-      --mwc-theme-text-primary-on-primary: tomato;
+    chip-set {
+      --theme-primary: lightblue;
+      --theme-text-primary-on-primary: tomato;
     }
   </style>
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Chips</span></a>
   </header>
 
   <main>
 
-  <mwc-chip-set>
-    <mwc-chip label="Chip"></mwc-chip>
-    <mwc-chip label="Leading Icon" leadingIcon="fingerprint"></mwc-chip>
-    <mwc-chip label="Trailing Icon" leadingIcon="language"></mwc-chip>
-  </mwc-chip-set>
+  <chip-set>
+    <chip label="Chip"></chip>
+    <chip label="Leading Icon" leadingIcon="fingerprint"></chip>
+    <chip label="Trailing Icon" leadingIcon="language"></chip>
+  </chip-set>
 
   <h3>choice</h3>
 
-  <mwc-chip-set type="choice">
-    <mwc-chip label="A"></mwc-chip>
-    <mwc-chip label="B" leadingIcon="fingerprint"></mwc-chip>
-    <mwc-chip label="C" leadingIcon="language"></mwc-chip>
-  </mwc-chip-set>
+  <chip-set type="choice">
+    <chip label="A"></chip>
+    <chip label="B" leadingIcon="fingerprint"></chip>
+    <chip label="C" leadingIcon="language"></chip>
+  </chip-set>
 
   <h3>filter</h3>
 
-  <mwc-chip-set type="filter">
-    <mwc-chip label="1"></mwc-chip>
-    <mwc-chip label="2" leadingIcon="fingerprint"></mwc-chip>
-    <mwc-chip label="3" leadingIcon="language"></mwc-chip>
-  </mwc-chip-set>
+  <chip-set type="filter">
+    <chip label="1"></chip>
+    <chip label="2" leadingIcon="fingerprint"></chip>
+    <chip label="3" leadingIcon="language"></chip>
+  </chip-set>
 
   </main>
 

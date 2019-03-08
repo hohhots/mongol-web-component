@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {Snackbar} from '@material/mwc-snackbar';
+import {Snackbar} from '@vmaterial/mon-snackbar';
 
 let element;
 

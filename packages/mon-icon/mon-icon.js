@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {LitElement, html} from '@polymer/lit-element/lit-element.js';
+import {LitElement, html} from '@polymer/lit-element';
 import {style} from './mon-icon-host-css.js';
 import './mon-icon-font.js';
 
@@ -27,4 +27,4 @@ export class Icon extends LitElement {
   }
 }
 
-customElements.define('mwc-icon', Icon);
+customElements.define('mon-icon', Icon);

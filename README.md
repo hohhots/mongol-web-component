@@ -20,9 +20,9 @@ Insert screenshot of a demo page, including a code snippet.
 
 The easiest way to try out the Material Web Components is to use one of these online tools:
 
-  * Runs in all [supported browsers](#browser-support): [Glitch](https://glitch.com/edit/#!/material-web-components)
+- Runs in all [supported browsers](#browser-support): [Glitch](https://glitch.com/edit/#!/material-web-components)
 
-  * Runs in browsers with [JavaScript Modules](https://caniuse.com/#search=modules): [JSBin](http://jsbin.com/gitufet/edit?html,output), [CodePen](https://codepen.io/sorvell/pen/MGrZqp?editors=1000).
+- Runs in browsers with [JavaScript Modules](https://caniuse.com/#search=modules): [JSBin](http://jsbin.com/gitufet/edit?html,output), [CodePen](https://codepen.io/sorvell/pen/MGrZqp?editors=1000).
 
 Or you can also copy [this HTML file](https://gist.githubusercontent.com/sorvell/2ec11ccde449815bc97edc1026be27a9/raw/8bab65dd5d15f657ae69493851690c5564367d13/index.html) into a local file and run it in any browser that supports JavaScript Modules.
 
@@ -30,46 +30,47 @@ When you're ready to use the Material Web Components in your web application:
 
 1. Ensure the webcomponents polyfills are included in your HTML page
 
-      - Install webcomponents polyfills
+   - Install webcomponents polyfills
 
-          ```npm i @webcomponents/webcomponentsjs```
+     `npm i @webcomponents/webcomponentsjs`
 
-      - Add webcomponents polyfills to your HTML page
+   - Add webcomponents polyfills to your HTML page
 
-          ```<script src="@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>```
+     `<script src="@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>`
 
-  1. Add one of the MWC elements to your project, for example for icon:
+1. Add one of the MWC elements to your project, for example for icon:
 
-      ```npm i @material/mwc-icon```
+   `npm i @vmaterial/mon-icon`
 
-  1. Import the element definition into your HTML page:
+1. Import the element definition into your HTML page:
 
-      ```<script type="module" src="@material/mwc-icon/index.js"></script>```
+   `<script type="module" src="@vmaterial/mon-icon/index.js"></script>`
 
-      Or into your module script:
+   Or into your module script:
 
-      ```import {Icon} from "@material/mwc-icon"```
+   `import {Icon} from "@vmaterial/mon-icon"`
 
-  1. Create an instance of element in your HTML page, or via any framework that [supports rendering Custom Elements](https://custom-elements-everywhere.com/):
+1. Create an instance of element in your HTML page, or via any framework that [supports rendering Custom Elements](https://custom-elements-everywhere.com/):
 
-      ```<mwc-icon>sentiment_very_satisfied</mwc-icon>```
+   `<mwc-icon>sentiment_very_satisfied</mwc-icon>`
 
-  1. Install the Polymer CLI:
+1. Install the Polymer CLI:
 
-      ```npm i -g polymer-cli```
+   `npm i -g polymer-cli`
 
-  1. Run the development server and open a browser pointing to its URL:
+1. Run the development server and open a browser pointing to its URL:
 
-      ```polymer serve```
+   `polymer serve`
 
-  > The Material Web Components are published on [npm](https://www.npmjs.com) using JavaScript Modules.
-  This means it can take advantage of the standard native JavaScript module loader available in all current major browsers.
-  >
-  > However, since the Material Web Components use npm convention to reference dependencies by name, a light transform to rewrite specifiers to URLs is required to get it to run in the browser. The polymer-cli's development server `polymer serve` automatically handles this transform.
+> The Material Web Components are published on [npm](https://www.npmjs.com) using JavaScript Modules.
+> This means it can take advantage of the standard native JavaScript module loader available in all current major browsers.
+>
+> However, since the Material Web Components use npm convention to reference dependencies by name, a light transform to rewrite specifiers to URLs is required to get it to run in the browser. The polymer-cli's development server `polymer serve` automatically handles this transform.
 
-  Tools like [WebPack](https://webpack.js.org/) and [Rollup](https://rollupjs.org/) can also be used to serve and/or bundle.
+Tools like [WebPack](https://webpack.js.org/) and [Rollup](https://rollupjs.org/) can also be used to serve and/or bundle.
 
 ## Contributing guide
+
 Below are instructions for setting up project development.
 
 1. `git clone` this repo
@@ -83,9 +84,9 @@ Components define their css using [SASS](http://sass-lang.com/). The SASS output
 
 To compile the component SASS run:
 
-  ```
-  npm run update-styling
-  ```
+```
+npm run update-styling
+```
 
 ## Useful Links
 
@@ -106,4 +107,11 @@ We officially support the last two versions of every major browser. Specifically
 - Opera
 - Mobile Safari
 - Chrome on Android
+
 # mongol-web-component
+
+## Dev process
+
+- npm install
+- npm run bootstrap
+- copy mon module from mongol-web-component/node_modules/@materail/mon-

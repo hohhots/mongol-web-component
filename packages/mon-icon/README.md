@@ -26,15 +26,15 @@ A [Material Components](https://material.io/components/) icon implementation usi
 
   1. Add mwc-icon to your project:
 
-      ```npm i @material/mwc-icon```
+      ```npm i @vmaterial/mon-icon```
 
   1. Import the mwc-icon definition into your HTML page:
 
-      ```<script type="module" src="@material/mwc-icon/index.js"></script>```
+      ```<script type="module" src="@vmaterial/mon-icon/index.js"></script>```
 
       Or into your module script:
 
-      ```import {Icon} from "@material/mwc-icon"```
+      ```import {Icon} from "@vmaterial/mon-icon"```
 
   1. Create an instance of mwc-icon in your HTML page, or via any framework that [supports rendering Custom Elements](https://custom-elements-everywhere.com/):
 
@@ -48,7 +48,7 @@ A [Material Components](https://material.io/components/) icon implementation usi
 
       ```polymer serve```
 
-  > mwc-icon is published on [npm](https://www.npmjs.com/package/@material/mwc-icon) using JavaScript Modules.
+  > mwc-icon is published on [npm](https://www.npmjs.com/package/@vmaterial/mon-icon) using JavaScript Modules.
   This means it can take advantage of the standard native JavaScript module loader available in all current major browsers.
   >
   > However, since mwc-icon uses npm convention to reference dependencies by name, a light transform to rewrite specifiers to URLs is required to get it to run in the browser. The polymer-cli's development server `polymer serve` automatically handles this transform.

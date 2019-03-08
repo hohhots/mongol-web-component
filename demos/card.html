@@ -46,13 +46,13 @@ limitations under the License.
 </head>
 <body class="unresolved">
   <script type="module">
-    import {style as cardStyle} from '../node_modules/@material/mwc-card/mwc-card-css.js';
-    import {style as typographyStyle} from '../node_modules/@material/mwc-typography/mwc-typography-css.js';
+    import {style as cardStyle} from '../node_modules/@vmaterial/mon-card/card-css.js';
+    import {style as typographyStyle} from '../node_modules/@vmaterial/mon-typography/mon-typography-css.js';
     import {LitElement, html} from '../node_modules/@polymer/lit-element/lit-element.js';
-    import '../node_modules/@material/mwc-button/mwc-button.js';
-    import '../node_modules/@material/mwc-icon/mwc-icon.js';
-    import '../node_modules/@material/mwc-icon-toggle/mwc-icon-toggle.js';
-    import '../node_modules/@material/mwc-ripple/mwc-ripple.js';
+    import '../node_modules/@vmaterial/mon-button/mon-button.js';
+    import '../node_modules/@vmaterial/mon-icon/icon.js';
+    import '../node_modules/@vmaterial/mon-icon-toggle/icon-toggle.js';
+    import '../node_modules/@vmaterial/mon-ripple/ripple.js';
 
     class DemoCard extends LitElement {
       _render() {
@@ -92,12 +92,12 @@ limitations under the License.
             <!-- ... content ... -->
             <div class="mdc-card__actions">
               <div class="mdc-card__action-buttons">
-                <mwc-button dense class="mdc-card__action--button">Read</mwc-button>
-                <mwc-button dense class="mdc-card__action--button">Save</mwc-button>
+                <button dense class="mdc-card__action--button">Read</button>
+                <button dense class="mdc-card__action--button">Save</button>
               </div>
               <div class="mdc-card__action-icons">
-                <mwc-icon-toggle title="Share" icon="share"></mwc-icon-toggle>
-                <mwc-icon-toggle title="More options" icon="more_vert"></mwc-icon-toggle>
+                <icon-toggle title="Share" icon="share"></icon-toggle>
+                <icon-toggle title="More options" icon="more_vert"></icon-toggle>
               </div>
             </div>
           </div>

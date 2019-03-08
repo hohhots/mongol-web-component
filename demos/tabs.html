@@ -20,48 +20,48 @@ limitations under the License.
   <title>tabs demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-tabs/mwc-tab-bar-scroller.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-tabs/mwc-tab-bar.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-tabs/mwc-tab.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-tabs/tab-bar-scroller.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-tabs/tab-bar.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-tabs/tab.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Tabs</span></a>
   </header>
 
   <main>
 
-    <mwc-tab-bar>
-      <mwc-tab label="one"></mwc-tab>
-      <mwc-tab label="two"></mwc-tab>
-      <mwc-tab label="three"></mwc-tab>
-    </mwc-tab-bar>
+    <tab-bar>
+      <tab label="one"></tab>
+      <tab label="two"></tab>
+      <tab label="three"></tab>
+    </tab-bar>
 
     <h3>With Icons</h3>
-    <mwc-tab-bar activeTabIndex="1">
-      <mwc-tab label="one" icon="accessibility"></mwc-tab>
-      <mwc-tab label="two" icon="exit_to_app"></mwc-tab>
-      <mwc-tab label="three" icon="camera"></mwc-tab>
-    </mwc-tab-bar>
+    <tab-bar activeTabIndex="1">
+      <tab label="one" icon="accessibility"></tab>
+      <tab label="two" icon="exit_to_app"></tab>
+      <tab label="three" icon="camera"></tab>
+    </tab-bar>
 
     <h3>Scrolling</h3>
-    <mwc-tab-bar-scroller>
-      <mwc-tab-bar>
-        <mwc-tab label="one"></mwc-tab>
-        <mwc-tab label="two"></mwc-tab>
-        <mwc-tab label="three"></mwc-tab>
-        <mwc-tab label="four"></mwc-tab>
-        <mwc-tab label="five"></mwc-tab>
-        <mwc-tab label="six"></mwc-tab>
-        <mwc-tab label="seven"></mwc-tab>
-        <mwc-tab label="eight"></mwc-tab>
-        <mwc-tab label="nine"></mwc-tab>
-        <mwc-tab label="ten"></mwc-tab>
-      </mwc-tab-bar>
-    </mwc-tab-bar-scroller>
+    <tab-bar-scroller>
+      <tab-bar>
+        <tab label="one"></tab>
+        <tab label="two"></tab>
+        <tab label="three"></tab>
+        <tab label="four"></tab>
+        <tab label="five"></tab>
+        <tab label="six"></tab>
+        <tab label="seven"></tab>
+        <tab label="eight"></tab>
+        <tab label="nine"></tab>
+        <tab label="ten"></tab>
+      </tab-bar>
+    </tab-bar-scroller>
   </main>
 
   <script>

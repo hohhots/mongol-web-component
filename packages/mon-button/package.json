@@ -1,5 +1,5 @@
 {
-  "name": "@material/mon-button",
+  "name": "@vmaterial/mon-button",
   "version": "0.0.1",
   "description": "",
   "main": "mon-button.js",
@@ -16,7 +16,7 @@
     "@polymer/lit-element": "^0.5.2"
   },
   "devDependencies": {
-    "@material/mwc-sass-render": "^0.1.2"
+    "@vmaterial/mon-sass-render": "^0.1.2"
   },
   "publishConfig": {
     "access": "public"

@@ -82,6 +82,7 @@
     }
   },
   "dependencies": {
+    "lit-html": "^0.10.0",
     "npm": "^6.2.0",
     "resize-observer-polyfill": "^1.5.0",
     "test-fixture": "^1.0.2",

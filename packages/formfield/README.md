@@ -26,15 +26,15 @@ A [Material Components](https://material.io/components/) formfield implementatio
 
   1. Add mwc-formfield to your project:
 
-      ```npm i @material/mwc-formfield```
+      ```npm i @vmaterial/mon-formfield```
 
   1. Import the mwc-formfield definition into your HTML page:
 
-      ```<script type="module" src="@material/mwc-formfield/mwc-formfield.js"></script>```
+      ```<script type="module" src="@vmaterial/mon-formfield/mwc-formfield.js"></script>```
 
       Or into your module script:
 
-      ```import {Formfield} from "@material/mwc-formfield"```
+      ```import {Formfield} from "@vmaterial/mon-formfield"```
 
   1. Create an instance of mwc-formfield in your HTML page, or via any framework that [supports rendering Custom Elements](https://custom-elements-everywhere.com/):
 
@@ -48,7 +48,7 @@ A [Material Components](https://material.io/components/) formfield implementatio
 
       ```polymer serve```
 
-  > mwc-formfield is published on [npm](https://www.npmjs.com/package/@material/mwc-formfield) using JavaScript Modules.
+  > mwc-formfield is published on [npm](https://www.npmjs.com/package/@vmaterial/mon-formfield) using JavaScript Modules.
   This means it can take advantage of the standard native JavaScript module loader available in all current major browsers.
   >
   > However, since mwc-formfield uses npm convention to reference dependencies by name, a light transform to rewrite specifiers to URLs is required to get it to run in the browser. The polymer-cli's development server `polymer serve` automatically handles this transform.

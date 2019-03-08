@@ -14,11 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {LitElement, html, classString as c$} from '@polymer/lit-element/lit-element.js';
+import {
+  LitElement,
+  html,
+  classString as c$,
+} from '@polymer/lit-element';
 import {style} from './mon-button-css.js';
-import {MDCWCRipple} from '@material/mon-ripple/mon-ripple.js';
-import {afterNextRender} from '@material/mon-base/utils.js';
-import '@material/mon-icon/mon-icon-font.js';
+import {MDCWCRipple} from '@vmaterial/mon-ripple/mon-ripple.js';
+import {afterNextRender} from '@vmaterial/mon-base/utils.js';
+import '@vmaterial/mon-icon/mon-icon-font.js';
 
 export class Button extends LitElement {
   static get properties() {
@@ -70,11 +74,19 @@ export class Button extends LitElement {
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-button mdc-ripple-upgraded ${hostClasses}" disabled?="${disabled}">
-        ${icon ? html`<span class="material-icons mdc-button__icon">${icon}</span>` : ''}
+      <button
+        class$="mdc-button mdc-ripple-upgraded ${hostClasses}"
+        disabled?="${disabled}"
+      >
+        ${icon
+    ? html`
+              <span class="material-icons mdc-button__icon">${icon}</span>
+            `
+    : ''}
         ${label || ''}
         <slot></slot>
-      </button>`;
+      </button>
+    `;
   }
 
   _firstRendered() {
@@ -83,7 +95,7 @@ export class Button extends LitElement {
 
   _getComputedStyle(el, property) {
     const w = window.getComputedStyle(this, null).getPropertyValue('width');
-    if ((w == 'auto') || (w == '0px')) {
+    if (w == 'auto' || w == '0px') {
       return;
     }
     return window.getComputedStyle(el, null).getPropertyValue(property);

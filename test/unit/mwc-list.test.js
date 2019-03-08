@@ -15,8 +15,8 @@
  */
 
 import {assert} from 'chai';
-import {ListItem} from '@material/mwc-list/mwc-list-item.js';
-import {ListItemSeparator} from '@material/mwc-list/mwc-list-item-separator.js';
+import {ListItem} from '@vmaterial/mon-list/mwc-list-item.js';
+import {ListItemSeparator} from '@vmaterial/mon-list/mwc-list-item-separator.js';
 
 let element;
 

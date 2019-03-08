@@ -15,7 +15,7 @@
  */
 
 import {assert} from 'chai';
-import {Formfield} from '@material/mwc-formfield';
+import {Formfield} from '@vmaterial/mon-formfield';
 
 let element;
 

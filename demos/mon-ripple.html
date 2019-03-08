@@ -21,9 +21,9 @@ limitations under the License.
   <title>ripple demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mv-body/mv-body.js"></script>
-  <script type="module" src="../node_modules/@material/mon-ripple/mon-ripple.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-body/mon-body.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-ripple/mon-ripple.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/mon-icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
   <style>
     .demo-box {
@@ -54,25 +54,25 @@ limitations under the License.
 
 <body class="unresolved">
 
-  <mv-body>
+  <mon-body>
 
     <header>
       <a href="index.html">
-        <mwc-icon>arrow_back</mwc-icon>
+        <mon-icon>arrow_back</mon-icon>
         <span>Ripple</span>
       </a>
     </header>
 
     <main>
       <div class="demo-container">
-        <div class="demo-box">Primary<mwc-ripple primary></mwc-ripple>
+        <div class="demo-box">Primary<mon-ripple primary></mon-ripple>
         </div>
-        <div class="demo-box">Accent<mwc-ripple accent></mwc-ripple>
+        <div class="demo-box">Accent<mon-ripple accent></mon-ripple>
         </div>
         <div class="demo-box"><input placeholder="Say something...">
-          <mwc-ripple></mwc-ripple>
+          <mon-ripple></mon-ripple>
         </div>
-        <div class="demo-unbounded">Unbounded<mwc-ripple unbounded></mwc-ripple>
+        <div class="demo-unbounded">Unbounded<mon-ripple unbounded></mon-ripple>
         </div>
       </div>
     </main>

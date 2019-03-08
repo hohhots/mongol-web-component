@@ -20,13 +20,13 @@ limitations under the License.
   <title>linear-progress demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-linear-progress/mwc-linear-progress.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-button/mwc-button.js"></script>
-  <script type="module" src="../node_modules/@material/mwc-icon/mwc-icon.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-linear-progress/linear-progress.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-button/mon-button.js"></script>
+  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
   <link rel="stylesheet" href="demo-component.css">
   <style>
 
-    mwc-linear-progress {
+    linear-progress {
       width: 50%;
       margin: auto;
     }
@@ -41,21 +41,21 @@ limitations under the License.
 </head>
 <body class="unresolved">
   <header>
-    <a href="index.html"><mwc-icon>arrow_back</mwc-icon>
+    <a href="index.html"><icon>arrow_back</icon>
     <span>Linear Progress</span></a>
   </header>
 
   <main>
-    <mwc-button id="toggle" raised ripple label="Toggle"></mwc-button>
-    <mwc-linear-progress id="progress1"></mwc-linear-progress>
+    <button id="toggle" raised ripple label="Toggle"></button>
+    <linear-progress id="progress1"></linear-progress>
     <h3>linear-progress: reverse</h3>
-    <mwc-linear-progress reverse class="demo-progress-bar"></mwc-linear-progress>
+    <linear-progress reverse class="demo-progress-bar"></linear-progress>
     <h3>linear-progress: determinate</h3>
-    <mwc-linear-progress determinate progress="0.5" buffer="1"></mwc-linear-progress>
+    <linear-progress determinate progress="0.5" buffer="1"></linear-progress>
     <h3>linear-progress: determinate buffer</h3>
-    <mwc-linear-progress determinate progress="0.3" buffer="0.7" class="demo-progress-bar"></mwc-linear-progress>
+    <linear-progress determinate progress="0.3" buffer="0.7" class="demo-progress-bar"></linear-progress>
     <h3>linear-progress: determinate buffer reverse</h3>
-    <mwc-linear-progress determinate reverse progress="0.2" buffer="0.6"></mwc-linear-progress>
+    <linear-progress determinate reverse progress="0.2" buffer="0.6"></linear-progress>
   </main>
 
   <script>
