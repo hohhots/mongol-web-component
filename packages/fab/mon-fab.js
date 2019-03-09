@@ -14,11 +14,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {LitElement, html, classString as c$} from '@polymer/lit-element';
-import {style} from './mwc-fab-css.js';
-import {MDCWCRipple} from '@vmaterial/mon-ripple/mwc-ripple.js';
-import {afterNextRender} from '@vmaterial/mon-base/utils.js';
-import '@vmaterial/mon-icon/mwc-icon-font.js';
+import { LitElement, html, classString as c$ } from "@polymer/lit-element";
+import { style } from "./mon-fab-css.js";
+import { MDCWCRipple } from "@vmaterial/mon-ripple/mon-ripple.js";
+import { afterNextRender } from "@vmaterial/mon-base/utils.js";
+import "@vmaterial/mon-icon/mon-icon-font.js";
 
 export class Fab extends LitElement {
   static get properties() {
@@ -27,43 +27,52 @@ export class Fab extends LitElement {
       exited: Boolean,
       disabled: Boolean,
       icon: String,
-      label: String,
+      label: String
     };
   }
 
   constructor() {
     super();
-    this.icon = '';
+    this.icon = "";
     this.mini = false;
     this.exited = false;
-    this.label = '';
+    this.label = "";
   }
 
   _createRoot() {
-    return this.attachShadow({mode: 'open', delegatesFocus: true});
+    return this.attachShadow({ mode: "open", delegatesFocus: true });
   }
 
   async ready() {
     super.ready();
     await afterNextRender();
-    this._ripple = new MDCWCRipple(this._root.querySelector('.mdc-fab'));
+    this._ripple = new MDCWCRipple(this._root.querySelector(".mdc-fab"));
   }
 
   _renderStyle() {
     return style;
   }
 
-  _render({icon, mini, exited, disabled, label}) {
+  _render({ icon, mini, exited, disabled, label }) {
     const hostClasses = c$({
-      'mdc-fab--mini': mini,
-      'mdc-fab--exited': exited,
+      "mdc-fab--mini": mini,
+      "mdc-fab--exited": exited
     });
     return html`
       ${this._renderStyle()}
-      <button class$="mdc-fab ${hostClasses}" disabled?="${disabled}" aria-label$="${label || icon}">
-        ${icon ? html`<span class="material-icons mdc-fab__icon">${icon}</span>` : ''}
-      </button>`;
+      <button
+        class$="mdc-fab ${hostClasses}"
+        disabled?="${disabled}"
+        aria-label$="${label || icon}"
+      >
+        ${icon
+          ? html`
+              <span class="material-icons mdc-fab__icon">${icon}</span>
+            `
+          : ""}
+      </button>
+    `;
   }
 }
 
-customElements.define('mon-fab', Fab);
+customElements.define("mon-fab", Fab);

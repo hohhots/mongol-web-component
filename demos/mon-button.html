@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 @license
 Copyright 2018 Google Inc. All Rights Reserved.
@@ -13,58 +13,68 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html>
+  <head>
+    <title>button demo</title>
+    <meta
+      name="viewport"
+      content="height=device-height, initial-scale=1.0, user-scalable=no"
+    />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-body/mon-body.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-button/mon-button.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+    <style>
+      .light {
+        --mdc-theme-on-primary: black;
+        --mdc-theme-primary: white;
+        --mdc-theme-on-secondary: black;
+        --mdc-theme-secondary: white;
+      }
 
-<head>
-  <title>button demo</title>
-  <meta name="viewport" content="height=device-height, initial-scale=1.0, user-scalable=no">
-  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@vmaterial/mon-body/mon-body.js"></script>
-  <script type="module" src="../node_modules/@vmaterial/mon-button/mon-button.js"></script>
-  <script type="module" src="../node_modules/@vmaterial/mon-icon/mon-icon.js"></script>
-  <link rel="stylesheet" href="demo-component.css">
-  <style>
-    .light {
-      --mdc-theme-on-primary: black;
-      --mdc-theme-primary: white;
-      --mdc-theme-on-secondary: black;
-      --mdc-theme-secondary: white;
-    }
+      .pink {
+        --mdc-theme-on-primary: white;
+        --mdc-theme-primary: #e9437a;
+        --mdc-theme-on-secondary: white;
+        --mdc-theme-secondary: #e9437a;
+      }
 
-    .pink {
-      --mdc-theme-on-primary: white;
-      --mdc-theme-primary: #e9437a;
-      --mdc-theme-on-secondary: white;
-      --mdc-theme-secondary: #e9437a;
-    }
+      .wide {
+        width: 250px;
+      }
 
-    .wide {
-      width: 250px;
-    }
+      .mvContainer {
+        display: block;
+        clear: both;
+      }
 
-    .mvContainer {
-      display: block;
-      clear: both;
-    }
+      mon-button {
+        margin: 20px 8px;
+      }
+    </style>
+  </head>
 
-    mon-button {
-      margin: 20px 8px;
-    }
-  </style>
-</head>
+  <body class="unresolved">
+    <mon-body>
+      <header>
+        <a href="index.html">
+          <mon-icon>arrow_back</mon-icon>
+          <span>Buttons</span>
+        </a>
+      </header>
 
-<body class="unresolved">
-  <mv-body>
-    <header>
-      <a href="index.html">
-        <icon>arrow_back</icon>
-        <span>Buttons</span>
-      </a>
-    </header>
-
-    <main>
-
-      <h4>labeled</h4>
-      <div class="mvContainer">
+      <main>
+        <h4>labeled</h4>
+        <div class="mvContainer">
           <div>
             <mon-button label="Normal"></mon-button>
             <mon-button class="light" raised label="raised"></mon-button>
@@ -74,45 +84,70 @@ limitations under the License.
             <mon-button class="pink wide" raised label="wide"></mon-button>
             <mon-button disabled label="disabled"></mon-button>
           </div>
-      </div>
+        </div>
 
-      <h4>icon labeled</h4>
+        <h4>icon labeled</h4>
 
-      <div class="mvContainer">
+        <div class="mvContainer">
           <div>
             <mon-button label="Normal" icon="explore"></mon-button>
-            <mon-button class="light" raised label="raised" icon="code"></mon-button>
+            <mon-button
+              class="light"
+              raised
+              label="raised"
+              icon="code"
+            ></mon-button>
             <mon-button unelevated label="unelevated" icon="check"></mon-button>
             <mon-button outlined label="outlined" icon="alarm"></mon-button>
-            <mon-button class="pink" dense label="dense" icon="feedback"></mon-button>
-            <mon-button class="pink wide" raised label="wide" icon="code"></mon-button>
-            <mon-button disabled label="disabled" icon="fingerprint"></mon-button>
+            <mon-button
+              class="pink"
+              dense
+              label="dense"
+              icon="feedback"
+            ></mon-button>
+            <mon-button
+              class="pink wide"
+              raised
+              label="wide"
+              icon="code"
+            ></mon-button>
+            <mon-button
+              disabled
+              label="disabled"
+              icon="fingerprint"
+            ></mon-button>
           </div>
-      </div>
+        </div>
 
-      <script type="module">
-        import { html } from '@polymer/lit-element/lit-element.js';
-        import { Button } from '@material/mon-button/mon-button.js';
-        class CustomButton extends Button {
-          _renderStyle() {
-            return html`${super._renderStyle()}<style>.mdc-button{border-radius: 8px}</style>`;
+        <script type="module">
+          import { html } from "@polymer/lit-element/lit-element.js";
+          import { Button } from "@material/mon-button/mon-button.js";
+          class CustomButton extends Button {
+            _renderStyle() {
+              return html`
+                ${super._renderStyle()}<style>
+                  .mdc-button {
+                    border-radius: 8px;
+                  }
+                </style>
+              `;
+            }
           }
-        }
-        customElements.define('custom-button', CustomButton);
-      </script>
+          customElements.define("custom-button", CustomButton);
+        </script>
 
-      <h4>custom button</h4>
+        <h4>custom button</h4>
 
-      <div class="mvContainer">
+        <div class="mvContainer">
           <custom-button label="Custom!" raised></custom-button>
-      </div>
+        </div>
 
-      <script>
-        addEventListener('load', () => document.body.classList.remove('unresolved'));
-      </script>
-
-    </main>
-  </mv-body>
-</body>
-
+        <script>
+          addEventListener("load", () =>
+            document.body.classList.remove("unresolved")
+          );
+        </script>
+      </main>
+    </mon-body>
+  </body>
 </html>
