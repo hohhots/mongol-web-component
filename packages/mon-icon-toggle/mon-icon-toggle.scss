@@ -15,8 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import '@material/icon-toggle/mdc-icon-toggle.scss';
-@import '@vmaterial/mon-icon/mwc-icon.scss';
+@import "@material/icon-toggle/mdc-icon-toggle.scss";
+@import "./node_modules/@vmaterial/mon-icon/mon-icon.scss";
 
 .material-icons {
   @extend %material-icons;
