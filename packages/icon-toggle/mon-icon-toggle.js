@@ -14,10 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {ComponentElement, MDCWebComponentMixin, html} from '@vmaterial/mon-base/component-element.js';
-import {style} from './mwc-icon-toggle-css.js';
 import {MDCIconToggle} from '@material/icon-toggle';
-import '@vmaterial/mon-icon/mwc-icon-font.js';
+
+import {
+  ComponentElement,
+  MDCWebComponentMixin,
+  html,
+} from '@vmaterial/mon-base/component-element.js';
+import {style} from './mon-icon-toggle-css.js';
+import '@vmaterial/mon-icon/mon-icon-font.js';
 
 export class MDCWCIconToggle extends MDCWebComponentMixin(MDCIconToggle) {}
 
@@ -70,23 +75,32 @@ export class IconToggle extends ComponentElement {
     offIcon = offIcon || icon;
     return html`
       ${this._renderStyle()}
-      <span class$="mdc-icon-toggle material-icons ${disabled ? 'mdc-icon-toggle--disabled' : ''}"
-            role="button"
-            aria-disabled$="${disabled}"
-            tabindex="0"
-            data-toggle-on$='{"label": "${label}", "content": "${icon}"}'
-            data-toggle-off$='{"label": "${offLabel}", "content": "${offIcon}"}'
-            on-MDCIconToggle:change="${this._boundChangeHandler}">
-      </span>`;
+      <span
+        class$="mdc-icon-toggle material-icons ${disabled
+    ? 'mdc-icon-toggle--disabled'
+    : ''}"
+        role="button"
+        aria-disabled$="${disabled}"
+        tabindex="0"
+        data-toggle-on$='{"label": "${label}", "content": "${icon}"}'
+        data-toggle-off$='{"label": "${offLabel}", "content": "${offIcon}"}'
+        on-MDCIconToggle:change="${this._boundChangeHandler}"
+      >
+      </span>
+    `;
   }
 
   _didRender(props, changed) {
-    if ('icon' in changed || 'label' in changed ||
-      'offIcon' in changed || 'offLabel' in changed) {
+    if (
+      'icon' in changed ||
+      'label' in changed ||
+      'offIcon' in changed ||
+      'offLabel' in changed
+    ) {
       this.componentReady().then((component) => component.refreshToggleData());
     }
     if ('on' in changed) {
-      this.componentReady().then((component) => component.on = props.on);
+      this.componentReady().then((component) => (component.on = props.on));
     }
   }
 
