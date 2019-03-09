@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+@license
+Copyright 2018 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+  <head>
+    <title>mon-icon demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-body/mon-body.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+    <style>
+      .color-size {
+        color: tomato;
+        --mdc-icon-size: 4em;
+      }
+    </style>
+  </head>
+  <body class="unresolved">
+    <mon-body>
+      <header>
+        <a href="index.html"
+          ><mon-icon>arrow_back</mon-icon> <span>Icon</span></a
+        >
+      </header>
+
+      <main>
+        <div class="demo-group">
+          <mon-icon>sentiment_very_dissatisfied</mon-icon>
+          <mon-icon>sentiment_dissatisfied</mon-icon>
+          <mon-icon>sentiment_neutral</mon-icon>
+          <mon-icon>sentiment_satisfied</mon-icon>
+          <mon-icon>sentiment_very_satisfied</mon-icon>
+        </div>
+
+        <h4>color and size</h4>
+        <div class="demo-group color-size">
+          <mon-icon>all_out</mon-icon>
+          <mon-icon>accessibility</mon-icon>
+          <mon-icon>exit_to_app</mon-icon>
+          <mon-icon>camera</mon-icon>
+        </div>
+      </main>
+
+      <script>
+        addEventListener("load", () =>
+          document.body.classList.remove("unresolved")
+        );
+      </script>
+    </mon-body>
+  </body>
+</html>
