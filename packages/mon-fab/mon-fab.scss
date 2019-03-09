@@ -14,8 +14,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-@import "@vmaterial/mon-icon/mwc-icon.scss";
-@import "@material/fab/mdc-fab.scss";
+@import "@material/mon-fab/mdc-fab.scss";
+
+@import "./node_modules/@vmaterial/mon-icon/mon-icon.scss";
 
 .material-icons {
   @extend %material-icons;
