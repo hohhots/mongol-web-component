@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
 @license
 Copyright 2018 Google Inc. All Rights Reserved.
@@ -16,54 +16,88 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html>
-<head>
-  <title>linear-progress demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script  src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../node_modules/@vmaterial/mon-linear-progress/linear-progress.js"></script>
-  <script type="module" src="../node_modules/@vmaterial/mon-button/mon-button.js"></script>
-  <script type="module" src="../node_modules/@vmaterial/mon-icon/icon.js"></script>
-  <link rel="stylesheet" href="demo-component.css">
-  <style>
+  <head>
+    <title>mon-linear-progress demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-body/mon-body.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-linear-progress/mon-linear-progress.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-button/mon-button.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+    <style>
+      linear-progress {
+        width: 50%;
+        margin: auto;
+      }
 
-    linear-progress {
-      width: 50%;
-      margin: auto;
-    }
+      .demo-progress-bar {
+        --mdc-theme-primary: red;
+        --mdc-theme-secondary: orange;
+        --mdc-linear-progress-buffering-dots-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' enable-background='new 0 0 5 2' xml:space='preserve' viewBox='0 0 5 2' preserveAspectRatio='none slice'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ffcdd2'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body class="unresolved">
+    <mon-body>
+      <header>
+        <a href="index.html"
+          ><mon-icon>arrow_back</mon-icon>
+          <span>Mongol Linear Progress</span></a
+        >
+      </header>
 
-    .demo-progress-bar {
-      --mdc-theme-primary: red;
-      --mdc-theme-secondary: orange;
-      --mdc-linear-progress-buffering-dots-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' enable-background='new 0 0 5 2' xml:space='preserve' viewBox='0 0 5 2' preserveAspectRatio='none slice'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23ffcdd2'/%3E%3C/svg%3E");
-    }
+      <main>
+        <button id="toggle" raised ripple label="Toggle"></button>
+        <mon-linear-progress id="progress1"></mon-linear-progress>
+        <h3>mon-linear-progress: reverse</h3>
+        <mon-linear-progress
+          reverse
+          class="demo-progress-bar"
+        ></mon-linear-progress>
+        <h3>mon-linear-progress: determinate</h3>
+        <mon-linear-progress
+          determinate
+          progress="0.5"
+          buffer="1"
+        ></mon-linear-progress>
+        <h3>mon-linear-progress: determinate buffer</h3>
+        <mon-linear-progress
+          determinate
+          progress="0.3"
+          buffer="0.7"
+          class="demo-progress-bar"
+        ></mon-linear-progress>
+        <h3>mon-linear-progress: determinate buffer reverse</h3>
+        <mon-linear-progress
+          determinate
+          reverse
+          progress="0.2"
+          buffer="0.6"
+        ></mon-linear-progress>
+      </main>
 
-  </style>
-</head>
-<body class="unresolved">
-  <header>
-    <a href="index.html"><icon>arrow_back</icon>
-    <span>Linear Progress</span></a>
-  </header>
+      <script>
+        toggle.onclick = e => {
+          progress1.closed = !progress1.closed;
+        };
 
-  <main>
-    <button id="toggle" raised ripple label="Toggle"></button>
-    <linear-progress id="progress1"></linear-progress>
-    <h3>linear-progress: reverse</h3>
-    <linear-progress reverse class="demo-progress-bar"></linear-progress>
-    <h3>linear-progress: determinate</h3>
-    <linear-progress determinate progress="0.5" buffer="1"></linear-progress>
-    <h3>linear-progress: determinate buffer</h3>
-    <linear-progress determinate progress="0.3" buffer="0.7" class="demo-progress-bar"></linear-progress>
-    <h3>linear-progress: determinate buffer reverse</h3>
-    <linear-progress determinate reverse progress="0.2" buffer="0.6"></linear-progress>
-  </main>
-
-  <script>
-    toggle.onclick = (e) => {
-      progress1.closed = !progress1.closed;
-    }
-
-    addEventListener('load', () => document.body.classList.remove('unresolved'));
-  </script>
-</body>
+        addEventListener("load", () =>
+          document.body.classList.remove("unresolved")
+        );
+      </script>
+    </mon-body>
+  </body>
 </html>
