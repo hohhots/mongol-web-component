@@ -114,4 +114,4 @@ We officially support the last two versions of every major browser. Specifically
 
 - npm install
 - npm run bootstrap
-- copy mon module from mongol-web-component/node_modules/@materail/mon-
+- copy material-component-web/node_modules/@mongol to node_modules
