@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import {LitElement, html, classString as c$} from '@polymer/lit-element';
-import {MDCRipple} from '@material/mon-ripple';
+import {MDCRipple} from '@mongol/ripple';
 
 import {MDCWebComponentMixin} from '@vmaterial/mon-base/mdc-web-component.js';
 import {style} from './mon-ripple-css.js';
