@@ -60,7 +60,7 @@ limitations under the License.
       </header>
 
       <main>
-        <button id="toggle" raised ripple label="Toggle"></button>
+        <mon-button id="toggle" raised ripple label="Toggle"></mon-button>
         <mon-linear-progress id="progress1"></mon-linear-progress>
         <h3>mon-linear-progress: reverse</h3>
         <mon-linear-progress
@@ -90,12 +90,12 @@ limitations under the License.
       </main>
 
       <script>
-        toggle.onclick = e => {
+        toggle.onclick = (e) => {
           progress1.closed = !progress1.closed;
         };
 
-        addEventListener("load", () =>
-          document.body.classList.remove("unresolved")
+        addEventListener('load', () =>
+          document.body.classList.remove('unresolved'),
         );
       </script>
     </mon-body>

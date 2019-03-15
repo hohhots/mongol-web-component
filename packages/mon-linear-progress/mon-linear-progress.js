@@ -14,17 +14,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import { MDCLinearProgress } from "@material/mon-linear-progress";
+import {MDCLinearProgress} from '@mongol/linear-progress';
 
 import {
   ComponentElement,
   MDCWebComponentMixin,
-  html
-} from "@vmaterial/mon-base/component-element.js";
-import { style } from "./mon-linear-progress-css.js";
+  html,
+} from '@vmaterial/mon-base/component-element.js';
+import {style} from './mon-linear-progress-css.js';
 
 export class MDCWCLinearProgress extends MDCWebComponentMixin(
-  MDCLinearProgress
+  MDCLinearProgress,
 ) {}
 
 export class LinearProgress extends ComponentElement {
@@ -33,7 +33,7 @@ export class LinearProgress extends ComponentElement {
   }
 
   static get componentSelector() {
-    return ".mdc-linear-progress";
+    return '.mdc-linear-progress';
   }
 
   static get properties() {
@@ -42,7 +42,7 @@ export class LinearProgress extends ComponentElement {
       progress: Number,
       buffer: Number,
       reverse: Boolean,
-      closed: Boolean
+      closed: Boolean,
     };
   }
 
@@ -79,23 +79,23 @@ export class LinearProgress extends ComponentElement {
   }
 
   async _didRender(props, changed, old) {
-    if ("determinate" in changed) {
+    if ('determinate' in changed) {
       await this.componentReady();
       this._component.determinate = props.determinate;
     }
-    if ("progress" in changed) {
+    if ('progress' in changed) {
       await this.componentReady();
       this._component.progress = props.progress;
     }
-    if ("buffer" in changed) {
+    if ('buffer' in changed) {
       await this.componentReady();
       this._component.buffer = props.buffer;
     }
-    if ("reverse" in changed) {
+    if ('reverse' in changed) {
       await this.componentReady();
       this._component.reverse = props.reverse;
     }
-    if ("closed" in changed) {
+    if ('closed' in changed) {
       if (props.closed) {
         this.close();
       } else {
@@ -105,16 +105,16 @@ export class LinearProgress extends ComponentElement {
   }
 
   open() {
-    this.componentReady().then(component => {
+    this.componentReady().then((component) => {
       component.open();
     });
   }
 
   close() {
-    this.componentReady().then(component => {
+    this.componentReady().then((component) => {
       component.close();
     });
   }
 }
 
-customElements.define("mon-linear-progress", LinearProgress);
+customElements.define('mon-linear-progress', LinearProgress);
