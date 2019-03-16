@@ -16,7 +16,7 @@
 
 'use strict';
 
-//const CssBundleFactory = require('./scripts/webpack/css-bundle-factory');
+// const CssBundleFactory = require('./scripts/webpack/css-bundle-factory');
 const Environment = require('./scripts/build/environment');
 const Globber = require('./scripts/webpack/globber');
 const JsBundleFactory = require('./scripts/webpack/js-bundle-factory');
@@ -29,8 +29,13 @@ env.setBabelEnv();
 const pathResolver = new PathResolver();
 const globber = new Globber({pathResolver});
 const pluginFactory = new PluginFactory({globber});
-//const cssBundleFactory = new CssBundleFactory({env, pathResolver, globber, pluginFactory});
-const jsBundleFactory = new JsBundleFactory({env, pathResolver, globber, pluginFactory});
+// const cssBundleFactory = new CssBundleFactory({env, pathResolver, globber, pluginFactory});
+const jsBundleFactory = new JsBundleFactory({
+  env,
+  pathResolver,
+  globber,
+  pluginFactory,
+});
 
 const OUTPUT = {
   fsDirAbsolutePath: pathResolver.getAbsolutePath('./build'),
@@ -39,6 +44,6 @@ const OUTPUT = {
 module.exports = [
   jsBundleFactory.createMainJsCombined({output: OUTPUT}),
   jsBundleFactory.createMainJsALaCarte({output: OUTPUT}),
-  //cssBundleFactory.createMainCssCombined({output: OUTPUT}),
-  //cssBundleFactory.createMainCssALaCarte({output: OUTPUT}),
+  // cssBundleFactory.createMainCssCombined({output: OUTPUT}),
+  // cssBundleFactory.createMainCssALaCarte({output: OUTPUT}),
 ];

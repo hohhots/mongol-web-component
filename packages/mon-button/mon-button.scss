@@ -15,8 +15,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import "@material/mon-button/mdc-button.scss";
-@import "./node_modules/@vmaterial/mon-icon/mon-icon.scss";
+@import '@mongol/button/mdc-button.scss';
+
+@import '@vmaterial/mon-icon/mon-icon.scss';
 
 .material-icons {
   @extend %material-icons;

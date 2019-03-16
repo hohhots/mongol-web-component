@@ -14,10 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {FormableComponentElement, MDCWebComponentMixin, html} from '@vmaterial/mon-base/formable-component-element.js';
+import {MDCSlider} from '@mongol/slider';
+
+import {
+  FormableComponentElement,
+  MDCWebComponentMixin,
+  html,
+} from '@vmaterial/mon-base/formable-component-element.js';
 import {classString as c$} from '@polymer/lit-element';
-import {style} from './mwc-slider-css.js';
-import {MDCSlider} from '@material/slider';
+import {style} from './mon-slider-css.js';
 
 export class MDCWCSlider extends MDCWebComponentMixin(MDCSlider) {}
 
@@ -77,23 +82,39 @@ export class Slider extends FormableComponentElement {
     });
     return html`
       ${this._renderStyle()}
-      <div class$="mdc-slider ${hostClasses}" tabindex="0" role="slider"
-        aria-valuemin$="${min}" aria-valuemax$="${max}" aria-valuenow$="${value}"
-        aria-disabled$="${disabled}" data-step$="${step}">
-      <div class="mdc-slider__track-container">
-        <div class="mdc-slider__track"></div>
-        ${discrete && markers ? html`<div class="mdc-slider__track-marker-container"></div>` : ''}
+      <div
+        class$="mdc-slider ${hostClasses}"
+        tabindex="0"
+        role="slider"
+        aria-valuemin$="${min}"
+        aria-valuemax$="${max}"
+        aria-valuenow$="${value}"
+        aria-disabled$="${disabled}"
+        data-step$="${step}"
+      >
+        <div class="mdc-slider__track-container">
+          <div class="mdc-slider__track"></div>
+          ${discrete && markers
+    ? html`
+                <div class="mdc-slider__track-marker-container"></div>
+              `
+    : ''}
+        </div>
+        <div class="mdc-slider__thumb-container">
+          ${discrete
+    ? html`
+                <div class="mdc-slider__pin">
+                  <span class="mdc-slider__pin-value-marker"></span>
+                </div>
+              `
+    : ''}
+          <svg class="mdc-slider__thumb" width="21" height="21">
+            <circle cx="10.5" cy="10.5" r="7.875"></circle>
+          </svg>
+          <div class="mdc-slider__focus-ring"></div>
+        </div>
       </div>
-      <div class="mdc-slider__thumb-container">
-        ${discrete ? html`<div class="mdc-slider__pin">
-          <span class="mdc-slider__pin-value-marker"></span>
-        </div>` : ''}
-        <svg class="mdc-slider__thumb" width="21" height="21">
-          <circle cx="10.5" cy="10.5" r="7.875"></circle>
-        </svg>
-        <div class="mdc-slider__focus-ring"></div>
-      </div>
-    </div>`;
+    `;
   }
 }
 
