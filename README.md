@@ -114,4 +114,6 @@ We officially support the last two versions of every major browser. Specifically
 
 - npm install
 - npm run bootstrap
-- copy material-component-web/node_modules/@mongol to node_modules
+- npm run linkModules
+
+- npm run dev

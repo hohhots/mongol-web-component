@@ -8,6 +8,7 @@
     "build:min": "mkdirp build && cross-env MDC_ENV=production webpack -p --progress --colors",
     "changelog": "standard-changelog -i CHANGELOG.md -k packages/mongol-material-components-web/package.json -w",
     "clean": "del-cli build/** build .closure-tmp/** .closure-tmp packages/*/node_modules packages/*/package-lock.json",
+    "linkModules": "./scripts/link-modules.sh",
     "dist": "npm run build && npm run build:min",
     "dev": "polyserve --npm --module-resolution=node -H 192.168.3.18",
     "fix": "npm-run-all --parallel fix:*",
