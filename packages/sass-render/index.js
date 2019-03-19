@@ -44,7 +44,11 @@ async function sassToCss(sassFile) {
   const result = await renderSass({
     file: sassFile,
     importer: (url) => {
-      if (url.indexOf('@material') === 0) {
+      if (
+        url.indexOf('@material') === 0 ||
+        url.indexOf('@mongol') === 0 ||
+        url.indexOf('@vmaterial') === 0
+      ) {
         return {file: resolveNpmPath(url)};
       } else {
         return null;
@@ -59,7 +63,9 @@ async function sassRender(sourceFile, templateFile, outputFile) {
   const template = await readFile(templateFile, 'utf-8');
   const match = delim.exec(template);
   if (!match) {
-    throw new Error(`Template file ${templateFile} did not contain template delimiters`);
+    throw new Error(
+      `Template file ${templateFile} did not contain template delimiters`,
+    );
   }
   const replacement = await sassToCss(sourceFile);
   const newContent = template.replace(delim, replacement);
