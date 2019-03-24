@@ -197,6 +197,7 @@ export class MvBody extends LitElement {
       windowScreenWidth: ${window.screen.width},
       windowScreenTop: ${window.screen.top},
       windowScreenLeft: ${window.screen.left},
+      windowScreenPixelDepth: ${window.screen.pixelDepth}
     `);
 
     // for browser on pc
