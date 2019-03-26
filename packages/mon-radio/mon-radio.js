@@ -14,10 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {FormableComponentElement, MDCWebComponentMixin, html} from '@vmaterial/mon-base/formable-component-element.js';
-import {style} from './mwc-radio-css.js';
+import {MDCRadio} from '@mongol/radio';
+
+import {
+  FormableComponentElement,
+  MDCWebComponentMixin,
+  html,
+} from '@vmaterial/mon-base/formable-component-element.js';
+import {style} from './mon-radio-css.js';
 import {SelectionController} from '@vmaterial/mon-base/selection-controller.js';
-import {MDCRadio} from '@material/radio';
 
 export class MDCWCRadio extends MDCWebComponentMixin(MDCRadio) {}
 
@@ -70,16 +75,22 @@ export class Radio extends FormableComponentElement {
     return html`
       ${this._renderStyle()}
       <div class="mdc-radio">
-        <input class="mdc-radio__native-control" type="radio"
-          checked="${checked}" name="${name}" value="${value}"
+        <input
+          class="mdc-radio__native-control"
+          type="radio"
+          checked="${checked}"
+          name="${name}"
+          value="${value}"
           on-change="${this._boundInputChangeHandler}"
           on-focus="${this._boundInputFocusHandler}"
-          on-blur="${this._boundInputBlurHandler}">
+          on-blur="${this._boundInputBlurHandler}"
+        />
         <div class="mdc-radio__background">
           <div class="mdc-radio__outer-circle"></div>
           <div class="mdc-radio__inner-circle"></div>
         </div>
-      </div>`;
+      </div>
+    `;
   }
 
   get disabled() {
@@ -87,7 +98,7 @@ export class Radio extends FormableComponentElement {
   }
 
   set disabled(value) {
-    this.componentReady().then((component) => component.disabled = value);
+    this.componentReady().then((component) => (component.disabled = value));
   }
 
   get checked() {
