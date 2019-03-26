@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+@license
+Copyright 2018 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+  <head>
+    <title>mongol checkbox demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-body/mon-body.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-checkbox/mon-checkbox.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+  </head>
+  <body class="unresolved">
+    <mon-body>
+      <header>
+        <a href="index.html"
+          ><mon-icon>arrow_back</mon-icon> <span>Mongol Checkbox</span></a
+        >
+      </header>
+
+      <main>
+        <div class="demo-group">
+          <mon-checkbox tabIndex="3"></mon-checkbox>
+          <mon-checkbox tabIndex="2" checked></mon-checkbox>
+          <mon-checkbox tabIndex="1" indeterminate></mon-checkbox>
+          <mon-checkbox tabIndex="-1" indeterminate></mon-checkbox>
+          <mon-checkbox disabled></mon-checkbox>
+        </div>
+      </main>
+
+      <script>
+        addEventListener('load', () =>
+          document.body.classList.remove('unresolved'),
+        );
+      </script>
+    </mon-body>
+  </body>
+</html>

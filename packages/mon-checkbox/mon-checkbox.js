@@ -14,9 +14,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {FormableComponentElement, MDCWebComponentMixin, html} from '@vmaterial/mon-base/formable-component-element.js';
-import {style} from './mwc-checkbox-css.js';
-import {MDCCheckbox} from '@material/checkbox';
+import {MDCCheckbox} from '@mongol/checkbox';
+
+import {
+  FormableComponentElement,
+  MDCWebComponentMixin,
+  html,
+} from '@vmaterial/mon-base/formable-component-element.js';
+import {style} from './mon-checkbox-css.js';
 
 export class MDCWCCheckbox extends MDCWebComponentMixin(MDCCheckbox) {}
 
@@ -63,21 +68,26 @@ export class Checkbox extends FormableComponentElement {
     return html`
       ${this._renderStyle()}
       <div class="mdc-checkbox">
-        <input type="checkbox"
+        <input
+          type="checkbox"
           class="mdc-checkbox__native-control"
-          checked="${checked}" value="${value}"
-          on-change="${this._boundInputChangeHandler}">
+          checked="${checked}"
+          value="${value}"
+          on-change="${this._boundInputChangeHandler}"
+        />
         <div class="mdc-checkbox__background">
-          <svg class="mdc-checkbox__checkmark"
-              viewBox="0 0 24 24">
-            <path class="mdc-checkbox__checkmark-path"
+          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+            <path
+              class="mdc-checkbox__checkmark-path"
               fill="none"
               stroke="white"
-              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"
+            />
           </svg>
           <div class="mdc-checkbox__mixedmark"></div>
         </div>
-      </div>`;
+      </div>
+    `;
   }
 
   get indeterminate() {
@@ -85,7 +95,9 @@ export class Checkbox extends FormableComponentElement {
   }
 
   set indeterminate(value) {
-    this.componentReady().then((component) => component.indeterminate = value);
+    this.componentReady().then(
+      (component) => (component.indeterminate = value),
+    );
   }
 
   get disabled() {
@@ -93,7 +105,7 @@ export class Checkbox extends FormableComponentElement {
   }
 
   set disabled(value) {
-    this.componentReady().then((component) => component.disabled = value);
+    this.componentReady().then((component) => (component.disabled = value));
   }
 
   _inputChangeHandler(e) {
