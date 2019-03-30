@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import {LitElement, html} from '@polymer/lit-element';
-import {style} from './mwc-switch-css.js';
+import {style} from './mon-switch-css.js';
 import {afterNextRender} from '@vmaterial/mon-base/utils.js';
 
 export class Switch extends LitElement {
@@ -40,11 +40,18 @@ export class Switch extends LitElement {
     return html`
       ${this._renderStyle()}
       <div class="mdc-switch">
-      <input type="checkbox" id="basic-switch" checked="${checked}" disabled?="${disabled}" class="mdc-switch__native-control" />
-      <div class="mdc-switch__background">
-        <div class="mdc-switch__knob"></div>
+        <input
+          type="checkbox"
+          id="basic-switch"
+          checked="${checked}"
+          disabled?="${disabled}"
+          class="mdc-switch__native-control"
+        />
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
       </div>
-    </div>`;
+    `;
   }
 
   async ready() {
