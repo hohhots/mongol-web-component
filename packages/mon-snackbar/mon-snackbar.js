@@ -14,9 +14,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {ComponentElement, MDCWebComponentMixin, html} from '@vmaterial/mon-base/component-element.js';
-import {style} from './mwc-snackbar-css.js';
-import {MDCSnackbar} from '@material/snackbar';
+import {MDCSnackbar} from '@mongol/snackbar';
+
+import {
+  ComponentElement,
+  MDCWebComponentMixin,
+  html,
+} from '@vmaterial/mon-base/component-element.js';
+import {style} from './mon-snackbar-css.js';
 
 export class MDCWCSnackbar extends MDCWebComponentMixin(MDCSnackbar) {}
 
@@ -56,32 +61,41 @@ export class Snackbar extends ComponentElement {
     return style;
   }
 
-  _render({checked, value}) {
-    return html`${this._renderStyle()}
-      <div class="mdc-snackbar"
-        aria-live="assertive"
-        aria-atomic="true"
-        aria-hidden="true">
-      <div class="mdc-snackbar__text"></div>
-      <div class="mdc-snackbar__action-wrapper">
-        <button type="button" class="mdc-snackbar__action-button"></button>
+  _render() {
+    const classes = {
+      'mdc-snackbar--stacked': this.stacked,
+      'mdc-snackbar--leading': this.leading,
+    };
+    return html`
+      <div
+        class="mdc-snackbar ${classMap(classes)}"
+        @keydown="${this._handleKeydown}"
+      >
+        <div class="mdc-snackbar__surface">
+          <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            ${this.labelText}
+          </div>
+          <div class="mdc-snackbar__actions">
+            <slot name="action" @click="${this._handleActionClick}"></slot>
+            <slot name="dismiss" @click="${this._handleDismissClick}"></slot>
+          </div>
+        </div>
       </div>
-    </div>`;
+    `;
   }
 
   show(data) {
     this.componentReady().then((component) => {
-      const options = {
-        message: this.message,
-        actionText: this.actionText,
-        multiline: this.multiLine,
-        actionOnBottom: this.actionOnBottom,
-        actionHandler: this._boundActionHandler,
-      };
-      if (this.timeout >= 0) {
-        options.timeout = this.timeout;
+      if (data) {
+        Object.getOwnPropertyNames(data).forEach((key) => {
+          this.setAttribute(key, data[key]);
+          // this.[key] = data[key];
+          // use key and value here
+        });
+        // Object.assign(this, data);
       }
-      component.show(Object.assign(options, data));
+
+      component.open();
     });
   }
 

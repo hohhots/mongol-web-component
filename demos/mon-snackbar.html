@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+@license
+Copyright 2018 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+  <head>
+    <title>mongol snackbar demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-body/mon-body.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-snackbar/mon-snackbar.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-button/mon-button.js"
+    ></script>
+    <script
+      type="module"
+      src="../node_modules/@vmaterial/mon-icon/mon-icon.js"
+    ></script>
+    <link rel="stylesheet" href="demo-component.css" />
+  </head>
+  <body class="unresolved">
+    <mon-body>
+      <header>
+        <a href="index.html"
+          ><mon-icon>arrow_back</mon-icon> <span>Mongol Snackbar</span></a
+        >
+      </header>
+
+      <main>
+        <div class="demo-group">
+          <mon-button id="snack1" raised ripple label="DEFAULT"></mon-button>
+          <mon-button id="snack2" raised ripple label="LEADING"></mon-button>
+          <mon-button id="snack3" raised ripple label="STACKED"></mon-button>
+        </div>
+
+        <mon-snackbar
+          id="snack"
+          labelText="Can't send photo. Retry in 5 seconds."
+        >
+          <mon-button id="actionButton" slot="action">RETRY</mon-button>
+          <mon-icon id="iconButton" icon="close" slot="dismiss"></mon-icon>
+        </mon-snackbar>
+      </main>
+      <script>
+        snack1.onclick = () => {
+          snack.stacked = false;
+          snack.leading = false;
+          snack.open();
+        };
+        snack2.onclick = () => {
+          snack.stacked = false;
+          snack.leading = true;
+          snack.open();
+        };
+        snack3.onclick = () => {
+          snack.stacked = true;
+          snack.leading = false;
+          snack.open();
+        };
+        addEventListener('load', () =>
+          document.body.classList.remove('unresolved'),
+        );
+      </script>
+    </mon-body>
+  </body>
+</html>
