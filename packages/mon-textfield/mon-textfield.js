@@ -14,18 +14,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {ComponentElement, html} from '@vmaterial/mon-base/component-element.js';
 import {classString as c$} from '@polymer/lit-element';
+import {MDCTextField} from '@mongol/textfield';
+
+import {
+  ComponentElement,
+  html,
+} from '@vmaterial/mon-base/component-element.js';
 import {MDCWebComponentMixin} from '@vmaterial/mon-base/mdc-web-component.js';
-import {MDCTextField} from '@material/textfield';
-import {style} from './mwc-textfield-css.js';
-import {afterNextRender} from '@vmaterial/mon-base/utils.js';
-import '@vmaterial/mon-icon/mwc-icon-font.js';
+import {style} from './mon-textfield-css.js';
+import '@vmaterial/mon-icon/mon-icon-font.js';
 
 class MDCWCTextField extends MDCWebComponentMixin(MDCTextField) {}
 
 export class Textfield extends ComponentElement {
-
   static get ComponentClass() {
     return MDCWCTextField;
   }
@@ -73,7 +75,20 @@ export class Textfield extends ComponentElement {
   }
 
   // TODO(sorvell) #css: styling for fullwidth
-  _render({value, label, box, outlined, disabled, icon, iconTrailing, fullWidth, required, placeHolder, helperText, type}) {
+  _render({
+    value,
+    label,
+    box,
+    outlined,
+    disabled,
+    icon,
+    iconTrailing,
+    fullWidth,
+    required,
+    placeHolder,
+    helperText,
+    type,
+  }) {
     const hostClasses = c$({
       'mdc-text-field--with-leading-icon': icon && !iconTrailing,
       'mdc-text-field--with-trailing-icon': icon && iconTrailing,
@@ -85,20 +100,61 @@ export class Textfield extends ComponentElement {
     return html`
       ${this._renderStyle()}
       <div class$="mdc-text-field mdc-text-field--upgraded ${hostClasses}">
-        ${!fullWidth && icon ? html`<i class="material-icons mdc-text-field__icon" tabindex="0">${icon}</i>` : ''}
+        ${!fullWidth && icon
+    ? html`
+              <i class="material-icons mdc-text-field__icon" tabindex="0"
+                >${icon}</i
+              >
+            `
+    : ''}
         ${this._renderInput({value, required, type, placeHolder, label})}
-        ${!fullWidth && label ? html`<label class$="mdc-floating-label ${value ? 'mdc-floating-label--float-above' : ''}" for="text-field">${label}</label>` : ''}
-        ${!fullWidth && outlined ? html`<div class="mdc-notched-outline">
-            <svg><path class="mdc-notched-outline__path"/></svg>
-          </div>
-          <div class="mdc-notched-outline__idle"></div>` :
-    html`<div class="mdc-line-ripple"></div>`}
+        ${!fullWidth && label
+    ? html`
+              <label
+                class$="mdc-floating-label ${value
+    ? 'mdc-floating-label--float-above'
+    : ''}"
+                for="text-field"
+                >${label}</label
+              >
+            `
+    : ''}
+        ${!fullWidth && outlined
+    ? html`
+              <div class="mdc-notched-outline">
+                <svg><path class="mdc-notched-outline__notch" /></svg>
+              </div>
+              <div class="mdc-notched-outline__idle"></div>
+            `
+    : html`
+              <div class="mdc-line-ripple"></div>
+            `}
       </div>
-      ${helperText ? html`<p class="mdc-text-field-helper-text" aria-hidden="true">${helperText}</p>` : ''}`;
+      ${helperText
+    ? html`
+            <p class="mdc-text-field-helper-text" aria-hidden="true">
+              ${helperText}
+            </p>
+          `
+    : ''}
+    `;
   }
 
   _renderInput({value, required, type, placeHolder, label}) {
-    return html`<input type="text" type$="${type}" placeholder$="${placeHolder}" required?="${required}" class$="mdc-text-field__input ${value ? 'mdc-text-field--upgraded' : ''}" id="text-field" value="${value}" aria-label$="${label}">`;
+    return html`
+      <input
+        type="text"
+        type$="${type}"
+        placeholder$="${placeHolder}"
+        required?="${required}"
+        class$="mdc-text-field__input ${value
+    ? 'mdc-text-field--upgraded'
+    : ''}"
+        id="text-field"
+        value="${value}"
+        aria-label$="${label}"
+      />
+    `;
   }
 
   ready() {

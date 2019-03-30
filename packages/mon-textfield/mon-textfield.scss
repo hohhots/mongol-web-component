@@ -15,11 +15,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import '@material/textfield/mdc-text-field.scss';
-@import '@vmaterial/mon-icon/mwc-icon.scss';
+@import '@mongol/textfield/mdc-text-field.scss';
+@import '@vmaterial/mon-icon/mon-icon.scss';
 
 .material-icons {
   @extend %material-icons;
+}
+
+.mdc-text-field__input {
+  cursor: vertical-text;
 }
 
 :host(:not([fullwidth])) {
