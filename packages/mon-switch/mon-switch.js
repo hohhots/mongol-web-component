@@ -36,21 +36,24 @@ export class Switch extends LitElement {
     return style;
   }
 
-  _render({checked, disabled}) {
+  _render() {
     return html`
       ${this._renderStyle()}
       <div class="mdc-switch">
-        <input
-          type="checkbox"
-          id="basic-switch"
-          checked="${checked}"
-          disabled?="${disabled}"
-          class="mdc-switch__native-control"
-        />
-        <div class="mdc-switch__background">
-          <div class="mdc-switch__knob"></div>
+        <div class="mdc-switch__track"></div>
+        <div class="mdc-switch__thumb-underlay" .ripple="${ripple()}">
+          <div class="mdc-switch__thumb">
+            <input
+              type="checkbox"
+              id="basic-switch"
+              class="mdc-switch__native-control"
+              role="switch"
+              @change="${this._changeHandler}"
+            />
+          </div>
         </div>
       </div>
+      <slot></slot>
     `;
   }
 

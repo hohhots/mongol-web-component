@@ -14,14 +14,22 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import {ComponentElement, html, MDCWebComponentMixin} from '@vmaterial/mon-base/component-element.js';
-import {callWhenReady, findAssignedNode, afterNextRender} from '@vmaterial/mon-base/utils.js';
 import {classString as c$} from '@polymer/lit-element';
-import {style} from './mwc-formfield-css.js';
-import {MDCFormField} from '@material/form-field';
+import {MDCFormField} from '@mongol/form-field';
 
-export class MDCWCFormField extends MDCWebComponentMixin(MDCFormField) {};
+import {
+  ComponentElement,
+  html,
+  MDCWebComponentMixin,
+} from '@vmaterial/mon-base/component-element.js';
+import {
+  callWhenReady,
+  findAssignedNode,
+  afterNextRender,
+} from '@vmaterial/mon-base/utils.js';
+import {style} from './mon-formfield-css.js';
 
+export class MDCWCFormField extends MDCWebComponentMixin(MDCFormField) {}
 
 export class Formfield extends ComponentElement {
   static get ComponentClass() {
@@ -54,11 +62,17 @@ export class Formfield extends ComponentElement {
   }
 
   _render({label, alignEnd, _labelClickHandler}) {
-    return html`${this._renderStyle()}
-      <div class$="mdc-form-field ${alignEnd ? 'mdc-form-field--align-end' : ''}">
+    return html`
+      ${this._renderStyle()}
+      <div
+        class$="mdc-form-field ${alignEnd ? 'mdc-form-field--align-end' : ''}"
+      >
         <slot></slot>
-        <label class="mdc-label" on-click="${_labelClickHandler}">${label}</label>
-      </div>`;
+        <label class="mdc-label" on-click="${_labelClickHandler}"
+          >${label}</label
+        >
+      </div>
+    `;
   }
 
   _didRender(props, changed) {
@@ -79,8 +93,8 @@ export class Formfield extends ComponentElement {
   }
 
   get _input() {
-    return this.__input = this.__input ||
-      findAssignedNode(this._root.querySelector('slot'), '*');
+    return (this.__input =
+      this.__input || findAssignedNode(this._root.querySelector('slot'), '*'));
   }
 }
 
