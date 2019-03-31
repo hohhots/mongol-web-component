@@ -99,7 +99,7 @@ export class Textfield extends ComponentElement {
     });
     return html`
       ${this._renderStyle()}
-      <div class$="mdc-text-field mdc-text-field--upgraded ${hostClasses}">
+      <div class$="mdc-text-field ${hostClasses}">
         ${!fullWidth && icon
     ? html`
               <i class="material-icons mdc-text-field__icon" tabindex="0"
@@ -121,10 +121,13 @@ export class Textfield extends ComponentElement {
     : ''}
         ${!fullWidth && outlined
     ? html`
-              <div class="mdc-notched-outline">
-                <svg><path class="mdc-notched-outline__notch" /></svg>
+              <div
+                class="mdc-notched-outline mdc-notched-outline--no-label mdc-notched-outline--upgraded"
+              >
+                <div class="mdc-notched-outline__leading"></div>
+                <div class="mdc-notched-outline__notch"></div>
+                <div class="mdc-notched-outline__trailing"></div>
               </div>
-              <div class="mdc-notched-outline__idle"></div>
             `
     : html`
               <div class="mdc-line-ripple"></div>
